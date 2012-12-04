@@ -20,18 +20,18 @@ OpenLayers.ProxyHost = function(url){
 };
 
 
-GeoNetwork.Util.defaultLocale = 'eng';
+
+GeoNetwork.Util.defaultLocale = 'fre';
 // Restrict locales to a subset of languages
-//GeoNetwork.Util.locales = [
-//            ['fr', 'Français']
-//    ];
+GeoNetwork.Util.locales = [['fr', 'Français', 'fre']];
+
 GeoNetwork.searchDefault = {
     activeMapControlExtent: false
 };
 GeoNetwork.advancedFormButton = true;
 
 GeoNetwork.Settings.editor = {
-    defaultViewMode : 'simple',
+    defaultViewMode : 'inspire',
     editHarvested: false
 //    defaultViewMode : 'inspire'
 };
