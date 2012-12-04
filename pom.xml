@@ -902,6 +902,17 @@
       </modules>
     </profile>
     <profile>
+      <id>jeevlet</id>
+      <activation>
+        <file>
+          <exists>jeevlet/pom.xml</exists>
+        </file>
+      </activation>
+      <modules>
+        <module>jeevlet</module>
+      </modules>
+    </profile>
+    <profile>
       <id>gast</id>
       <activation>
         <file>
