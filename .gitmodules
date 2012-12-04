@@ -16,3 +16,6 @@
 [submodule "geoserver"]
 	path = geoserver
 	url = https://github.com/geonetwork/core-geoserver.git
+[submodule "jeevlet"]
+	path = jeevlet
+	url = https://github.com/geosource-catalogue/jeevlet.git
