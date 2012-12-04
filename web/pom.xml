@@ -903,6 +903,18 @@
       </properties>
     </profile>
     <profile>
+      <id>env-geosource</id>
+      <activation>
+        <property>
+          <name>env</name>
+          <value>geosource</value>
+        </property>
+      </activation>
+      <properties>
+        <env>geosource</env>
+      </properties>
+    </profile>
+    <profile>
       <id>env-inspire</id>
       <activation>
         <property>
