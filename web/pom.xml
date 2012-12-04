@@ -469,6 +469,20 @@
                      <exclude>**/*.js</exclude>
                    </excludes>
                  </resource>
+                 <!-- Make a copy of the iso19139.fra profile to the source 
+                 to have it loaded in jetty:run goal. -->
+                 <resource>
+                   <directory>${basedir}/../schema-plugins/iso19139.fra</directory>
+                   <filtering>false</filtering>
+                   <targetPath>${basedir}/src/main/webapp/WEB-INF/data/config/schema_plugins/iso19139.fra</targetPath>
+                 </resource>
+                 <!-- Make a copy of the iso19139.fra profile to the source 
+                 to have it in the packaging. -->
+                 <resource>
+                   <directory>${basedir}/../schema-plugins/iso19139.fra</directory>
+                   <filtering>false</filtering>
+                   <targetPath>${build.webapp.resources}/WEB-INF/data/config/schema_plugins/iso19139.fra</targetPath>
+                 </resource>
                </resources>
                <filters>
                  <filter>${basedir}/src/main/filters/${env}.properties</filter>
