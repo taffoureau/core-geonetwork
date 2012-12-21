@@ -150,6 +150,7 @@ public class Params {
 		public static final String RESETPW = "resetpw";
 		
 		public static final String NEWSERVICE  = "newservice";
+		public static final String UPDATESERVICE  = "updateservice";
 	}
 
     /**
