@@ -119,7 +119,19 @@ public class Params {
     public static final String DOCHANGES = "doChanges";
     
     public static final String FULL_PRIVILEGES = "fullPrivileges";
-
+    
+	public static final String SERVICENAME     = "servicename";
+	public static final String CLASSNAME     = "classname";
+		public static final String FILTER_TITLE     = "title";
+	public static final String FILTER_SUBJECT     = "abstract";
+	public static final String FILTER_KEYWORD     = "keyword";
+	public static final String FILTER_DENOMINATORFROM     = "denominatorFrom";
+	public static final String FILTER_DENOMINATORTO     = "denominatorTo";
+	
+	
+	
+	
+	
     /**
      * TODO javadoc.
      */
@@ -136,6 +148,8 @@ public class Params {
 		public static final String EDITINFO = "editinfo";
 		public static final String FULLUPDATE = "fullupdate";
 		public static final String RESETPW = "resetpw";
+		
+		public static final String NEWSERVICE  = "newservice";
 	}
 
     /**

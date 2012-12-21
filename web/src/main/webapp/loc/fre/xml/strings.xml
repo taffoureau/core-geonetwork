@@ -1384,7 +1384,7 @@
 
     <cswServer>Configuration CSW</cswServer>
 	<cswServerDes>Configuration du serveur CSW</cswServerDes>
-    <cswServerConfig>Configuration du serveur CSW</cswServerConfig>
+	<cswServerConfig>Configuration du serveur CSW</cswServerConfig>
     <cswServerEnable>Activer</cswServerEnable>
     <cswServerMetadataPublic>Publier les métadonnées insérées via CSW (Transaction)</cswServerMetadataPublic>
     <cswServerTitle>Titre</cswServerTitle>
@@ -1392,6 +1392,21 @@
     <cswServerFees>Frais</cswServerFees>
     <cswServerAccessConstraints>Contraintes d'accès</cswServerAccessConstraints>
     <cswServerContact>Contact</cswServerContact>
+
+	<virtualcswServer>Configuration CSW virtuel</virtualcswServer>
+	<virtualcswServerDes>Configuration des serveurs CSW virtuels</virtualcswServerDes>
+    <virtualcswServerConfig>Configuration des serveurs CSW virtuels</virtualcswServerConfig>
+    <virtualcswServiceName>Nom du service</virtualcswServiceName>
+    <virtualcswClassName>Classe</virtualcswClassName>
+    <virtualcswNewService>Ajouter un service</virtualcswNewService>
+    <virtualcswParamName>Type de filtre</virtualcswParamName>
+    <virtualcswParamValue>Valeur du filtre</virtualcswParamValue>
+    <virtualcswServicenameMandatory>Le nom de service est obligatoire.</virtualcswServicenameMandatory>
+    <virtualcswClassnameMandatory>La classe est obligatoire.</virtualcswClassnameMandatory>
+    
+    <virtualcswUpdateService>Mise à jour d'un serveur CSW virtuel</virtualcswUpdateService>
+    
+    
 
     <customize-elementset>Personnaliser ensemble d'éléments</customize-elementset>
     <csw-server-disabled>Serveur CSW est désactivé.</csw-server-disabled>
