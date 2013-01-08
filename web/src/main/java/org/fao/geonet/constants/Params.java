@@ -122,12 +122,15 @@ public class Params {
     
 	public static final String SERVICENAME     = "servicename";
 	public static final String CLASSNAME     = "classname";
-		public static final String FILTER_TITLE     = "title";
+	public static final String FILTER_ANY     = "any";	
+	public static final String FILTER_TITLE     = "title";
 	public static final String FILTER_SUBJECT     = "abstract";
 	public static final String FILTER_KEYWORD     = "keyword";
 	public static final String FILTER_DENOMINATORFROM     = "denominatorFrom";
 	public static final String FILTER_DENOMINATORTO     = "denominatorTo";
-	
+	public static final String FILTER_TYPE     = "type";
+	public static final String FILTER_CATALOG     = "catalog";
+	public static final String FILTER_GROUP     = "group";
 	
 	
 	

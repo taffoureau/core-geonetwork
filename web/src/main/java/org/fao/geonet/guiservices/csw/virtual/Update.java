@@ -45,11 +45,15 @@ public class Update implements Service
 		};*/
 		
 		HashMap<String, String> filters = new HashMap<String, String>();
+		filters.put(Params.FILTER_ANY, Util.getParam(params, Params.FILTER_ANY, ""));
 		filters.put(Params.FILTER_TITLE, Util.getParam(params, Params.FILTER_TITLE, ""));
 		filters.put(Params.FILTER_SUBJECT, Util.getParam(params, Params.FILTER_SUBJECT, ""));
 		filters.put(Params.FILTER_KEYWORD, Util.getParam(params, Params.FILTER_KEYWORD, ""));
 		filters.put(Params.FILTER_DENOMINATORFROM, Util.getParam(params, Params.FILTER_DENOMINATORFROM, ""));
 		filters.put(Params.FILTER_DENOMINATORTO, Util.getParam(params, Params.FILTER_DENOMINATORTO, ""));
+		filters.put(Params.FILTER_TYPE, Util.getParam(params, Params.FILTER_TYPE, ""));
+		filters.put(Params.FILTER_CATALOG, Util.getParam(params, Params.FILTER_CATALOG, ""));
+		filters.put(Params.FILTER_GROUP, Util.getParam(params, Params.FILTER_GROUP, ""));
 		
 		/*
 		String state    = Util.getParam(params, Params.STATE,   "");

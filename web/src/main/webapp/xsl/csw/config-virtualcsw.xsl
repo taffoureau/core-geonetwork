@@ -71,7 +71,8 @@
 							<xsl:value-of select="/root/gui/strings/edit"/>
 						</button>
 						&#160;
-						<button class="content" onclick="deleteUser('{/root/gui/locService}/user.remove?id={id}','{/root/gui/strings/delUserConf}', {id})">
+						<!-- <button class="content" onclick="deleteUser('{/root/gui/locService}/user.remove?id={id}','{/root/gui/strings/delUserConf}', {id})">-->
+						<button class="content" onclick="load('{/root/gui/locService}/virtualcsw.config.delete?id={id}')">	
 							<xsl:value-of select="/root/gui/strings/delete"/>
 						</button>
 						

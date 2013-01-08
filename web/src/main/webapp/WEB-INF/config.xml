@@ -1267,6 +1267,11 @@
 			<output sheet="csw/virtualcsw-update.xsl">
 				<call name="services" class=".guiservices.csw.virtual.Get"/>
 			</output>
+		</service>		
+		
+		<service name="virtualcsw.config.delete">
+			<class name=".guiservices.csw.virtual.Delete"/>
+			<output forward="virtualcsw.config" />
 		</service>
 		
 		<service name="csw.config.set">

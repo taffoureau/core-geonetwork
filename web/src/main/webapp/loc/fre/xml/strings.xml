@@ -1406,7 +1406,15 @@
     
     <virtualcswUpdateService>Mise à jour d'un serveur CSW virtuel</virtualcswUpdateService>
     
-    
+    <virtualcswAny>Texte libre</virtualcswAny>
+    <virtualcswTitle>Titre</virtualcswTitle>
+	<virtualcswAbstract>Résumé</virtualcswAbstract>
+	<virtualcswKeywords>Sujet</virtualcswKeywords>
+	<virtualcswDenominatorFrom>Echelle minimum</virtualcswDenominatorFrom>
+	<virtualcswDenominatorTo>Echelle maximum</virtualcswDenominatorTo>
+	<virtualcswType>Type de ressource</virtualcswType>
+	<virtualcswCatalog>Catalogue</virtualcswCatalog>
+	<virtualcswGroup>Groupe</virtualcswGroup>
 
     <customize-elementset>Personnaliser ensemble d'éléments</customize-elementset>
     <csw-server-disabled>Serveur CSW est désactivé.</csw-server-disabled>
