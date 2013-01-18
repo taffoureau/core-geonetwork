@@ -1247,13 +1247,12 @@
 			</output>
 		</service>
 		
-		<service name="virtualcsw.config.add">
-			<class name=".guiservices.csw.virtual.Add"/>
-		</service>
-		
 		<service name="virtualcsw.config.get">
 			<output sheet="csw/virtualcsw-new.xsl">
 				<call name="services" class=".guiservices.csw.virtual.Get"/>
+				<call name="groups" class=".guiservices.groups.GetMine" />
+                <call name="categories" class=".services.category.List" />
+                <call name="sources" class=".guiservices.util.Sources" />
 			</output>
 		</service>
 		
@@ -1266,6 +1265,9 @@
 		<service name="virtualcsw.config.edit">
 			<output sheet="csw/virtualcsw-update.xsl">
 				<call name="services" class=".guiservices.csw.virtual.Get"/>
+				<call name="groups" class=".guiservices.groups.GetMine" />
+                <call name="categories" class=".services.category.List" />
+                <call name="sources" class=".guiservices.util.Sources" />
 			</output>
 		</service>		
 		

@@ -21,12 +21,6 @@
 					return;
 				}
 
-				// check surname specified
-				if (document.virtualcswupdateform.classname.value == '') {
-						alert("<xsl:value-of select="/root/gui/strings/virtualcswClassnameMandatory"/>");
-						return;
-				}
-
 				// all ok, proceed
 				document.virtualcswupdateform.submit();
 			}//update
@@ -71,11 +65,13 @@
 					<td class="padded"><input class="content" type="text" name="servicename" value="{/root/gui/services/record/name}"/></td>
 				</tr>
 				<tr>
-					<th class="padded"><xsl:value-of select="/root/gui/strings/virtualcswClassName"/> (*)</th>
-					<td class="padded"><input class="content" type="text" name="classname" value="{/root/gui/services/record/class}"/></td>
+					<th class="padded"><xsl:value-of select="/root/gui/strings/virtualcswServiceDescription"/></th>
+					<td class="padded"><input class="content" size="40" type="text" name="servicedescription" value="{/root/gui/services/record/description}"/></td>
 				</tr>
 				
 				<tr><td colspan="2"><br/><hr style="border:1px solid; color:#eee"/><br/></td></tr>
+				
+				<input class="content" type="hidden" name="classname" value=".services.main.CswDiscoveryDispatcher"/>
 				
 				<xsl:call-template name="virtualcswinfofields"/>
 			</table>

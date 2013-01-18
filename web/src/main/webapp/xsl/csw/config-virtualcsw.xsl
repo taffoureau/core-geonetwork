@@ -38,10 +38,13 @@
 		
 		<table border="0">
 			<tr>
-				<th class="padded" style="width:100px;"><b><xsl:value-of select="/root/gui/strings/virtualcswServiceName"/></b></th>
-				<th class="padded" style="width:100px;"><b><xsl:value-of select="/root/gui/strings/virtualcswClassName"/></b></th>
+				<th class="padded" style="width:200px;"><b><xsl:value-of select="/root/gui/strings/virtualcswServiceName"/></b></th>
+				<th class="padded" style="width:200px;"><b><xsl:value-of select="/root/gui/strings/virtualcswServiceDescription"/></b></th>
+				
+			<!-- <th class="padded" style="width:100px;"><b><xsl:value-of select="/root/gui/strings/virtualcswClassName"/></b></th>
 				<th class="padded" style="width:100px;"><b><xsl:value-of select="/root/gui/strings/virtualcswParamName"/></b></th>
-				<th class="padded" style="width:100px;"><b><xsl:value-of select="/root/gui/strings/virtualcswParamValue"/></b></th>
+				<th class="padded" style="width:100px;"><b><xsl:value-of select="/root/gui/strings/virtualcswParamValue"/></b></th>-->
+				
 				<th class="padded"><b><xsl:value-of select="/root/gui/strings/operation"/></b></th>
 			</tr>
 			
@@ -59,12 +62,17 @@
 				
 				<tr>
 					<td class="padded"><xsl:value-of select="name"/></td>
+					
+					<td class="padded"><xsl:value-of select="description"/></td>
+										
+					<!-- 
+					
 					<td class="padded"><xsl:value-of select="class"/></td>
 					
 					<td class="padded"></td>
 					<td class="padded"></td>
 					
-					<!--  <td class="padded"><xsl:value-of select="/root/gui/strings/profileChoice[@value=$profileId]"/></td>-->
+					 <td class="padded"><xsl:value-of select="/root/gui/strings/profileChoice[@value=$profileId]"/></td>-->
 					
 					<td class="padded">
 						<button class="content" onclick="load('{/root/gui/locService}/virtualcsw.config.edit?id={id}')">

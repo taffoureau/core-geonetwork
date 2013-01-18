@@ -51,13 +51,14 @@ public class Add implements Service {
         // 
         String serviceName = Util.getParam(params, "service");
         String className = Util.getParam(params, "class");
+        String serviceDescription = Util.getParam(params, "servicedescription");
        
         int serviceId = context.getSerialFactory().getSerial(dbms, "Services");
         
         
-        String query = "INSERT INTO Services(id, name, class) VALUES (?, ?, ?)";
+        String query = "INSERT INTO Services(id, name, class, description) VALUES (?, ?, ?, ?)";
         
-        dbms.execute(query, serviceId, serviceName, className);
+        dbms.execute(query, serviceId, serviceName, className, serviceDescription);
         
 		
         //String paramName = Util.getParam(params, "paramName");

@@ -121,6 +121,7 @@ public class Params {
     public static final String FULL_PRIVILEGES = "fullPrivileges";
     
 	public static final String SERVICENAME     = "servicename";
+	public static final String SERVICEDESCRIPTION     = "servicedescription";
 	public static final String CLASSNAME     = "classname";
 	public static final String FILTER_ANY     = "any";	
 	public static final String FILTER_TITLE     = "title";
@@ -131,6 +132,7 @@ public class Params {
 	public static final String FILTER_TYPE     = "type";
 	public static final String FILTER_CATALOG     = "catalog";
 	public static final String FILTER_GROUP     = "group";
+	public static final String FILTER_CATEGORY     = "category";
 	
 	
 	

@@ -14,18 +14,45 @@
 			{
 				var invalid = " "; // Invalid character is a space
 				var minLength = 6; // Minimum length
-	
+				var maxLength = 48; //Maximum length
+				var regexp = new RegExp( "[ÀÂÇÈÉÊËÎÔÙÛàâçèéêëîôùû]", "gi" ) ;
+
+
+				// check service name specified
 				if (document.virtualcswupdateform.servicename.value.length == 0)
 				{
 					alert("<xsl:value-of select="/root/gui/strings/virtualcswServicenameMandatory"/>");
 					return;
 				}
 
-				// check surname specified
-				if (document.virtualcswupdateform.classname.value == '') {
-						alert("<xsl:value-of select="/root/gui/strings/virtualcswClassnameMandatory"/>");
-						return;
+				// check special characters				
+				var resultat = document.virtualcswupdateform.servicename.value.match(regexp) ;
+				if(resultat) {
+				  	alert("<xsl:value-of select="/root/gui/strings/virtualcswServicenameSpecialChars"/>");
+				  	return;
+				  }
+				
+				// check service name length
+				if (document.virtualcswupdateform.servicename.value.length >= 48)
+				{
+					alert("<xsl:value-of select="/root/gui/strings/virtualcswServicenameTooLong"/>");
+					return;
 				}
+				
+				if (document.virtualcswupdateform.servicename.value.substring(0,4)!='csw-')
+				{
+					alert("<xsl:value-of select="/root/gui/strings/virtualcswServiceNameStartsWith"/>");
+					return;
+				}
+				
+				
+				if (document.virtualcswupdateform.servicename.value.indexOf(invalid) > -1) {
+					alert(translate('spacesNot'));
+					return;
+				}	
+				
+
+				
 
 				// all ok, proceed
 				document.virtualcswupdateform.submit();
@@ -41,7 +68,7 @@
 	<xsl:template name="content">
 		<xsl:call-template name="formLayout">
 			<xsl:with-param name="title">
-				<xsl:value-of select="/root/gui/strings/insert"/>
+				<xsl:value-of select="/root/gui/strings/virtualcswInsert"/>
 			</xsl:with-param>
 			<xsl:with-param name="content">
 				<xsl:call-template name="form"/>
@@ -69,11 +96,13 @@
 					<td class="padded"><input class="content" type="text" name="servicename" value="{/root/response/record/servicename}"/></td>
 				</tr>
 				<tr>
-					<th class="padded"><xsl:value-of select="/root/gui/strings/virtualcswClassName"/> (*)</th>
-					<td class="padded"><input class="content" type="text" name="classname" value=""/></td>
+					<th class="padded"><xsl:value-of select="/root/gui/strings/virtualcswServiceDescription"/></th>
+					<td class="padded"><input class="content" size="40" type="text" name="servicedescription" value=""/></td>
 				</tr>
 				
 				<tr><td colspan="2"><br/><hr style="border:1px solid; color:#eee"/><br/></td></tr>
+
+				<input class="content" type="hidden" name="classname" value=".services.main.CswDiscoveryDispatcher"/>
 				
 				<xsl:call-template name="virtualcswinfofields"/>
 			</table>

@@ -52,15 +52,7 @@ public class Get implements Service {
 			dbms.select ("SELECT * FROM Services WHERE id=?", Integer.valueOf(id));
 
 		//--- retrieve filter parameters
-
-		
-
 		//elParameters.addContent(dbms.select("SELECT name, value FROM ServiceParameters WHERE service =?", Integer.valueOf(id)).getChildren());
-	
-		//System.out.println("SELECT name, value FROM ServiceParameters WHERE service = " + Integer.valueOf(id));
-		
-		
-		//System.out.println("SIZE OF LIST:" + list.size());
 		
 		Element elParameters = new Element(Geonet.Elem.FILTER);
 		
