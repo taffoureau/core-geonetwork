@@ -1393,7 +1393,7 @@
     <cswServerAccessConstraints>Contraintes d'accès</cswServerAccessConstraints>
     <cswServerContact>Contact</cswServerContact>
 
-	<virtualcswServer>Configuration CSW virtuel</virtualcswServer>
+	<virtualcswServer>Ajouter un point d'accès CSW</virtualcswServer>
 	<virtualcswServerDes>Configuration des serveurs CSW virtuels</virtualcswServerDes>
     <virtualcswServerConfig>Configuration des serveurs CSW virtuels</virtualcswServerConfig>
     <virtualcswInsert>Configuration du serveur CSW virtuel</virtualcswInsert>
