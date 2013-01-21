@@ -21,4 +21,4 @@
 	url = https://github.com/geosource-catalogue/jeevlet.git
 [submodule "schema-plugins"]
 	path = schema-plugins
-	url = https://github.com:geonetwork/schema-plugins.git
+	url = https://github.com/geonetwork/schema-plugins.git
