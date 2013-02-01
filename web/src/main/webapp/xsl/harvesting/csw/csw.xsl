@@ -34,7 +34,7 @@
 			</tr>
 
 			<tr>
-				<td class="padded"><xsl:value-of select="/root/gui/harvesting/capabUrl"/></td>
+				<td class="padded">URL</td>
 				<td class="padded"><input id="csw.capabUrl" class="content" type="text" value="" size="30"/></td>
 			</tr>
 
@@ -90,7 +90,7 @@
 		<xsl:call-template name="schedule-widget">
 			<xsl:with-param name="type">csw</xsl:with-param>
 		</xsl:call-template>
-		</xsl:template>
+	</xsl:template>
 	
 	<!-- ============================================================================================= -->
 

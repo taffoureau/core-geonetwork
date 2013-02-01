@@ -77,6 +77,14 @@ public class CswParams extends AbstractParams
 		icon     = Util.getParam(site, "icon",            "default.gif");
 
 		addSearches(searches);
+		
+		
+		if (searches.getChild("search")!=null){
+			eltSearches = searches.getChild("search").getChildren();
+		}
+		
+		
+
 	}
 
 	//---------------------------------------------------------------------------
@@ -91,7 +99,7 @@ public class CswParams extends AbstractParams
 
 		Element site     = node.getChild("site");
 		Element searches = node.getChild("searches");
-
+		
 		capabUrl = Util.getParam(site, "capabilitiesUrl", capabUrl);
 
         try {
@@ -108,8 +116,14 @@ public class CswParams extends AbstractParams
 		//--- if some search queries are given, we drop the previous ones and
 		//--- set these new ones
 
-		if (searches != null)
+		if (searches != null){
 			addSearches(searches);
+		}
+		
+		if (searches.getChild("search")!=null){
+			eltSearches = searches.getChild("search").getChildren();
+		}
+		
 	}
 
 	//---------------------------------------------------------------------------
@@ -170,6 +184,9 @@ public class CswParams extends AbstractParams
 	public String icon;
 
 	private List<Search> alSearches = new ArrayList<Search>();
+	
+	public List<Element> eltSearches = new ArrayList<Element>();
+	
 }
 
 //=============================================================================

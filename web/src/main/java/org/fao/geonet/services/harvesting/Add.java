@@ -64,6 +64,8 @@ public class Add implements Service
 		params.setAttribute("owner", context.getUserSession().getUserId());
 		
 		String id = hm.add(dbms, params);
+		
+		System.out.println("harvesting add() parameters : " + params);
 
 		return new Element(Jeeves.Elem.RESPONSE)
 							.addContent(new Element("id").setText(id));

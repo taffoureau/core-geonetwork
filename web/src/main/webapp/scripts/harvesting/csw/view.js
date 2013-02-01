@@ -9,12 +9,16 @@ csw.View = function(xmlLoader)
 	HarvesterView.call(this);	
 	
 	var searchTransf = new XSLTransformer('harvesting/csw/client-search-row.xsl', xmlLoader);
+	var searchCapTransf = new XSLTransformer('harvesting/csw/client-search-capability.xsl', xmlLoader);
+	var searchTempTransf = new XSLTransformer('harvesting/csw/client-search-temp.xsl', xmlLoader);
 	var privilTransf = new XSLTransformer('harvesting/csw/client-privil-row.xsl', xmlLoader);
 	var resultTransf = new XSLTransformer('harvesting/csw/client-result-tip.xsl', xmlLoader);
 	
 	var loader = xmlLoader;
 	var valid  = new Validator(loader);
 	var shower = null;
+	
+	var searchtemp;
 	
 	var currSearchId = 0;
 	
@@ -134,16 +138,15 @@ function getData()
 		
 		searchData.push(
 		{
-			ANY_TEXT : xml.getElementById(divElem, 'csw.anytext') .value,
-			TITLE    : xml.getElementById(divElem, 'csw.title')   .value,
-			ABSTRACT : xml.getElementById(divElem, 'csw.abstract').value,
-			SUBJECT  : xml.getElementById(divElem, 'csw.subject') .value,
-			MINSCALE : xml.getElementById(divElem, 'csw.minscale').value,
-			MAXSCALE : xml.getElementById(divElem, 'csw.maxscale').value
+			//ANY_TEXT : xml.getElementById(divElem, 'csw.anytext') .value,
+			RevisionDate : xml.getElementById(divElem, 'csw.RevisionDate').value,
+			AlternateTitle : xml.getElementById(divElem, 'csw.AlternateTitle').value
+			
 		});
 	}
 	
 	data.SEARCH_LIST = searchData;
+	data.SEARCH_TEMP = searchtemp;
 	
 	//--- retrieve privileges and categories information
 	
@@ -191,13 +194,86 @@ function updateIcon()
 //=== Search methods
 //=====================================================================================
 
+function addEmptySearchOld()
+{
+		var doc    = Sarissa.getDomDocument();	
+		var search = doc.createElement('search');
+
+		addSearch(search);
+}
+
+
 function addEmptySearch()
 {
-	var doc    = Sarissa.getDomDocument();	
-	var search = doc.createElement('search');
+	var url = $('csw.capabUrl').value;
+	OpenLayers.ProxyHostURL = '../../../proxy?url='+encodeURIComponent(url);
+	console.log(OpenLayers.ProxyHostURL);
+		 
+	OpenLayers.Request.GET({
+		url: OpenLayers.ProxyHostURL,
+   		success: function(response) {
+   			
+   			var doc    = Sarissa.getDomDocument();	
+   			var search = doc.createElement('search');
+   			var searchtmp = doc.createElement('search');
+   			
+            console.log("starting to parse returned XML ... ");
+            
+    		var format = new OpenLayers.Format.XML();
+    		var doc = format.read(response.responseText);
+    		var nodes = format.getElementsByTagNameNS(doc, '*', 'Constraint');
+			for(var i=0; i < nodes.length; i++) {
+				if (nodes[i].attributes[0].value =='SupportedISOQueryables' || nodes[i].attributes[0].value =='AdditionalQueryables')
+				for(var j=0; j < nodes[i].childNodes.length; j++) {
+					if (nodes[i].childNodes[j].nodeName == 'ows:Value'){
+						var sub = doc.createElement(nodes[i].childNodes[j].firstChild.nodeValue);
+						search.appendChild(sub);
+						
+						var text = doc.createTextNode('{'+nodes[i].childNodes[j].firstChild.nodeValue +'}');
+						var subtmp = doc.createElement(nodes[i].childNodes[j].firstChild.nodeValue);
+						subtmp.appendChild(text);
+						searchtmp.appendChild(subtmp);
 	
-	addSearch(search);
+					}
+				}
+			}
+			
+			addSearchTemp(searchtmp);
+			
+			addSearchCap(search);
+			
+    	},
+    	failure: function(result) {
+            console.log("failure");
+    	}
+	});
+
+	
 }
+
+//=====================================================================================
+
+function addSearchCap(search)
+{
+	var id = ''+ currSearchId++;
+	search.setAttribute('id', id);
+	
+	var html = searchCapTransf.transformToText(search);
+	
+	//--- add the new search in list
+	new Insertion.Bottom('csw.searches', html);
+	
+}
+
+
+function addSearchTemp(searchtmp)
+{
+	searchtemp = searchTempTransf.transformToText(searchtmp);
+	
+	console.log(searchtemp);
+	
+}
+
 
 //=====================================================================================
 
@@ -206,10 +282,13 @@ function addSearch(search)
 	var id = ''+ currSearchId++;
 	search.setAttribute('id', id);
 	
+
 	var html = searchTransf.transformToText(search);
 
+	
 	//--- add the new search in list
 	new Insertion.Bottom('csw.searches', html);
+	
 	
 	valid.add(
 	[
