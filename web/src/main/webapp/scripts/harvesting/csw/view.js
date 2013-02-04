@@ -11,6 +11,8 @@ csw.View = function(xmlLoader)
 	var searchTransf = new XSLTransformer('harvesting/csw/client-search-row.xsl', xmlLoader);
 	var searchCapTransf = new XSLTransformer('harvesting/csw/client-search-capability.xsl', xmlLoader);
 	var searchTempTransf = new XSLTransformer('harvesting/csw/client-search-temp.xsl', xmlLoader);
+	var editCapTransf = new XSLTransformer('harvesting/csw/client-edit-capability.xsl', xmlLoader);
+	var elemCapTransf = new XSLTransformer('harvesting/csw/elem-capability.xsl', xmlLoader);
 	var privilTransf = new XSLTransformer('harvesting/csw/client-privil-row.xsl', xmlLoader);
 	var resultTransf = new XSLTransformer('harvesting/csw/client-result-tip.xsl', xmlLoader);
 	
@@ -19,6 +21,7 @@ csw.View = function(xmlLoader)
 	var shower = null;
 	
 	var searchtemp;
+	var elemCap;
 	
 	var currSearchId = 0;
 	
@@ -101,8 +104,10 @@ function setData(node)
 	
 	removeAllSearch();
 	
-	for (var i=0; i<list.length; i++)
-		addSearch(list[i]);
+	for (var i=0; i<list.length; i++){
+		//addSearch(list[i]);
+		addEditCap(list[i]);
+	}
 
 	//--- add privileges entries
 	
@@ -132,18 +137,52 @@ function getData()
 	var searchData = [];
 	var searchList = xml.children($('csw.searches'));
 	
+	var capList = elemCap.getElementsByTagName('capability');
+	var obj={};
+	
 	for(var i=0; i<searchList.length; i++)
 	{
 		var divElem = searchList[i];
-		
-		searchData.push(
+
+		for(var i=0; i<searchList.length; i++)
 		{
-			//ANY_TEXT : xml.getElementById(divElem, 'csw.anytext') .value,
-			RevisionDate : xml.getElementById(divElem, 'csw.RevisionDate').value,
-			AlternateTitle : xml.getElementById(divElem, 'csw.AlternateTitle').value
+			var divElem = searchList[i];
 			
-		});
+			/*searchData.push(
+			{
+				RevisionDate : xml.getElementById(divElem, 'csw.RevisionDate').value,
+				AlternateTitle : xml.getElementById(divElem, 'csw.AlternateTitle').value,
+				CreationDate :  xml.getElementById(divElem, 'csw.CreationDate').value
+				
+			});*/
+			
+			for(var j=0; j<capList.length; j++){
+				
+				var capName = capList[j].getAttribute('name');
+				obj[capName]= xml.getElementById(divElem, capList[j].textContent).value;
+				
+			}
+		}
+	
+		searchData.push(obj);
+	
 	}
+	
+	if(typeof(searchtemp)=='undefined'){ 
+
+		var doc    = Sarissa.getDomDocument();
+		var searchtmp = doc.createElement('search');
+		for(var j=0; j < capList.length; j++) {
+			
+			var text = doc.createTextNode('{'+capList[j].getAttribute('name') +'}');
+			var subtmp = doc.createElement(capList[j].getAttribute('name'));
+			subtmp.appendChild(text);
+			searchtmp.appendChild(subtmp);
+		}
+		
+		addSearchTemp(searchtmp);
+	} 
+	
 	
 	data.SEARCH_LIST = searchData;
 	data.SEARCH_TEMP = searchtemp;
@@ -206,8 +245,7 @@ function addEmptySearchOld()
 function addEmptySearch()
 {
 	var url = $('csw.capabUrl').value;
-	OpenLayers.ProxyHostURL = '../../../proxy?url='+encodeURIComponent(url);
-	console.log(OpenLayers.ProxyHostURL);
+	OpenLayers.ProxyHostURL = '../../proxy?url='+encodeURIComponent(url);
 		 
 	OpenLayers.Request.GET({
 		url: OpenLayers.ProxyHostURL,
@@ -217,8 +255,6 @@ function addEmptySearch()
    			var search = doc.createElement('search');
    			var searchtmp = doc.createElement('search');
    			
-            console.log("starting to parse returned XML ... ");
-            
     		var format = new OpenLayers.Format.XML();
     		var doc = format.read(response.responseText);
     		var nodes = format.getElementsByTagNameNS(doc, '*', 'Constraint');
@@ -258,20 +294,42 @@ function addSearchCap(search)
 	var id = ''+ currSearchId++;
 	search.setAttribute('id', id);
 	
+	elemCap = elemCapTransf.transform(search); 
+	
 	var html = searchCapTransf.transformToText(search);
 	
 	//--- add the new search in list
 	new Insertion.Bottom('csw.searches', html);
 	
+
+	
 }
+
+//=====================================================================================
+
+function addEditCap(search)
+{
+	var id = ''+ currSearchId++;
+	search.setAttribute('id', id);
+	
+	elemCap = elemCapTransf.transform(search); 
+		
+	var html = editCapTransf.transformToText(search);
+	
+	//--- add the new search in list
+	new Insertion.Bottom('csw.searches', html);
+	
+
+	
+}
+
+//=====================================================================================
 
 
 function addSearchTemp(searchtmp)
 {
 	searchtemp = searchTempTransf.transformToText(searchtmp);
-	
-	console.log(searchtemp);
-	
+
 }
 
 

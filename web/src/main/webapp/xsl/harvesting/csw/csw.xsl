@@ -34,7 +34,7 @@
 			</tr>
 
 			<tr>
-				<td class="padded">URL</td>
+				<td class="padded"><xsl:value-of select="/root/gui/harvesting/capabUrl"/></td>
 				<td class="padded"><input id="csw.capabUrl" class="content" type="text" value="" size="30"/></td>
 			</tr>
 

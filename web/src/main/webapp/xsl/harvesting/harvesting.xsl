@@ -38,7 +38,7 @@
 
 		<script type="text/javascript" src="{/root/gui/url}/scripts/openlayers/OpenLayers.js"/>
 		<script type="text/javascript" src="{/root/gui/url}/scripts/openlayers/lib/OpenLayers/Format/CSWGetRecords/v2_0_2.js"/>
-				
+		
 	</xsl:template>
 
 	<!-- ============================================================================================= -->

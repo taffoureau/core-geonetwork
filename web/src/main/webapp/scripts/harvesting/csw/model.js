@@ -104,8 +104,6 @@ function getUpdateRequest(data)
 	
 	request = str.replace(request, '{SEARCH_LIST}', text);
 	
-	console.log('REQUEST : ' + request)
-	
 	return this.substituteCommon(data, request);
 }
 

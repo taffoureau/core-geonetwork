@@ -79,8 +79,10 @@ public class CswParams extends AbstractParams
 		addSearches(searches);
 		
 		
-		if (searches.getChild("search")!=null){
-			eltSearches = searches.getChild("search").getChildren();
+		if (searches!=null){
+			if (searches.getChild("search")!=null){
+				eltSearches = searches.getChild("search").getChildren();
+			}
 		}
 		
 		
