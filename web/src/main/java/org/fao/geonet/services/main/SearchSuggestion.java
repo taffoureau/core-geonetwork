@@ -154,21 +154,22 @@ public class SearchSuggestion implements Service {
 		if (origin.equals(INDEX_TERM_VALUES) 
 				|| (listOfSuggestions.size() == 0 && origin.equals(""))) {
 			// If a field is not stored, field values could not be retrieved
-			// In that cas search the index
-			List<SearchManager.TermFrequency> termList = sm.getTermsFequency(
+			// In that case search the index
+			List<SearchManager.TermFrequency> termList = sm.getStartingTermsFequency(
 					fieldName, searchValue, maxNumberOfTerms, threshold);
+			
 			Collections.sort(termList);
 			Collections.reverse(termList);
 
-			Iterator<SearchManager.TermFrequency> iterator = termList
-					.iterator();
+			Iterator<SearchManager.TermFrequency> iterator = termList.iterator();
 			while (iterator.hasNext()) {
-				SearchManager.TermFrequency freq = (SearchManager.TermFrequency) iterator
-						.next();
+				SearchManager.TermFrequency freq = 
+						(SearchManager.TermFrequency) iterator.next();
 				listOfSuggestions.add(freq.getTerm());
 				// Term frequency not returned :
 				// String.valueOf(freq.getFrequency());
 			}
+		
 		}
 		
 		if (Log.isDebugEnabled(Geonet.SEARCH_ENGINE)) {

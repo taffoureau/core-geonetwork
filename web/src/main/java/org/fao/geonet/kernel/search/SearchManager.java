@@ -1089,6 +1089,43 @@ public class SearchManager {
         }
         return termList;
     }
+	
+	/**
+	 * getStartingTermsFequency
+	 * @param fieldName
+	 * @param searchValue
+	 * @param maxNumberOfTerms
+	 * @param threshold
+	 * @return
+	 * @throws Exception
+	 */
+	public List<TermFrequency> getStartingTermsFequency(String fieldName, String searchValue, int maxNumberOfTerms,
+            int threshold) throws Exception {
+		
+		List<TermFrequency> termList = new ArrayList<TermFrequency>();
+		IndexReader reader = getIndexReader(null);
+		TermEnum term = reader.terms(new Term(fieldName, ""));
+		int i = 0;
+		try {
+			if (term.term()!=null) {
+				// Extract terms containing search value.
+				do {
+					if (!term.term().field().equals(fieldName) || (++i > maxNumberOfTerms)) {
+						break;
+					}
+					if (term.docFreq() >= threshold && StringUtils.startsWith(term.term().text(), searchValue)) {
+						TermFrequency freq = new TermFrequency(term.term().text(), term.docFreq());
+						termList.add(freq);
+					} 
+				}
+				while (term.next());
+			}
+		} finally {
+			releaseIndexReader(reader);
+		}
+		return termList;
+	}
+
 
 	/**
 	 * Frequence of terms.
