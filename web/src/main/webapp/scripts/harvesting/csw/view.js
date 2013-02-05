@@ -105,7 +105,6 @@ function setData(node)
 	removeAllSearch();
 	
 	for (var i=0; i<list.length; i++){
-		//addSearch(list[i]);
 		addEditCap(list[i]);
 	}
 
@@ -147,14 +146,6 @@ function getData()
 		for(var i=0; i<searchList.length; i++)
 		{
 			var divElem = searchList[i];
-			
-			/*searchData.push(
-			{
-				RevisionDate : xml.getElementById(divElem, 'csw.RevisionDate').value,
-				AlternateTitle : xml.getElementById(divElem, 'csw.AlternateTitle').value,
-				CreationDate :  xml.getElementById(divElem, 'csw.CreationDate').value
-				
-			});*/
 			
 			for(var j=0; j<capList.length; j++){
 				
@@ -247,6 +238,9 @@ function addEmptySearch()
 	var url = $('csw.capabUrl').value;
 	OpenLayers.ProxyHostURL = '../../proxy?url='+encodeURIComponent(url);
 		 
+	if (url==''){
+		return;
+	}
 	OpenLayers.Request.GET({
 		url: OpenLayers.ProxyHostURL,
    		success: function(response) {
