@@ -139,6 +139,7 @@ public class HarvestManager
 
 		if (id != null)
 		{
+			System.out.println("result "  + result);
 			result = transform(result);
 			addInfo(result);
 		}

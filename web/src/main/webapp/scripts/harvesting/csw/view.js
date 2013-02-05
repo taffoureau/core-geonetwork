@@ -9,12 +9,19 @@ csw.View = function(xmlLoader)
 	HarvesterView.call(this);	
 	
 	var searchTransf = new XSLTransformer('harvesting/csw/client-search-row.xsl', xmlLoader);
+	var searchCapTransf = new XSLTransformer('harvesting/csw/client-search-capability.xsl', xmlLoader);
+	var searchTempTransf = new XSLTransformer('harvesting/csw/client-search-temp.xsl', xmlLoader);
+	var editCapTransf = new XSLTransformer('harvesting/csw/client-edit-capability.xsl', xmlLoader);
+	var elemCapTransf = new XSLTransformer('harvesting/csw/elem-capability.xsl', xmlLoader);
 	var privilTransf = new XSLTransformer('harvesting/csw/client-privil-row.xsl', xmlLoader);
 	var resultTransf = new XSLTransformer('harvesting/csw/client-result-tip.xsl', xmlLoader);
 	
 	var loader = xmlLoader;
 	var valid  = new Validator(loader);
 	var shower = null;
+	
+	var searchtemp;
+	var elemCap;
 	
 	var currSearchId = 0;
 	
@@ -100,8 +107,9 @@ function setData(node)
 	
 	removeAllSearch();
 	
-	for (var i=0; i<list.length; i++)
-		addSearch(list[i]);
+	for (var i=0; i<list.length; i++){
+		addEditCap(list[i]);
+	}
 
 	//--- add privileges entries
 	
@@ -131,22 +139,47 @@ function getData()
 	var searchData = [];
 	var searchList = xml.children($('csw.searches'));
 	
+	var capList = elemCap.getElementsByTagName('capability');
+	var obj={};
+	
 	for(var i=0; i<searchList.length; i++)
 	{
 		var divElem = searchList[i];
-		
-		searchData.push(
+
+		for(var i=0; i<searchList.length; i++)
 		{
-			ANY_TEXT : xml.getElementById(divElem, 'csw.anytext') .value,
-			TITLE    : xml.getElementById(divElem, 'csw.title')   .value,
-			ABSTRACT : xml.getElementById(divElem, 'csw.abstract').value,
-			SUBJECT  : xml.getElementById(divElem, 'csw.subject') .value,
-			MINSCALE : xml.getElementById(divElem, 'csw.minscale').value,
-			MAXSCALE : xml.getElementById(divElem, 'csw.maxscale').value
-		});
+			var divElem = searchList[i];
+			
+			for(var j=0; j<capList.length; j++){
+				
+				var capName = capList[j].getAttribute('name');
+				obj[capName]= xml.getElementById(divElem, capList[j].textContent).value;
+				
+			}
+		}
+	
+		searchData.push(obj);
+	
 	}
 	
+	if(typeof(searchtemp)=='undefined'){ 
+
+		var doc    = Sarissa.getDomDocument();
+		var searchtmp = doc.createElement('search');
+		for(var j=0; j < capList.length; j++) {
+			
+			var text = doc.createTextNode('{'+capList[j].getAttribute('name') +'}');
+			var subtmp = doc.createElement(capList[j].getAttribute('name'));
+			subtmp.appendChild(text);
+			searchtmp.appendChild(subtmp);
+		}
+		
+		addSearchTemp(searchtmp);
+	} 
+	
+	
 	data.SEARCH_LIST = searchData;
+	data.SEARCH_TEMP = searchtemp;
 	
 	//--- retrieve privileges and categories information
 	
@@ -194,13 +227,108 @@ function updateIcon()
 //=== Search methods
 //=====================================================================================
 
+function addEmptySearchOld()
+{
+		var doc    = Sarissa.getDomDocument();	
+		var search = doc.createElement('search');
+
+		addSearch(search);
+}
+
+
 function addEmptySearch()
 {
-	var doc    = Sarissa.getDomDocument();	
-	var search = doc.createElement('search');
+	var url = $('csw.capabUrl').value;
+	OpenLayers.ProxyHostURL = '../../proxy?url='+encodeURIComponent(url);
+		 
+	if (url==''){
+		return;
+	}
+	OpenLayers.Request.GET({
+		url: OpenLayers.ProxyHostURL,
+   		success: function(response) {
+   			
+   			var doc    = Sarissa.getDomDocument();	
+   			var search = doc.createElement('search');
+   			var searchtmp = doc.createElement('search');
+   			
+    		var format = new OpenLayers.Format.XML();
+    		var doc = format.read(response.responseText);
+    		var nodes = format.getElementsByTagNameNS(doc, '*', 'Constraint');
+			for(var i=0; i < nodes.length; i++) {
+				if (nodes[i].attributes[0].value =='SupportedISOQueryables' || nodes[i].attributes[0].value =='AdditionalQueryables')
+				for(var j=0; j < nodes[i].childNodes.length; j++) {
+					if (nodes[i].childNodes[j].nodeName == 'ows:Value'){
+						var sub = doc.createElement(nodes[i].childNodes[j].firstChild.nodeValue);
+						search.appendChild(sub);
+						
+						var text = doc.createTextNode('{'+nodes[i].childNodes[j].firstChild.nodeValue +'}');
+						var subtmp = doc.createElement(nodes[i].childNodes[j].firstChild.nodeValue);
+						subtmp.appendChild(text);
+						searchtmp.appendChild(subtmp);
 	
-	addSearch(search);
+					}
+				}
+			}
+			
+			addSearchTemp(searchtmp);
+			
+			addSearchCap(search);
+			
+    	},
+    	failure: function(result) {
+            console.log("failure");
+    	}
+	});
+
+	
 }
+
+//=====================================================================================
+
+function addSearchCap(search)
+{
+	var id = ''+ currSearchId++;
+	search.setAttribute('id', id);
+	
+	elemCap = elemCapTransf.transform(search); 
+	
+	var html = searchCapTransf.transformToText(search);
+	
+	//--- add the new search in list
+	new Insertion.Bottom('csw.searches', html);
+	
+
+	
+}
+
+//=====================================================================================
+
+function addEditCap(search)
+{
+	var id = ''+ currSearchId++;
+	search.setAttribute('id', id);
+	
+	elemCap = elemCapTransf.transform(search); 
+		
+	var html = editCapTransf.transformToText(search);
+	
+	//--- add the new search in list
+	new Insertion.Bottom('csw.searches', html);
+	
+
+	
+}
+
+//=====================================================================================
+
+
+function addSearchTemp(searchtmp)
+{
+	searchtemp = searchTempTransf.transformToText(searchtmp);
+
+}
+
 
 //=====================================================================================
 
@@ -209,10 +337,13 @@ function addSearch(search)
 	var id = ''+ currSearchId++;
 	search.setAttribute('id', id);
 	
+
 	var html = searchTransf.transformToText(search);
 
+	
 	//--- add the new search in list
 	new Insertion.Bottom('csw.searches', html);
+	
 	
 	valid.add(
 	[
