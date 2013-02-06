@@ -1102,28 +1102,30 @@ public class SearchManager {
 	public List<TermFrequency> getStartingTermsFequency(String fieldName, String searchValue, int maxNumberOfTerms,
             int threshold) throws Exception {
 		
-		List<TermFrequency> termList = new ArrayList<TermFrequency>();
-		IndexReader reader = getIndexReader(null);
-		TermEnum term = reader.terms(new Term(fieldName, ""));
-		int i = 0;
-		try {
-			if (term.term()!=null) {
-				// Extract terms containing search value.
-				do {
-					if (!term.term().field().equals(fieldName) || (++i > maxNumberOfTerms)) {
-						break;
-					}
-					if (term.docFreq() >= threshold && StringUtils.startsWith(term.term().text(), searchValue)) {
-						TermFrequency freq = new TermFrequency(term.term().text(), term.docFreq());
-						termList.add(freq);
-					} 
-				}
-				while (term.next());
-			}
-		} finally {
-			releaseIndexReader(reader);
-		}
-		return termList;
+        List<TermFrequency> termList = new ArrayList<TermFrequency>();
+        IndexAndTaxonomy indexAndTaxonomy = getNewIndexReader(null);
+        GeonetworkMultiReader multiReader = indexAndTaxonomy.indexReader;
+        @SuppressWarnings("resource")
+        SlowCompositeReaderWrapper atomicReader = new SlowCompositeReaderWrapper(multiReader);
+        Terms terms = atomicReader.terms(fieldName);
+        if (terms != null) {
+            TermsEnum termEnum = terms.iterator(null);
+            int i = 1;
+            try {
+                BytesRef term = termEnum.next();
+                while (term != null && i++ < maxNumberOfTerms) {
+                    String text = term.utf8ToString();
+                    if (termEnum.docFreq() >= threshold && StringUtils.startsWith(text, searchValue)) {
+                        TermFrequency freq = new TermFrequency(text, termEnum.docFreq());
+                        termList.add(freq);
+                    }
+                    term = termEnum.next();
+                }
+            } finally {
+                releaseIndexReader(indexAndTaxonomy);
+            }
+        }
+        return termList;
 	}
 
 

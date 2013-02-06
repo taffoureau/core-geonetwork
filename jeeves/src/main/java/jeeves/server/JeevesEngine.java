@@ -815,37 +815,39 @@ public class JeevesEngine
 
 		Element eltServices = new Element("services");
 		eltServices.setAttribute("package", "org.fao.geonet");
-		java.util.List serviceList =  _dbms.select ("SELECT * FROM Services").getChildren();
 		
-		if (!dbLoaded){
-			for(int j=0; j<serviceList.size(); j++){	
-			
-				Element eltService = (Element)serviceList.get(j);
-				Element srv = new Element("service");
-				Element cls = new Element("class");
-				java.util.List paramList = _dbms.select("SELECT name, value FROM ServiceParameters WHERE service =?", Integer.valueOf(eltService.getChildText("id"))).getChildren();
+		try {
+			java.util.List serviceList =  _dbms.select ("SELECT * FROM Services").getChildren();
+		  		
+			if (!dbLoaded){
+				for(int j=0; j<serviceList.size(); j++){	
 				
-				for(int k=0; k<paramList.size(); k++){	
-					Element eltParam = (Element)paramList.get(k);
-					String paramId = eltParam.getChildText("id");
-					if (eltParam.getChildText("value")!=null && !eltParam.getChildText("value").equals("")){
-						//cls.addContent(new Element("param").setAttribute("name",eltParam.getChildText("name")).setAttribute("value",eltParam.getChildText("value")));
-						cls.addContent(new Element("param").setAttribute("name","filter").setAttribute("value","+"+eltParam.getChildText("name")+":"+eltParam.getChildText("value")));
+					Element eltService = (Element)serviceList.get(j);
+					Element srv = new Element("service");
+					Element cls = new Element("class");
+					java.util.List paramList = _dbms.select("SELECT name, value FROM ServiceParameters WHERE service =?", Integer.valueOf(eltService.getChildText("id"))).getChildren();
+					
+					for(int k=0; k<paramList.size(); k++){	
+						Element eltParam = (Element)paramList.get(k);
+						String paramId = eltParam.getChildText("id");
+						if (eltParam.getChildText("value")!=null && !eltParam.getChildText("value").equals("")){
+							//cls.addContent(new Element("param").setAttribute("name",eltParam.getChildText("name")).setAttribute("value",eltParam.getChildText("value")));
+							cls.addContent(new Element("param").setAttribute("name","filter").setAttribute("value","+"+eltParam.getChildText("name")+":"+eltParam.getChildText("value")));
+						}
 					}
+					
+					srv.setAttribute("name", eltService.getChildText("name")).addContent(cls.setAttribute("name", eltService.getChildText("class")));
+					eltServices.addContent(srv);
 				}
-				
-				srv.setAttribute("name", eltService.getChildText("name")).addContent(cls.setAttribute("name", eltService.getChildText("class")));
-				eltServices.addContent(srv);
 			}
+					
+			dbservices.add(eltServices);
+			
+		} catch (Exception e) {
+			warning("Could not load service configuration from the database (database may not be available yet). Message is: " + e.getMessage());
 		}
 		
 		dbservices.add(eltServices);
-
-		/*/// for debug ///
-		Document document = new Document(eltServices);
-        XMLOutputter out = new XMLOutputter();
-        System.out.println(out.outputString(document));
-        ////////////////*/
 
 	}
 	
