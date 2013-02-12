@@ -148,7 +148,7 @@ public class CswHarvester extends AbstractHarvester
 											String siteId, String optionsId) throws SQLException
 	{
 		CswParams params = (CswParams) p;
-
+		
 		settingMan.add(dbms, "id:"+siteId, "capabUrl", params.capabUrl);
 		settingMan.add(dbms, "id:"+siteId, "icon",     params.icon);
         settingMan.add(dbms, "id:"+siteId, "rejectDuplicateResource", params.rejectDuplicateResource);
@@ -158,21 +158,16 @@ public class CswHarvester extends AbstractHarvester
 		String  searchID = settingMan.add(dbms, path, "search", "");	
 		
 		if (params.eltSearches!=null){
-			Iterator<Element> iterator = params.eltSearches.iterator();
-			while (iterator.hasNext()) {
-				Element element = iterator.next();
+			for (Element element : params.eltSearches) {
 				if (!element.getName().startsWith("parser")){
 					settingMan.add(dbms, "id:"+searchID, element.getName(), element.getText());
 				}
 			}
-			
 		}
 
 		//--- store search nodes
-
 		/*for (Search s : params.getSearches())
 		{
-			
 			String  searchID = settingMan.add(dbms, path, "search", "");
 
 			settingMan.add(dbms, "id:"+searchID, "freeText", s.freeText);

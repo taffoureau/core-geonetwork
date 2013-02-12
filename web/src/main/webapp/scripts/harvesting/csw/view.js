@@ -139,9 +139,13 @@ function getData()
 	var searchData = [];
 	var searchList = xml.children($('csw.searches'));
 	
+	if (typeof(elemCap)=='undefined'){
+		elemCap = elemCapTransf.transform(Sarissa.getDomDocument().createElement('search')); 
+	}
+	
 	var capList = elemCap.getElementsByTagName('capability');
 	var obj={};
-	
+		
 	for(var i=0; i<searchList.length; i++)
 	{
 		var divElem = searchList[i];
@@ -152,18 +156,18 @@ function getData()
 			
 			for(var j=0; j<capList.length; j++){
 				
-				var capName = capList[j].getAttribute('name');
-				obj[capName]= xml.getElementById(divElem, capList[j].textContent).value;
-				
+					var capName = capList[j].getAttribute('name');
+					obj[capName]= xml.getElementById(divElem, capList[j].textContent).value;
+					
 			}
 		}
 	
 		searchData.push(obj);
-	
+		
 	}
-	
+		
 	if(typeof(searchtemp)=='undefined'){ 
-
+	
 		var doc    = Sarissa.getDomDocument();
 		var searchtmp = doc.createElement('search');
 		for(var j=0; j < capList.length; j++) {
@@ -173,10 +177,11 @@ function getData()
 			subtmp.appendChild(text);
 			searchtmp.appendChild(subtmp);
 		}
-		
+			
 		addSearchTemp(searchtmp);
 	} 
 	
+
 	
 	data.SEARCH_LIST = searchData;
 	data.SEARCH_TEMP = searchtemp;
@@ -242,6 +247,10 @@ function addEmptySearch()
 	OpenLayers.ProxyHostURL = '../../proxy?url='+encodeURIComponent(url);
 		 
 	if (url==''){
+		return;
+	}
+	if (url.indexOf('Capabilities')==-1){
+		alert('Incomplete URL : missing request=GetCapabilities');
 		return;
 	}
 	OpenLayers.Request.GET({

@@ -79,7 +79,6 @@ public class CswParams extends AbstractParams
 
 		addSearches(searches);
 		
-		
 		if (searches!=null){
 			if (searches.getChild("search")!=null){
 				eltSearches = searches.getChild("search").getChildren();
@@ -99,7 +98,7 @@ public class CswParams extends AbstractParams
 	public void update(Element node) throws BadInputEx
 	{
 		super.update(node);
-
+		
 		Element site     = node.getChild("site");
 		Element searches = node.getChild("searches");
 		
@@ -127,7 +126,7 @@ public class CswParams extends AbstractParams
 		if (searches.getChild("search")!=null){
 			eltSearches = searches.getChild("search").getChildren();
 		}
-		
+
 	}
 
 	//---------------------------------------------------------------------------
@@ -137,6 +136,8 @@ public class CswParams extends AbstractParams
 	//---------------------------------------------------------------------------
 
 	public Iterable<Search> getSearches() { return alSearches; }
+	
+	//public Iterable<Element> getSearchElements() { return eltSearches; }
 
 	//---------------------------------------------------------------------------
 
@@ -155,6 +156,8 @@ public class CswParams extends AbstractParams
 
 		for (Search s : alSearches)
 			copy.alSearches.add(s.copy());
+		
+		copy.eltSearches = eltSearches;
 
 		return copy;
 	}
@@ -189,8 +192,7 @@ public class CswParams extends AbstractParams
 	public String icon;
     public boolean rejectDuplicateResource;
 
-	private List<Search> alSearches = new ArrayList<Search>();
-	
+	private List<Search> alSearches = new ArrayList<Search>();	
 	public List<Element> eltSearches = new ArrayList<Element>();
 	
 }
