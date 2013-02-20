@@ -144,18 +144,18 @@ public class DataManager {
 
 		// get all metadata from DB
 		Element result = dbms.select("SELECT id, changeDate FROM Metadata ORDER BY id ASC");
-		
-        if(Log.isDebugEnabled(Geonet.DATA_MANAGER))
-		    Log.debug(Geonet.DATA_MANAGER, "DB CONTENT:\n'"+ Xml.getString(result) +"'");
 
-		// get lastchangedate of all metadata in index
+		if(Log.isDebugEnabled(Geonet.DATA_MANAGER))
+        	Log.debug(Geonet.DATA_MANAGER, "DB CONTENT:\n'"+ Xml.getString(result) +"'");
+        
+        // get lastchangedate of all metadata in index
 		Map<String,String> docs = searchMan.getDocsChangeDate();
 
 		// set up results HashMap for post processing of records to be indexed
 		ArrayList<String> toIndex = new ArrayList<String>();
 
         if (Log.isDebugEnabled(Geonet.DATA_MANAGER))
-            Log.debug(Geonet.DATA_MANAGER, "INDEX CONTENT:");
+        	Log.debug(Geonet.DATA_MANAGER, "INDEX CONTENT:");
 
 		// index all metadata in DBMS if needed
 		for(int i = 0; i < result.getContentSize(); i++) {
@@ -349,6 +349,10 @@ public class DataManager {
          */
         public void run() {
             context.setAsThreadLocal();
+            
+            if(Log.isDebugEnabled(Geonet.DATA_MANAGER))
+            	Log.debug(Geonet.DATA_MANAGER, "running IndexMetaDataTask");
+            
             try {
                 // poll context to see whether servlet is up yet
                 while (!context.isServletInitialized()) {
@@ -358,7 +362,12 @@ public class DataManager {
                 }
                 Dbms dbms = (Dbms) context.getResourceManager().openDirect(Geonet.Res.MAIN_DB);
                 try {
-
+                	        
+            		GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
+            		gc.setIndexing(true);
+                    if(Log.isDebugEnabled(Geonet.DATA_MANAGER))
+                        Log.debug(Geonet.DATA_MANAGER, "setting indexation flag to " + gc.isIndexing());
+                    
                     if (ids.size() > 1) {
                         // servlet up so safe to index all metadata that needs indexing
                         try {
@@ -377,11 +386,16 @@ public class DataManager {
                     else {
                         indexMetadata(dbms, ids.get(0));
                     }
+
+            		gc.setIndexing(false);
+                    if(Log.isDebugEnabled(Geonet.DATA_MANAGER))
+                        Log.debug(Geonet.DATA_MANAGER, "setting indexation flag to " + gc.isIndexing() );
                 }
                 finally {
                     //-- commit Dbms resource (which makes it available to pool again)
                     //-- to avoid exhausting Dbms pool
                     context.getResourceManager().close(Geonet.Res.MAIN_DB, dbms);
+                    
                 }
             }
             catch (Exception e) {
@@ -403,9 +417,13 @@ public class DataManager {
             Vector<Element> moreFields = new Vector<Element>();
             int id$ = new Integer(id);
             
+            if(Log.isDebugEnabled(Geonet.DATA_MANAGER))
+                Log.debug(Geonet.DATA_MANAGER, "starting to index metadata with id " + id);
+            
             // get metadata, extracting and indexing any xlinks
             Element md   = xmlSerializer.selectNoXLinkResolver(dbms, "Metadata", id, true);
             if (xmlSerializer.resolveXLinks()) {
+            	
                 List<Attribute> xlinks = Processor.getXLinks(md);
                 if (xlinks.size() > 0) {
                     moreFields.add(SearchManager.makeField("_hasxlinks", "1", true, true));
@@ -421,6 +439,9 @@ public class DataManager {
                 }
             }
             else {
+            	if(Log.isDebugEnabled(Geonet.DATA_MANAGER))
+                    Log.debug(Geonet.DATA_MANAGER, "no xlink");
+            	
                 moreFields.add(SearchManager.makeField("_hasxlinks", "0", true, true));
             }
 
@@ -539,6 +560,7 @@ public class DataManager {
                 moreFields.add(SearchManager.makeField("_valid", isValid, true, true));
             }
             searchMan.index(schemaMan.getSchemaDir(schema), md, id, moreFields, isTemplate, title);
+
         }
 		catch (Exception x) {
 			Log.error(Geonet.DATA_MANAGER, "The metadata document index with id=" + id + " is corrupt/invalid - ignoring it. Error: " + x.getMessage());
