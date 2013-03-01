@@ -144,27 +144,25 @@ function getData()
 	}
 	
 	var capList = elemCap.getElementsByTagName('capability');
-	var obj={};
+	
 		
+	
 	for(var i=0; i<searchList.length; i++)
 	{
 		var divElem = searchList[i];
-
-		for(var i=0; i<searchList.length; i++)
-		{
-			var divElem = searchList[i];
-			
-			for(var j=0; j<capList.length; j++){
-				
-					var capName = capList[j].getAttribute('name');
-					obj[capName]= xml.getElementById(divElem, capList[j].textContent).value;
-					
-			}
-		}
-	
-		searchData.push(obj);
+		var obj={};
 		
+		for(var j=0; j<capList.length; j++){
+			
+				var capName = capList[j].getAttribute('name');
+				obj[capName]= xml.getElementById(divElem, capList[j].textContent).value;
+				
+		}
+		
+		searchData.push(obj);
 	}
+	
+	
 		
 	if(typeof(searchtemp)=='undefined'){ 
 	
@@ -334,8 +332,7 @@ function addEditCap(search)
 
 function addSearchTemp(searchtmp)
 {
-	searchtemp = searchTempTransf.transformToText(searchtmp);
-
+	searchtemp = xml.toString(searchtmp);
 }
 
 
