@@ -19,3 +19,5 @@ CREATE TABLE ServiceParameters
         
     foreign key(service) references Services(id)
   );
+  
+UPDATE Settings SET value='2.9.0' WHERE name='version';
