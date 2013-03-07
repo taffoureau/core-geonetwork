@@ -63,8 +63,13 @@
       <version id="272">
         <file path="WEB-INF/classes/setup/sql-geosource/migrate/272" filePrefix="migrate-"/>
       </version>
+      <!-- 
       <version id="280">
         <file path="WEB-INF/classes/setup/sql-geosource/migrate/280" filePrefix="migrate-"/>
+      </version>
+      -->
+      <version id="290">
+        <file path="WEB-INF/classes/setup/sql-geosource/migrate/290" filePrefix="migrate-db-"/>
       </version>
     </replaceXML>
   </file>
