@@ -352,6 +352,7 @@ GeoNetwork.Catalogue = Ext.extend(Ext.util.Observable, {
             getSources: serviceUrl + 'xml.info?type=sources',
             getUsers: serviceUrl + 'xml.info?type=users',
             getSiteInfo: serviceUrl + 'xml.info?type=site&type=auth',
+            getIndexInfo: serviceUrl + 'xml.info?type=index',
             getInspireInfo: serviceUrl + 'xml.info?type=inspire',
             getIsoLanguages: serviceUrl + 'isolanguages',
             schemaInfo: serviceUrl + 'xml.schema.info',
@@ -541,6 +542,22 @@ GeoNetwork.Catalogue = Ext.extend(Ext.util.Observable, {
         }
         return info;
     },
+    /** api: method[getIndexInfo]
+    *
+    *  Return running indexation status.
+    */
+    getIndexInfo: function() {
+    	var info;
+    	var request = OpenLayers.Request.GET({
+    		url: this.services.getIndexInfo,
+    		async: false
+    	});
+    	if (request.responseXML) {
+    		var xml = request.responseXML.documentElement;
+    		info = xml.firstChild.data;
+    	}
+    	return info
+    }, 
     /** private: method[updateStatus]
      *
      *  Update status bar information. Status bar could be an

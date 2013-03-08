@@ -147,6 +147,9 @@ public class Info implements Service
 			else if (type.equals("auth"))
 				result.addContent(getAuth(context));
 			
+			else if (type.equals("index"))
+				result.addContent(getIndex(gc));
+			
 			else
 				throw new BadParameterEx("Unknown type parameter value.", type);
 		}
@@ -154,6 +157,14 @@ public class Info implements Service
 		result.addContent(getEnv(context));
 
 		return Xml.transform(result, xslPath +"/info.xsl");
+	}
+	
+	
+	private Element getIndex(GeonetContext context) {
+		Element index = new Element("index");
+		Element indexing = new Element("indexing").setText(Boolean.toString(context.isIndexing()));
+		index.addContent(indexing);
+		return index;
 	}
 
 	private Element getAuth(ServiceContext context) {
@@ -163,8 +174,6 @@ public class Info implements Service
 
 		return auth;
 	}
-
-	
 
 	//--------------------------------------------------------------------------
 	//---

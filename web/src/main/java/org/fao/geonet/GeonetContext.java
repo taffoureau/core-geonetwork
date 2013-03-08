@@ -59,6 +59,7 @@ public class GeonetContext
   /* package */ MetadataNotifierManager metadataNotifierMan;
 	/* package */ ThreadPool        threadPool;
 	Class statusActionsClass;
+	boolean indexing;
 
 
     //---------------------------------------------------------------------------
@@ -78,7 +79,7 @@ public class GeonetContext
 	public ThesaurusManager  getThesaurusManager()  { return thesaurusMan; }
 	public OaiPmhDispatcher  getOaipmhDispatcher()  { return oaipmhDis;    }
 	public ApplicationContext  getApplicationContext() { return app_context; }
-  public MetadataNotifierManager getMetadataNotifier() { return metadataNotifierMan; }
+	public MetadataNotifierManager getMetadataNotifier() { return metadataNotifierMan; }
     public ThreadPool        getThreadPool()        { return threadPool;   }
 
 	//---------------------------------------------------------------------------
@@ -86,6 +87,13 @@ public class GeonetContext
 	public String getSiteId()   { return settingMan.getValue("system/site/siteId"); }
 	public String getSiteName() { return settingMan.getValue("system/site/name");   }
 	public Class getStatusActionsClass() { return statusActionsClass; }
+	public boolean isIndexing(){
+		return indexing;
+	}
+	
+	public void setIndexing(boolean _indexing){
+		indexing=_indexing;
+	}
 }
 
 //=============================================================================
