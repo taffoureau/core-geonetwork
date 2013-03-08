@@ -574,6 +574,19 @@ GeoNetwork.app = function () {
             }
         });
     }
+    /** private: methode[createIndexationPanel]
+     *  panel indicating if there is a running indexation 
+     *
+     *  :return:
+     */
+    function createIndexationPanel(){
+    	var info=catalogue.getIndexInfo();
+    	if (info=='true'){
+    		return new Ext.Panel({border:true,frame:false,baseCls:"none",id:"indexationPanel",autoWidth:true,renderTo:"shortcut",autoLoad:{url:"indexation_"+catalogue.LANG+".html",callback:initShortcut,scope:this,loadScripts:false}})
+    	} else {
+    		return new Ext.Panel();
+    	}
+    }
     
     /**
      * Main tagcloud displayed in the information panel
@@ -761,6 +774,7 @@ GeoNetwork.app = function () {
             // Extra stuffs
             infoPanel = createInfoPanel();
             helpPanel = createHelpPanel();
+            indexationPanel = createIndexationPanel();
             
             createHeader();
             
@@ -823,7 +837,7 @@ GeoNetwork.app = function () {
                     id: 'center',
                     split: true,
                     margins: margins,
-                    items: [infoPanel, resultsPanel]
+                    items: [indexationPanel,infoPanel, resultsPanel]
                 }, {
                     region: 'east',
                     id: 'east',
