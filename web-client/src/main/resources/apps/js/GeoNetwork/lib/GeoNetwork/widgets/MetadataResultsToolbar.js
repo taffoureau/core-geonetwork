@@ -544,7 +544,7 @@ GeoNetwork.MetadataResultsToolbar = Ext.extend(Ext.Toolbar, {
         }
         
         Ext.each(this.selectionActions, function(e){
-            if (nb === 0) {
+            if (nb == 0) {
                 e.disable();
             } else {
                 e.enable();
