@@ -1353,15 +1353,28 @@
 			<description>Informations appliquées aux caractéristiques d’une collection de session</description>
 		</entry>
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
-		<entry>
+		<!--<entry>
 			<code>dataset</code>
 			<label>Jeu de données</label>
+			<description>Informations appliquées aux caractéristiques de jeu de données</description>
+		</entry>
+		<!-\- - - - - - - - - - - - - - - - - - - - - - - - - -\->
+		<entry>
+			<code>series</code>
+			<label>Collection de données</label>
+			<description>Informations appliquées aux caractéristiques de la collection de données</description>
+		</entry>-->
+		
+		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+		<entry>
+			<code>dataset</code>
+			<label>Série de données</label>
 			<description>Informations appliquées aux caractéristiques de jeu de données</description>
 		</entry>
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<entry>
 			<code>series</code>
-			<label>Collection de données</label>
+			<label>Ensemble de Séries de données</label>
 			<description>Informations appliquées aux caractéristiques de la collection de données</description>
 		</entry>
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -1685,15 +1698,28 @@
 			<description>Informations appliquées aux caractéristiques d’une collection de session</description>
 		</entry>
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
-		<entry>
+<!--		<entry>
 			<code>dataset</code>
 			<label>Jeu de données</label>
+			<description>Informations appliquées aux caractéristiques de jeu de données</description>
+		</entry>
+		<!-\- - - - - - - - - - - - - - - - - - - - - - - - - -\->
+		<entry>
+			<code>series</code>
+			<label>Collection de données</label>
+			<description>Informations appliquées aux caractéristiques de la collection de données</description>
+		</entry>-->
+		
+		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+		<entry>
+			<code>dataset</code>
+			<label>Série de données</label>
 			<description>Informations appliquées aux caractéristiques de jeu de données</description>
 		</entry>
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<entry>
 			<code>series</code>
-			<label>Collection de données</label>
+			<label>Ensemble de Séries de données</label>
 			<description>Informations appliquées aux caractéristiques de la collection de données</description>
 		</entry>
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
