@@ -82,7 +82,7 @@ GeoNetwork.Settings.results = {
         //loadRelationForAll: true
         loadRelationForAll: undefined
 };
-GeoNetwork.MapModule = true;
+GeoNetwork.MapModule = false;
 GeoNetwork.ProjectionList = [['EPSG:4326', 'WGS84 (lat/lon)']];
 GeoNetwork.WMSList = [['Geoserver', 'http://localhost/geoserver/wms?']];
 
