@@ -121,6 +121,10 @@ public class Thesaurus {
 		this.downloadUrl = buildDownloadUrl(fname, type, dname, siteUrl);
 		this.keywordUrl = buildKeywordUrl(fname, type, dname, siteUrl);
 		
+		// TODO: add parameter to set title
+		// TODO: add parameter to set namespace
+		this.defaultNamespace = DEFAULT_THESAURUS_NAMESPACE;
+		
         retrieveThesaurusTitle(thesaurusFile, dname + "." + fname, ignoreMissingError);
 	}
 
