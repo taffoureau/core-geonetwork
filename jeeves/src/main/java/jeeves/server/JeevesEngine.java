@@ -57,6 +57,8 @@ import jeeves.monitor.MonitorManager;
 import jeeves.resources.dbms.Dbms;
 import jeeves.server.context.ServiceContext;
 import jeeves.server.dispatchers.ServiceManager;
+import jeeves.server.dispatchers.guiservices.XmlCacheManager;
+import jeeves.server.overrides.ConfigurationOverrides;
 import jeeves.server.resources.ProviderManager;
 import jeeves.server.resources.ResourceManager;
 import jeeves.server.sources.ServiceRequest;
@@ -107,6 +109,7 @@ public class JeevesEngine
 	private List<Element> appHandList = new ArrayList<Element>();
 	private Vector<ApplicationHandler> vAppHandlers = new Vector<ApplicationHandler>();
 	private Vector<Activator> vActivators = new Vector<Activator>();
+	private XmlCacheManager xmlCacheManager = new XmlCacheManager();
     private MonitorManager monitorManager;
     
     private List<Element> dbservices = new ArrayList<Element>();
@@ -164,9 +167,14 @@ public class JeevesEngine
 			info("Path    : "+ appPath);
 			info("BaseURL : "+ baseUrl);
 
+			// obtain application context so we can configure the serviceManager with it but we will configure it a bit later
+            JeevesApplicationContext jeevesAppContext = (JeevesApplicationContext) WebApplicationContextUtils.getWebApplicationContext(servletContext);
+            
 			serviceMan.setAppPath(appPath);
 			serviceMan.setProviderMan(providerMan);
 			serviceMan.setMonitorMan(monitorManager);
+			serviceMan.setXmlCacheManager(xmlCacheManager );
+			serviceMan.setApplicationContext(jeevesAppContext);
 			serviceMan.setSerialFactory(serialFact);
 			serviceMan.setBaseUrl(baseUrl);
 			serviceMan.setServlet(servlet);
@@ -174,6 +182,7 @@ public class JeevesEngine
 			scheduleMan.setAppPath(appPath);
 			scheduleMan.setProviderMan(providerMan);
 			scheduleMan.setMonitorManager(monitorManager);
+			scheduleMan.setApplicationContext(jeevesAppContext);
 			scheduleMan.setSerialFactory(serialFact);
 			scheduleMan.setBaseUrl(baseUrl);
 
@@ -181,21 +190,20 @@ public class JeevesEngine
 			
 			loadConfigFile(servletContext, configPath, Jeeves.CONFIG_FILE, serviceMan);
 
-			info("Initializing profiles...");
-			ProfileManager profileManager = serviceMan.loadProfiles(servletContext, profilesFile);
-            
-			 JeevesApplicationContext jeevesAppContext = (JeevesApplicationContext) WebApplicationContextUtils.getWebApplicationContext(servletContext);
-			 // Add ResourceManager as a bean to the spring application context so that GeonetworkAuthentication can access it
-			 jeevesAppContext.getBeanFactory().registerSingleton("resourceManager", new ResourceManager(this.monitorManager, this.providerMan));
-			 profileManager.setApplicationContext(jeevesAppContext);
-			 jeevesAppContext.getBeanFactory().registerSingleton("profileManager", profileManager);
-			 jeevesAppContext.getBeanFactory().registerSingleton("serialFactory", serialFact);
-		
+            info("Initializing profiles...");
+            ProfileManager profileManager = serviceMan.loadProfiles(servletContext, profilesFile);
+
+            // Add ResourceManager as a bean to the spring application context so that GeonetworkAuthentication can access it
+            jeevesAppContext.getBeanFactory().registerSingleton("resourceManager", new ResourceManager(this.monitorManager, this.providerMan));
+            profileManager.setApplicationContext(jeevesAppContext);
+            jeevesAppContext.getBeanFactory().registerSingleton("profileManager", profileManager);
+            jeevesAppContext.getBeanFactory().registerSingleton("serialFactory", serialFact);
+
 			//--- handlers must be started here because they may need the context
 			//--- with the ProfileManager already loaded
 
 			for(int i=0; i<appHandList.size(); i++)
-				initAppHandler((Element) appHandList.get(i), servlet);
+				initAppHandler((Element) appHandList.get(i), servlet, jeevesAppContext);
 
 			info("Starting schedule manager...");
 			scheduleMan.start();
@@ -554,7 +562,7 @@ public class JeevesEngine
 	//---------------------------------------------------------------------------
 
 	@SuppressWarnings("unchecked")
-	private void initAppHandler(Element handler, JeevesServlet servlet) throws Exception
+	private void initAppHandler(Element handler, JeevesServlet servlet, JeevesApplicationContext jeevesApplicationContext) throws Exception
 	{
 		if (handler == null)
 			info("Handler not found");
@@ -573,7 +581,7 @@ public class JeevesEngine
 
 			ApplicationHandler h = (ApplicationHandler) c.newInstance();
 
-			ServiceContext srvContext = serviceMan.createServiceContext("AppHandler");
+			ServiceContext srvContext = serviceMan.createServiceContext("AppHandler", jeevesApplicationContext);
 			srvContext.setLanguage(defaultLang);
 			srvContext.setLogger(appHandLogger);
 			srvContext.setServlet(servlet);
