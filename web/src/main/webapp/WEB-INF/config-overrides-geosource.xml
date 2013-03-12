@@ -70,6 +70,7 @@
       -->
       <version id="290">
         <file path="WEB-INF/classes/setup/sql-geosource/migrate/290" filePrefix="migrate-db-"/>
+        <file path="WEB-INF/classes/setup/sql-geosource/migrate/290" filePrefix="migrate-"/>
       </version>
     </replaceXML>
   </file>
