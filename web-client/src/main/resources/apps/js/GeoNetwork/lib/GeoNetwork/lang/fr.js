@@ -473,6 +473,8 @@ GeoNetwork.Lang.fr = {
     'Theme': 'Thème',
     'thesaurusFilePath': 'Fichier (.rdf)',
     'ThesaurusName': 'Nom du thésaurus',
+    'ThesaurusId': 'Identifiant du thésaurus',
+    'ThesaurusTitle': 'Identifiant du thésaurus',
     'createThesaurusFromURL': 'A partir d\'une URL',
     'createThesaurusFromRepository': 'A partir du dépôt partagé',
     'creationMode': 'Créer',

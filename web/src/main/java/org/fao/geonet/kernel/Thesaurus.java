@@ -70,6 +70,8 @@ public class Thesaurus {
 
 	private String fname;
 
+	private String tname;
+	
 	private String type;
 
 	private String dname;
@@ -116,6 +118,17 @@ public class Thesaurus {
 	public Thesaurus(IsoLanguagesMapper mapper, String fname, String type, String dname, File thesaurusFile, String siteUrl) {
 	    this(mapper, fname, type, dname, thesaurusFile, siteUrl, false);
 	}
+	
+	/**
+	 * 
+	 * @param mapper
+	 * @param fname
+	 * @param type
+	 * @param dname
+	 * @param thesaurusFile
+	 * @param siteUrl
+	 * @param ignoreMissingError
+	 */
     public Thesaurus(IsoLanguagesMapper mapper, String fname, String type, String dname, File thesaurusFile, String siteUrl, boolean ignoreMissingError) {
 		super();
 		this.isoLanguageMapper = mapper;
@@ -127,17 +140,59 @@ public class Thesaurus {
 		this.keywordUrl = buildKeywordUrl(fname, type, dname, siteUrl);
 		
 		// TODO: add parameter to set title
+		this.title = tname; 
+		
 		// TODO: add parameter to set namespace
 		this.defaultNamespace = DEFAULT_THESAURUS_NAMESPACE;
 		
         retrieveThesaurusTitle(thesaurusFile, dname + "." + fname, ignoreMissingError);
 	}
 
-	
-	public Thesaurus(String fname, String type, String dname, File thesaurusFile, String siteUrl) {
-		this(null, fname, type, dname, thesaurusFile, siteUrl);
+    
+    /**
+     * Thesaurus
+     * @param mapper
+     * @param tname
+     * @param fname
+     * @param type
+     * @param dname
+     * @param thesaurusFile
+     * @param siteUrl
+     * @param ignoreMissingError
+     */
+    public Thesaurus(String tname, String fname, String type, String dname, File thesaurusFile, String siteUrl, boolean ignoreMissingError) {
+		
+    	super();
+		this.isoLanguageMapper = null;
+		this.fname = fname;
+		this.type = type;
+		this.dname = dname;
+		this.thesaurusFile = thesaurusFile; 
+		this.downloadUrl = buildDownloadUrl(fname, type, dname, siteUrl);
+		this.keywordUrl = buildKeywordUrl(fname, type, dname, siteUrl);
+		
+		this.tname = tname;
+		this.title = tname;
+		
+		// TODO: add parameter to set namespace
+		this.defaultNamespace = DEFAULT_THESAURUS_NAMESPACE;
+		
+        //retrieveThesaurusTitle(thesaurusFile, dname + "." + fname, ignoreMissingError);
 	}
 	
+    /**
+     * Thesaurus
+     * @param fname
+     * @param type
+     * @param dname
+     * @param thesaurusFile
+     * @param siteUrl
+     */
+    public Thesaurus(String fname, String type, String dname, File thesaurusFile, String siteUrl) {
+		this(null, fname, type, dname, thesaurusFile, siteUrl);
+	}
+    
+    
     /**
 	 * 
 	 * @return Thesaurus identifier
@@ -280,6 +335,41 @@ public class Thesaurus {
 		}
 	}
 
+    /**
+     * 
+     * @param _title
+     * @throws AccessDeniedException 
+     * @throws IOException 
+     * @throws GraphException 
+     */
+    public void addTitleElement(String _title) throws IOException, AccessDeniedException, GraphException{
+    	
+        Graph myGraph = new org.openrdf.model.impl.GraphImpl();
+
+        ValueFactory myFactory = myGraph.getValueFactory();
+        
+    	String namespaceSkos = "http://www.w3.org/2004/02/skos/core#";
+    	String namespaceDC = "http://purl.org/dc/elements/1.1/";
+    	
+        URI mySubject = myFactory.createURI( "http://geonetwork-opensource.org/" , _title);
+    	URI skosClass = myFactory.createURI(namespaceSkos, "ConceptScheme");
+    	URI titleURI = myFactory.createURI(namespaceDC, "title");
+    	
+    	URI rdfType = myFactory.createURI(org.openrdf.vocabulary.RDF.TYPE);
+    	
+    	mySubject.addProperty(rdfType, skosClass);
+    	
+        Value valueObj = myFactory.createLiteral(_title);
+        myGraph.add(mySubject, titleURI, valueObj );
+        
+        repository.addGraph(myGraph);
+        
+       
+    	
+    }
+    
+    
+    
 	/**
 	 * Add a keyword to the Thesaurus.
 	 * 
@@ -597,9 +687,10 @@ public class Thesaurus {
      *
      */
     private void retrieveThesaurusTitle(File thesaurusFile, String defaultTitle, boolean ignoreMissingError) {
-				// set defaults as in the case of a local thesaurus file, this info
-				// may not be present yet
-				this.title = defaultTitle;
+		
+    	// set defaults as in the case of a local thesaurus file, this info
+		// may not be present yet
+		this.title = defaultTitle;
         this.date = new ISODate().toString();
 				this.version = "unknown"; // not really acceptable!
 
@@ -618,8 +709,17 @@ public class Thesaurus {
             if (title != null) {
                 this.title = title.getValue();
                 this.defaultNamespace = title.getParentElement().getAttributeValue("about", rdfNamespace);
+
             } else {
-                this.title = defaultTitle;
+            	title = Xml.selectElement(thesaurusEl, "rdf:Description/dc:title", theNSs);
+                if (title != null) {
+                    this.title = title.getValue();
+                    this.defaultNamespace = title.getParentElement().getAttributeValue("about", rdfNamespace);
+                    
+                } else {
+                	this.title = defaultTitle;
+                
+                }
             }
             
             try {

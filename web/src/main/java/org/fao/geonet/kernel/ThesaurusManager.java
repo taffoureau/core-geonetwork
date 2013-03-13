@@ -331,6 +331,8 @@ public class ThesaurusManager implements ThesaurusFinder {
 		
 		createThesaurusRepository(gst);	
 		thesauriMap.put(thesaurusName, gst);
+		
+		gst.addTitleElement(gst.getTitle());
 	}
 	
 	/**

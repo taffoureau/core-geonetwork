@@ -670,9 +670,11 @@ GeoNetwork.admin.ThesaurusManagerPanel = Ext.extend(Ext.Panel, {
                                   this.thesaurusStore.reload();
                               },
                               failure: function() { Ext.Msg.alert('Fail'); },
-                              xmlData: '<request><fname>' + Ext.getCmp('empty_thesaurusName').getValue()
-                                + '</fname><dname>' + Ext.getCmp('empty_themeCmb').getValue() + '</dname><type>'
-                                + Ext.getCmp('empty_thesaurusType').getValue() + '</type></request>'
+                              xmlData: '<request><tname>' + Ext.getCmp('empty_thesaurusName').getValue() + 
+                              	'</tname><fname>' + Ext.getCmp('empty_thesaurusTitle').getValue() + 
+                              	'</fname><dname>' + Ext.getCmp('empty_themeCmb').getValue() + 
+                              	'</dname><type>' + Ext.getCmp('empty_thesaurusType').getValue() + 
+                              	'</type></request>'
                               });
                         
                         win.hide();
@@ -775,32 +777,41 @@ GeoNetwork.admin.ThesaurusManagerPanel = Ext.extend(Ext.Panel, {
     /**
      * Method: getCreateEmptyThesaurusForm
      */
-    getCreateEmptyThesaurusForm: function(){
-        this.createEmptyThesaurusForm = new Ext.form.FormPanel({
-            fileUpload: false,
-            region: 'center',
-            autoHeight: true,
-            baseCls: 'x-plain',
-            labelWidth: 170,
-            split: true,
-            items: [{
-                xtype: 'textfield',
-                fieldLabel: OpenLayers.i18n('ThesaurusName'),
-                id: 'empty_thesaurusName',
-                name: 'fname',
-                anchor: '-15'
-            }, this.createTypeCombo('empty_themeCmb'), {
-                xtype: 'textfield',
-                fieldLabel: OpenLayers.i18n('thesaurusType'),
-                id: 'empty_thesaurusType',
-                name: 'type',
-                value: 'local',
-                hidden: true,
-                anchor: '-15'
-            }]
-        });
-        return this.createEmptyThesaurusForm;
-    },
+    getCreateEmptyThesaurusForm: function() {
+    	this.createEmptyThesaurusForm = new Ext.form.FormPanel({
+    	fileUpload: false,
+    	region: "center",
+    	autoHeight: true,
+    	baseCls: "x-plain",
+    	labelWidth: 170,
+    	split: true,
+    	items: [{
+    	xtype: "textfield",
+    	fieldLabel: OpenLayers.i18n("ThesaurusName"),
+    	id: "empty_thesaurusName",
+    	name: "tname",
+    	anchor: "-15"
+    	},
+    	{
+    	xtype: "textfield",
+    	fieldLabel: OpenLayers.i18n("ThesaurusTitle"),
+    	id: "empty_thesaurusTitle",
+    	name: "fname",
+    	anchor: "-15"
+    	},
+    	this.createTypeCombo("empty_themeCmb"),
+    	{
+    	xtype: "textfield",
+    	fieldLabel: OpenLayers.i18n("thesaurusType"),
+    	id: "empty_thesaurusType",
+    	name: "type",
+    	value: "local",
+    	hidden: true,
+    	anchor: "-15"
+    	}]
+    	});
+    	return this.createEmptyThesaurusForm
+    	}, 
 
   getCreateThesaurusFromLocalFileForm: function(){
   this.createThesaurusFromLocalFileForm = new Ext.form.FormPanel({

@@ -474,6 +474,7 @@ GeoNetwork.Lang.en = {
     'Theme': 'Theme',
     'thesaurusFilePath': 'Thesaurus file (.rdf)',
     'ThesaurusName': 'Thesaurus name',
+    'ThesaurusTitle': 'Thesaurus identifier',
     'createThesaurusFromURL': 'from URL',
     'createThesaurusFromRepository': 'from thesaurus repository',
     'creationMode': 'Create',
