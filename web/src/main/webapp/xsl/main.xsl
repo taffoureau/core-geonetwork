@@ -32,9 +32,7 @@
 			<body onload="init();">
 				<!-- banner -->
 				<xsl:if test="not(/root/request/modal)">
-					<div id="header">
-						<xsl:call-template name="banner"/>
-					</div>
+					<xsl:call-template name="banner"/>
 				</xsl:if>
 			
 				<div id="content_container" style="display:none">
