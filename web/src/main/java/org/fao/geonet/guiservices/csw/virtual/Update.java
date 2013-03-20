@@ -4,19 +4,14 @@ import jeeves.constants.Jeeves;
 import jeeves.interfaces.Service;
 import jeeves.resources.dbms.Dbms;
 import jeeves.server.ServiceConfig;
-import jeeves.server.UserSession;
 import jeeves.server.context.ServiceContext;
-import jeeves.utils.PasswordUtil;
 import jeeves.utils.Util;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Params;
 import org.jdom.Element;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
 
 //=============================================================================
 
@@ -105,10 +100,58 @@ public class Update implements Service
 			
 		}
 		
-
+		// launching the service on the fly
+		initService(context, dbms, servicename);
+		
 		return new Element(Jeeves.Elem.RESPONSE);
-	}
 
+	}
+	
+
+	/**
+	 * launch service upon creation
+	 * 
+	 * @param context
+	 * @param dbms
+	 * @param servicename
+	 * @throws Exception
+	 */
+	private void initService(ServiceContext context, Dbms dbms, String servicename) 
+			throws Exception {
+		
+		// build service element
+		
+		Element eltServices = new Element("services");
+		eltServices.setAttribute("package", "org.fao.geonet");
+		
+		String query = "SELECT * FROM Services WHERE name=?";
+		Element eltService = dbms.select(query, servicename);
+  		
+		Element srv = new Element("service");
+		Element cls = new Element("class");
+
+		java.util.List paramList = 
+			dbms.select("SELECT name, value FROM ServiceParameters WHERE service =?", 
+					Integer.valueOf(eltService.getChild("record").getChildText("id"))).getChildren();
+		
+		for(int k=0; k<paramList.size(); k++){	
+			Element eltParam = (Element)paramList.get(k);
+			if (eltParam.getChildText("value")!=null && !eltParam.getChildText("value").equals("")){
+				cls.addContent(new Element("param").setAttribute("name","filter").setAttribute("value","+"+eltParam.getChildText("name")+":"+eltParam.getChildText("value")));
+			}
+		}
+		
+		srv.setAttribute("name", eltService.getChild("record").getChildText("name")).addContent(cls.setAttribute("name", eltService.getChild("record").getChildText("class")));
+		eltServices.addContent(srv);
+
+		
+		// init service
+		
+		context.getServlet().getEngine().initServices(eltServices);
+	
+		
+	}
+	
 
 
 

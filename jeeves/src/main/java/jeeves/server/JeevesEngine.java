@@ -633,7 +633,7 @@ public class JeevesEngine
 	  */
 
 	@SuppressWarnings("unchecked")
-	private void initServices(Element services) throws Exception
+	public void initServices(Element services) throws Exception
 	{
 		info("Initializing services...");
 
