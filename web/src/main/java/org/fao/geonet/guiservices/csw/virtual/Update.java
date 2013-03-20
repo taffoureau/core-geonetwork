@@ -79,11 +79,11 @@ public class Update implements Service
 			for (Map.Entry<String, String> filter : filters.entrySet()) {
 				
 				String query = "SELECT * FROM ServiceParameters WHERE service=? AND name=?";
-				Element testParams = dbms.select(query, id, filter.getKey());
+				Element testParams = dbms.select(query, new Integer(id), filter.getKey());
 				
 				if (testParams.getChildren().size() != 0){ 
 					query = "UPDATE serviceParameters SET value=? WHERE service=? AND name=?";
-					dbms.execute (query, filter.getValue(), id, filter.getKey());
+					dbms.execute (query, filter.getValue(), new Integer(id), filter.getKey());
 				} else {
 					paramId = String.format( "%s" , context.getSerialFactory().getSerial(dbms, "ServiceParameters"));
 					query = "INSERT INTO serviceParameters (id, service, name, value) VALUES (?, ?, ?, ?)";
