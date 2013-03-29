@@ -95,14 +95,15 @@
 	<xsl:template match="fra:FRA_DataIdentification/fra:relatedCitation">
 	</xsl:template>
    
-	<xsl:template match="fra:FRA_Constraints/fra:Citation">
+	<xsl:template match="fra:FRA_Constraints/fra:citation">
 	</xsl:template>
 	
-	<xsl:template match="fra:FRA_LegalConstraints/fra:Citation">
+	<xsl:template match="fra:FRA_LegalConstraints/fra:citation">
 	</xsl:template>
 
-	<xsl:template match="fra:FRA_SecurityConstraints/fra:Citation">
+	<xsl:template match="fra:FRA_SecurityConstraints/fra:citation">
 	</xsl:template>
+	
 	
 	<!-- Removed Validity values and UseBy for dates-->
 	<xsl:template match="gmd:date[CI_Date/dateType/CI_DateTypeCode/@codeListValue='validity']">
