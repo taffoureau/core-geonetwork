@@ -128,7 +128,7 @@
     
   </element>
   <element name="gmd:CI_OnlineResource" id="396.0">
-    <label>Ressource en ligne</label>
+    <label>Localisateur de la ressource</label>
     <description>Type de données pour l'information sur les sources en ligne, grâce auxquelles les éléments de métadonnées étendus sur le jeu de données, la spécification ou le profil peuvent être obtenus</description>
     <help>Type de données contenant des informations relatives à la possibilité et dans l'affirmative, à la manière d'accéder en ligne au jeu de données.</help>
     <condition/>
@@ -197,7 +197,7 @@
     
   </element>
   <element name="gmd:DQ_ConformanceResult" id="129.0">
-    <label>Résultat de conformité</label>
+    <label>Conformité</label>
     <description>Classe qui contient l'information sur les résultats des évaluations des valeurs (ou jeu de valeurs) obtenues en comparaison avec une valeur de qualité spécifique</description>
     <help>Classe contenant des informations relatives aux résultats d'exploitation se déduisant de la comparaison des valeurs obtenues avec un indicateur de qualité spécifié.</help>
     <condition/>
@@ -342,7 +342,7 @@
     
   </element>
   <element name="gmd:EX_GeographicBoundingBox" id="343.0">
-    <label>Emprise géographique</label>
+    <label>Rectangle de délimitation géographique</label>
     <description>Type de données pour la description de la position géographique du jeu de données. Il s'agit ici d'une référence approximative de telle sorte qu''il n''est pas nécessaire de spécifier le système de coordonnées</description>
     <help>Type de données destiné à la description de la position géographique du jeu de données. Il s'agit ici de la définition d'une enveloppe sommaire (délimitation en latitude et en longitude). Des informations supplémentaires peuvent être trouvées sous EX_Extent et EX_GeographicExtent.</help>
     <help for="inspire"><![CDATA[<b>Exigence INSPIRE :</b> Étendue de la ressource dans l’espace 
@@ -601,7 +601,7 @@ responsable du service.</li>
     
   </element>
   <element name="gmd:MD_Keywords" id="52.0">
-    <label>Mots clés</label>
+    <label>Mots clés complémentaires</label>
     <description>Classe pour les mots clés, leur type et leur source de référence</description>
     <help>Classe réservée aux mots clés, à leurs types (c.-à-d. la catégorie dont ils sont issus), de même qu''à leur référence ou à leur provenance. Les mots clés sont utilisés comme arguments de recherche.</help>
     <condition/>
@@ -774,7 +774,7 @@ responsable du service.</li>
     
   </element>
   <element name="gmd:URL" id="608.0">
-    <label>Adresse Internet</label>
+    <label>Lien</label>
     <description>Classe destinée à la description d'un élément de métadonnées URL libre multilingue</description>
     <help>Le type de données PT_FreeText permet de gérer des informations textuelles en plusieurs langues.</help>
     <help for="inspire"><![CDATA[<b>Exigence INSPIRE :</b>
@@ -894,7 +894,7 @@ de métadonnées de données « BD Carthage métropole »
   </element>
   
   <element name="gmd:abstract" id="25.0">
-    <label>Résumé</label>
+    <label>Résumé de la ressource</label>
     <description>Court résumé explicatif du contenu des ressources</description>
     <help>Court résumé descriptif du contenu du jeu de données. Cet attribut est du type PT_FreeText et est géré dans la classe du même nom.</help>
     <help for="inspire"><![CDATA[<b>Exigence INSPIRE :</b>
@@ -1068,7 +1068,7 @@ de métadonnées de données « BD Carthage métropole »
     <condition>Par défaut UTF-8</condition>
   </element>
   <element name="gmd:characterSet" id="40.0" context="gmd:MD_DataIdentification">
-    <label>Jeu de caractère</label>
+    <label>Encodage des caractères</label>
     <description>Nom entier du standard de code de caractères utilisé pour le jeu de données</description>
     <help>Nom complet du code de caractères normalisé utilisé pour le fichier de métadonnées. Le paramètre par défaut est "utf8". Les fichiers de texte contiennent normalement des valeurs d'octets représentant un sous-ensemble de valeurs de caractères via un codage (8859_1, ISO Latin-1), un format de transfert (Unicode-Transfer-Format UTF8) ou tout autre moyen.</help>
     <help for="inspire"><![CDATA[<b>Exigence INSPIRE :</b>
@@ -1169,7 +1169,7 @@ de métadonnées de données « BD Carthage métropole »
     
   </element>
   <element name="gmd:code" id="207.0" context="gmd:RS_Identifier">
-    <label>Identificateur</label>
+    <label>Code</label>
     <description>Valeur alphanumérique pour l'identification d'une occurrence dans le domaine de valeurs</description>
     <help>Code alphanumérique de l'identifiant. Ces informations sont du type PT_FreeText et sont gérées dans la classe du même nom.</help>
     <condition>Obligatoire</condition>
@@ -1240,7 +1240,7 @@ de métadonnées de données « BD Carthage métropole »
     
   </element>
   <element name="gmd:contact" id="8.0">
-    <label>Contact</label>
+    <label>Point de contact des métadonnées</label>
     <description>Organisme responsable pour les informations que contiennent les métadonnées.</description>
     <help>Rôle (propriétaire, prestataire, gestionnaire, etc.) de la personne ou du service compétent pouvant être sélectionné dans la liste présentée ici. Cet attribut renvoie à la classe CI_ResponsibleParty dans laquelle les informations relatives au service ou à la personne concernée sont gérées. Cet attribut est du type CI_ResponsibleParty et est géré dans la classe du même nom.</help>
     
@@ -1500,7 +1500,7 @@ date de mise en ligne du service, en tant que date de publication.
     
   </element>
   <element name="gmd:date" id="362.0">
-    <label>Date</label>
+    <label>Date de référence</label>
     <description/>
     <condition/>
   </element>
@@ -1512,7 +1512,7 @@ date de mise en ligne du service, en tant que date de publication.
     
   </element>
   <element name="gmd:dateStamp" id="9.0">
-    <label>Date de création</label>
+    <label>Date des métadonnées</label>
     <description>Date de création des métadonnées</description>
     <help>Date de création des métadonnées. Elle est automatiquement attribuée par l'application.</help>
     
@@ -1570,7 +1570,7 @@ date de mise en ligne du service, en tant que date de publication.
     
   </element>
   <element name="gmd:denominator" id="57.0">
-    <label>Dénominateur</label>
+    <label>Echelle équivalente</label>
     <description>Le dénominateur de l'échelle (le chiffre en dessous de la barre de fraction)</description>
     <help>La valeur se trouvant sous la barre de fraction. Il s'agit ici de l'échelle : dans le cas d'une carte à l'échelle du 1:25000, seul le terme "25000" est entré. Cette valeur peut également représenter une indication de précision dans le cas d'un jeu de données vectorielles. Exemple : des limites saisies à une échelle de 1:25'000 et présentant ce niveau de précision.</help>
     <condition>Il faut saisir ou une échelle ou une distance</condition>
@@ -1631,7 +1631,7 @@ date de mise en ligne du service, en tant que date de publication.
     <condition/>
   </element>
   <element name="gmd:descriptiveKeywords" id="33.0">
-    <label>Mots clés descriptifs</label>
+    <label>Mots clés</label>
     <description>Catégorie, type et source de référence des mots clés</description>
     <help>
       En Europe, si la ressource est une série de données géographiques ou un ensemble de séries de données géographiques, il
@@ -1757,7 +1757,7 @@ version en tant que mot-clé complémentaire(s). Le numéro de version doit comp
     
   </element>
   <element name="gmd:distance" id="61.0">
-    <label>Distance au sol</label>
+    <label>Distance de résolution</label>
     <description>Distance de référence, mesurée au sol</description>
     <help>Résolution au sol</help>
     <condition>Saisir une distance si pas d'échelle</condition>
@@ -1772,7 +1772,7 @@ version en tant que mot-clé complémentaire(s). Le numéro de version doit comp
   </element>
   
   <element name="gmd:distributionFormat" id="271.0">
-    <label>Format (encodage)</label>
+    <label>Encodage</label>
     <description>Description du format de distribution</description>
     <help>Ces informations sont gérées dans la classe MD_Format.</help>
     <condition/>
@@ -1885,7 +1885,7 @@ version en tant que mot-clé complémentaire(s). Le numéro de version doit comp
   </element>
   <element name="gmd:environmentDescription" id="44.0">
     <label>Description de l'environnement de travail</label>
-    <description>Description de l'environnement de travail dans lequel le jeu de données a été créé, incluant des choses telles que logiciel, système d'exploitation, nom de fichier et taille du jeu de données</description>
+    <description>Description de l'environnement de travail dans lequel le jeu de données a été créé, incluant des choses telles que logiciel, système d'exploitation, nom de fichier et taille du jeu de donn��es</description>
     <help>Description de l'environnement de travail dans lequel le jeu de données est créé, incluant des éléments tels que le logiciel utilisé, le système d'exploitation, le nom et la taille du fichier.</help>
     <condition/>
     
@@ -2214,7 +2214,7 @@ période de temps couverte par le service.
     
   </element>
   <element name="gmd:identifier" id="365.0">
-    <label>Identificateur</label>
+    <label>Identificateur de ressource unique</label>
     <description>Identificateur de l'indication de provenance</description>
     <help>Identificateur de l'indication de provenance. La classe MD_Identifier permet d'affecter une indication de provenance à un registre existant.</help>
     <condition>Condition</condition>
@@ -2351,14 +2351,14 @@ période de temps couverte par le service.
     
   </element>
   <element name="gmd:keyword" id="53.0">
-    <label>Mot Clé</label>
+    <label>Valeur du mot clé</label>
     <description>Mots, notions ou phrases courants utilisés pour décrire le sujet</description>
     <help>Mots clés du jeu de données par l'intermédiaire desquels il peut être caractérisé et défini. Ces termes sont également utilisés en tant qu''arguments de recherche. Ces informations sont du type PT_FreeText et sont gérées dans la classe du même nom.</help>
     <condition/>
     
   </element>
   <element name="gmd:language" id="3.0" context="gmd:MD_Metadata">
-    <label>Langue</label>
+    <label>Langue des métadonnées</label>
     <description>Langue utilisée pour documenter les métadonnées</description>
     <help>La sélection s'opère dans la liste des langues ISO. Exemple : "fr" pour le français, "de" pour l'allemand, "en" pour l'anglais, "it" pour l'italien, "rm" pour le romanche, ...</help>
     
@@ -2379,7 +2379,7 @@ période de temps couverte par le service.
     <condition>Obligatoire</condition>
   </element>
   <element name="gmd:language" id="39.0" context="gmd:MD_DataIdentification">
-    <label>Langue</label>
+    <label>Langue de la ressource</label>
     <description>Langue utilisée pour le jeu de données</description>
     <help>Langue utilisée pour la documentation des données. La sélection s'opère dans la liste des langues ISO. Exemple : "fr" pour le français, "de" pour l'allemand, "en" pour l'anglais, "it" pour l'italien, "rm" pour le romanche, ...</help>
     <condition>Obligatoire</condition>
@@ -2432,7 +2432,7 @@ période de temps couverte par le service.
     <condition>Obligatoire si niveau hiérarchique autre que "jeu de données"</condition>
   </element>
   <element name="gmd:lineage" id="81.0">
-    <label>Qualité de la provenance</label>
+    <label>Généalogie</label>
     <description>Informations de qualité concernant la provenance des données</description>
     <help>Informations relatives à la provenance, à la filiation ou au processus de génération. Elles sont gérées dans la classe LI_Lineage. "+lineage" est obligatoire si "scope.DQ_Scope.level" = "Jeu de données".</help>
     <help><![CDATA[<b>Généalogie</b>]]></help>
@@ -2462,7 +2462,7 @@ période de temps couverte par le service.
     <condition>Condition</condition>
   </element>
   <element name="gmd:linkage" id="397.0">
-    <label>Adresse Internet</label>
+    <label>Lien</label>
     <description>URL ou indication semblable d'une adresse Internet pour un accès on-line , par exemple http://www.isotc211.org</description>
     <help>Lien Internet, par exemple www.cosig.ch.</help>
     <condition/>
@@ -2601,11 +2601,12 @@ période de temps couverte par le service.
     
   </element>
   <element name="gmd:name" id="285.0" context="gmd:MD_Format">
-    <label>Nom du format</label>
+    <label>Valeur de l'encodage</label>
     <description>Nom des formats de transfert des données</description>
     <help>Nom du format de transfert de données, par exemple TIFF, ZIP, etc.</help>
     <condition>Obligatoire</condition>
     <helper rel="gmd:version">
+	  <option value="GML" title="3.2.1">GML</option>
       <option value="Texte">Texte</option>
       <option value="ESRI Shapefile" title="1.0">ESRI Shapefile</option>
       <option value="Mapinfo MIF/MID" title="4.5">Mapinfo MIF/MID</option>
@@ -2783,7 +2784,7 @@ période de temps couverte par le service.
     
   </element>
   <element name="gmd:onLine" id="277.0">
-    <label>Sources en ligne</label>
+    <label>Ressource en ligne</label>
     <description>Information sur les sources en ligne depuis lesquelles la ressource peut être obtenue</description>
     <help>Informations relatives à la source en ligne via laquelle le jeu de données peut être acquis. Ces informations sont du type CI_OnlineRessource et sont gérées dans la classe du même nom.</help>
     <condition/>
@@ -2804,7 +2805,7 @@ période de temps couverte par le service.
     
   </element>
   <element name="gmd:organisationName" id="376.0">
-    <label>Organisation</label>
+    <label>Nom de l'organisation</label>
     <description>Nom de l'organisation responsable</description>
     <help>Nom de l'organisation responsable, s'il s'agit d'une personne isolée ou nom de l'organisation au sein de laquelle cette personne est employée. Ces informations sont du type PT_FreeText et sont gérées dans la classe du même nom.</help>
     <condition>Condition</condition>
@@ -2837,7 +2838,7 @@ période de temps couverte par le service.
     
   </element>
   <element name="gmd:otherConstraints" id="72.0">
-    <label>Autres contraintes</label>
+    <label>Restrictions d'accès public au sens INSPIRE</label>
     <description>Autres restrictions et prérequis légaux pour accéder et utiliser les ressources où de métadonnées</description>
     <help>Autres restrictions et conditions préalables de nature juridique concernant l'accès et l'utilisation de la ressource ou des métadonnées. Ce champ doit être complété dès lors que l'un des deux champs précédents (accessConstraints, useConstraints) porte la mention "Autres restrictions".</help>
     <condition>Condition</condition>
@@ -2939,7 +2940,7 @@ la non-évaluation</b>, dans le cadre de métadonnées INSPIRE
     
   </element>
   <element name="gmd:pointOfContact" id="29.0">
-    <label>Contact pour la ressource</label>
+    <label>Partie responsable</label>
     <description>Identification, et mode de communication avec, des personnes ou des organisations associées aux ressources</description>
     <help>Identification de la personne (voire des personnes) ou de l'organisation (voire des organisations) responsable du jeu de données décrit et mode de communication avec elle. Cette personne ou ce service endosse un rôle (propriétaire, prestataire, gestionnaire, etc.) bien spécifique pouvant être sélectionné dans la liste proposée. Les données correspondantes de la personne ou du service sont gérées dans la classe CI_ResponsibleParty. Ce rôle peut également servir à l'affectation d'un jeu de données à une commune. Exemple : le rôle de "propriétaire" permet ici d'affecter un lot de la MO à la commune correspondante.</help>
     
@@ -3114,14 +3115,14 @@ la non-évaluation</b>, dans le cadre de métadonnées INSPIRE
     
   </element>
   <element name="gmd:referenceSystemInfo" id="13.0">
-    <label>Information sur le système de référence</label>
+    <label>Référentiel de coordonnées et système de référence temporel</label>
     <description>Description des références spatiale et temporelle utilisées dans le jeu de données</description>
     <help>Description des systèmes de référence spatiale et temporelle utilisés dans le jeu de données. Ces informations sont gérées dans la classe MD_ReferenceSystem.</help>
     <condition/>
     
   </element>
   <element name="gmd:report" id="80.0">
-    <label>Qualité quantitative</label>
+    <label>Rapport sur la qualité</label>
     <description>Information de qualité quantitative pour les données concernée par le domaine</description>
     <help>Information de qualité de nature quantitative portant sur les données.</help>
     <condition>Condition</condition>
@@ -3223,7 +3224,7 @@ diffusion restreinte.
     
   </element>
   <element name="gmd:role" id="379.0">
-    <label>Rôle</label>
+    <label>Rôle de la partie responsable</label>
     <description>Fonction accomplie par le service responsable</description>
     <help>Rôle endossé par le service responsable (prestataire, gestionnaire, propriétaire, utilisateur, distributeur, créateur de données, instance compétente, évaluateur de données, responsable de leur traitement ou de leur publication, auteur, éditeur ou partenaire commercial).</help>
     
@@ -3249,7 +3250,7 @@ diffusion restreinte.
     
   </element>
   <element name="gmd:scaleDenominator" id="94.0">
-    <label>Dénominateur de l'échelle</label>
+    <label>Echelle équivalente</label>
     <description>Dénominateur de l'échelle de la carte source</description>
     <help>Facteur d'échelle (dénominateur) de la carte source. Ces informations sont du type MD_RepresentativeFraction et sont gérées dans la classe du même nom.</help>
     <condition/>
@@ -3456,7 +3457,7 @@ diffusion restreinte.
   </element>
   
   <element name="gmd:statement" id="83.0">
-    <label>Généralités sur la provenance</label>
+    <label>Généalogie</label>
     <description>Explication générale sur les connaissances du producteur de données au sujet de la filiation du jeu de données</description>
     <help>Explication générale de la filiation du jeu de données fournie par le créateur des données. Dans le cas de données de la MO, il peut s'agir de l'indication des bases (MO93/MD93). Pour des données tramées, il peut s'agir de l'indication du fait qu''elles dérivent de prises de vues aériennes.</help>
     <condition>Condition</condition>
@@ -3503,7 +3504,7 @@ diffusion restreinte.
     
   </element>
   <element name="gmd:title" id="360.0" context="gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title">
-    <label>Titre de la spécification</label>
+    <label>Spécification</label>
     <description>Nom avec lequel la ressource en question est connue</description>
     <help>
       <!-- [2] -->
@@ -3616,7 +3617,7 @@ celles des scénarios d’échange du Sandre est possible en complément.
     <condition>Obligatoire</condition>
   </element>
   <element name="gmd:title" id="360.0" context="gmd:MD_Metadata/gmd:identificationInfo/srv:SV_ServiceIdentification/gmd:citation/gmd:CI_Citation/gmd:title">
-    <label>Titre</label>
+    <label>Intitulé de la ressource</label>
     <description>L’intitulé (ou le titre) de la ressource doit être un nom caractéristique et souvent unique
       sous lequel la ressource est connue.</description>
     <help for="inspire"><![CDATA[<b>Exigence INSPIRE :</b>
@@ -3671,7 +3672,7 @@ l’IGN (WPS)
     
   </element>
   <element name="gmd:title" id="360.0">
-    <label>Titre</label>
+    <label>Intitulé de la ressource</label>
     <description>Nom avec lequel la ressource en question est connue</description>
     <help for="inspire"><![CDATA[<b>Exigence INSPIRE :</b>
     L’intitulé (ou le titre) de la ressource doit être un nom caractéristique
@@ -3734,7 +3735,7 @@ l’IGN (WPS)
     <condition>Obligatoire si "jeu de données"</condition>
   </element>
   <element name="gmd:MD_TopicCategoryCode">
-    <label>Thématique</label>
+    <label>Catégorie ISO</label>
     <description>Code de la catégorie du sujet</description>
     <help/>
     <condition/>
@@ -3845,7 +3846,7 @@ l’IGN (WPS)
     <condition/>
   </element>
   <element name="gmd:useLimitation" id="68.0">
-    <label>Limitation d'utilisation</label>
+    <label>Conditions applicables à l'accès et à l'utilisation</label>
     <description>Limitation d'utilisation de la ressource où de métadonnées. Exemple: "ne pas utiliser pour la navigation"</description>
     <help>Restriction d'utilisation de la ressource ou des métadonnées. Exemple: "ne pas utiliser pour la navigation"</help>
     
@@ -4207,13 +4208,13 @@ INSPIRE doit être fournie.
       <option value="view">Service de visualisation (view)</option>
       <option value="download">Service de téléchargement (download)</option>
       <option value="transformation">Service de transformation (transformation)</option>
-      <option value="invoke">Service d'invocation (invoke)</option>
+      <option value="invoke">Service d'appel de services (invoke)</option>
       <option value="other">Autres services (other)</option>
-      <option value="OGC:WMS">OGC Web Map Service</option>
+      <!--option value="OGC:WMS">OGC Web Map Service</option>
       <option value="OGC:WFS">OGC Web Feature Service</option>
       <option value="OGC:WCS">OGC Web Coverage Service</option>
-      <!--<option value="W3C:HTML:DOWNLOAD">Téléchargement</option>
-      <option value="W3C:HTML:LINK">Information</option>-->
+      <option value="W3C:HTML:DOWNLOAD">Téléchargement</option>
+      <option value="W3C:HTML:LINK">Information</option-->
     </helper>
   </element>
   <element name="srv:SV_Parameter">
@@ -4243,7 +4244,7 @@ INSPIRE doit être fournie.
     <description>Information sur les opérations</description>
   </element>
   <element name="srv:operatesOn">
-    <label>Identifiant de la donnée associée</label>
+    <label>Ressource couplée</label>
     <description>Information sur la ou les données associées au service</description>
   </element>
   <element name="srv:operationName">
@@ -4606,7 +4607,7 @@ http://www.sandre.eaufrance.fr/?urn=urn:sandre:ensembledonnees:BDCarthage:FXX:::
     
   </element>
   <element name="gco:LocalName">
-    <label>Nom local</label>
+    <label>Valeur</label>
     <description/>
     <help/>
     <condition/>
