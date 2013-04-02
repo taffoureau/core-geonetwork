@@ -87,6 +87,9 @@ public class ServiceContext extends BasicContext
 	private boolean startupError = false;
 	Map<String,String> startupErrors;
     private XmlCacheManager xmlCacheManager;
+    
+	// MULTISITE
+    private String site;
 
 	//--------------------------------------------------------------------------
 	//---
@@ -145,6 +148,8 @@ public class ServiceContext extends BasicContext
 	{
 		this.service = service;
 		logger       = Log.createLogger(Log.WEBAPP +"."+ service);
+		// MULTISITE logger
+		// if (null != site) logger = Log.createLogger(Log.WEBAPP +"." + service + "." + site);
 	}
 
 	//--------------------------------------------------------------------------
@@ -212,13 +217,16 @@ public class ServiceContext extends BasicContext
 			}
 		};
 		
+		// MULTISITE
+		context.setSite(site);
+		
 		UserSession session = userSession;
 		if(userSession == null) {
 			session = new UserSession();
 		} 
 		
 		try {
-		servlet.getEngine().getServiceManager().dispatch(request,session,context);
+		servlet.getEngine(site).getServiceManager().dispatch(request,session,context);
 		} catch (Exception e) {
 			Log.error(Log.XLINK_PROCESSOR,"Failed to parse result xml"+ request.getService());
 			throw new ServiceExecutionFailedException(request.getService(),e);
@@ -237,6 +245,14 @@ public class ServiceContext extends BasicContext
     public XmlCacheManager getXmlCacheManager() {
         return this.xmlCacheManager;
     }
+
+	public String getSite() {
+		return site;
+	}
+
+	public void setSite(String site) {
+		this.site = site;
+	}
 
 }
 

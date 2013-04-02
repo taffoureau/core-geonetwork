@@ -39,6 +39,8 @@ public class GeonetworkOverridingWKTFactory extends FactoryUsingWKT implements C
         if (overrideProjFile == null) {
         	ServiceContext srvContext = ServiceContext.get();
         	if(srvContext != null) {
+        		
+        		// MULTISITE WEB-INF SHARED
         		overrideProjFile = srvContext.getServlet().getServletContext().getRealPath("/WEB-INF/override_epsg.properties");
         	}
         	

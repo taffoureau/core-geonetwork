@@ -79,11 +79,11 @@ public class ProfileManager
 	  */
 
 	@SuppressWarnings("unchecked")
-	public ProfileManager(ServletContext servletContext, String appPath, String profilesFile) throws Exception
+	public ProfileManager(ServletContext servletContext, String appPath, String profilesFile, String site) throws Exception
 	{
 		Element elProfiles = Xml.loadFile(profilesFile);
 		if (servletContext != null) {
-		      ConfigurationOverrides.updateWithOverrides(profilesFile, servletContext, appPath, elProfiles);
+		      ConfigurationOverrides.updateWithOverrides(profilesFile, servletContext, appPath, elProfiles, site);
 		}
 		htProfiles  = new Hashtable<String, Element>(50);
 

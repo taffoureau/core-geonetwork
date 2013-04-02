@@ -325,6 +325,7 @@ public class MetadataSchema
 	}
 
 	public void buildchematronRules(String basePath) {
+		// MULTISITE WEB-INF SHARED
         String schematronResourceDir = basePath + "WEB-INF" 
                 + File.separator + "classes" + File.separator + "schematron" + File.separator ;
         String schemaSchematronDir = schemaDir + File.separator + "schematron";

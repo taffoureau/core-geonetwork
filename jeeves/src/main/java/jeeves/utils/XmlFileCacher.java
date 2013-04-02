@@ -39,20 +39,23 @@ public class XmlFileCacher
 {
 	private ServletContext servletContext;
     private String appPath;
+    
+    // MULTISITE
+    private String site;
 
     //--------------------------------------------------------------------------
 	//---
 	//--- Constructor
 	//---
 	//--------------------------------------------------------------------------
-    public XmlFileCacher(File file, String appPath)
+    public XmlFileCacher(File file, String appPath, String site)
     {
-        this(file, null, appPath);
+        this(file, null, appPath, site);
     }
     /**
      * @param servletContext if non-null the config-overrides can be applied to the xml file when it is loaded
      */
-	public XmlFileCacher(File file, ServletContext servletContext, String appPath)
+	public XmlFileCacher(File file, ServletContext servletContext, String appPath, String site)
 	{
 		//--- 10 seconds as default interval
 		this(file, 10, servletContext, appPath);
@@ -119,7 +122,7 @@ public class XmlFileCacher
 	protected Element load() throws JDOMException, IOException
 	{
 		Element xml = Xml.loadFile(file);
-	    ConfigurationOverrides.updateWithOverrides(file.getPath(), servletContext, appPath, xml);
+	    ConfigurationOverrides.updateWithOverrides(file.getPath(), servletContext, appPath, xml, site);
         return xml;
 	}
 

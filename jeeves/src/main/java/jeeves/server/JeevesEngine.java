@@ -33,11 +33,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -110,7 +108,7 @@ public class JeevesEngine
 	private Vector<ApplicationHandler> vAppHandlers = new Vector<ApplicationHandler>();
 	private Vector<Activator> vActivators = new Vector<Activator>();
 	private XmlCacheManager xmlCacheManager = new XmlCacheManager();
-    private MonitorManager monitorManager;
+    private MonitorManager monitorManager = null;
     
     private List<Element> dbservices = new ArrayList<Element>();
     
@@ -125,7 +123,7 @@ public class JeevesEngine
 	/** Inits the engine, loading all needed data
 	  */
 
-	public void init(String appPath, String configPath, String baseUrl, JeevesServlet servlet) throws ServletException
+	public void init(String appPath, String configPath, String baseUrl, JeevesServlet servlet, String site) throws ServletException
 	{
 		try
 		{
@@ -135,9 +133,9 @@ public class JeevesEngine
             ServletContext servletContext = null;
             if(servlet != null) servletContext= servlet.getServletContext();
 
-            ConfigurationOverrides.updateLoggingAsAccordingToOverrides(servletContext, appPath);
+            ConfigurationOverrides.updateLoggingAsAccordingToOverrides(servletContext, appPath, site);
 
-            monitorManager = new MonitorManager(servletContext, baseUrl);
+            this.monitorManager = new MonitorManager(servletContext, baseUrl);
 			this.appPath = appPath;
 
 			long start   = System.currentTimeMillis();
@@ -166,6 +164,7 @@ public class JeevesEngine
 
 			info("Path    : "+ appPath);
 			info("BaseURL : "+ baseUrl);
+			info("Site    : "+ site);
 
 			// obtain application context so we can configure the serviceManager with it but we will configure it a bit later
             JeevesApplicationContext jeevesAppContext = (JeevesApplicationContext) WebApplicationContextUtils.getWebApplicationContext(servletContext);
@@ -176,34 +175,48 @@ public class JeevesEngine
 			serviceMan.setXmlCacheManager(xmlCacheManager );
 			serviceMan.setApplicationContext(jeevesAppContext);
 			serviceMan.setSerialFactory(serialFact);
-			serviceMan.setBaseUrl(baseUrl);
+			serviceMan.setBaseUrl(baseUrl); // URL MULTISITE ?
 			serviceMan.setServlet(servlet);
-
+			// MULTISITE
+			serviceMan.setSite(site);
+			
 			scheduleMan.setAppPath(appPath);
 			scheduleMan.setProviderMan(providerMan);
 			scheduleMan.setMonitorManager(monitorManager);
 			scheduleMan.setApplicationContext(jeevesAppContext);
 			scheduleMan.setSerialFactory(serialFact);
-			scheduleMan.setBaseUrl(baseUrl);
+			scheduleMan.setBaseUrl(baseUrl); // URL MULTISITE ?
 
 			dbLoaded = false;
 			
-			loadConfigFile(servletContext, configPath, Jeeves.CONFIG_FILE, serviceMan);
+			loadConfigFile(servletContext, configPath, Jeeves.CONFIG_FILE, serviceMan, site);
 
             info("Initializing profiles...");
             ProfileManager profileManager = serviceMan.loadProfiles(servletContext, profilesFile);
 
-            // Add ResourceManager as a bean to the spring application context so that GeonetworkAuthentication can access it
-            jeevesAppContext.getBeanFactory().registerSingleton("resourceManager", new ResourceManager(this.monitorManager, this.providerMan));
-            profileManager.setApplicationContext(jeevesAppContext);
-            jeevesAppContext.getBeanFactory().registerSingleton("profileManager", profileManager);
-            jeevesAppContext.getBeanFactory().registerSingleton("serialFactory", serialFact);
+            // MULTISITE PURPOSE - use same singleton for all sites
+            
+            if (!jeevesAppContext.getBeanFactory().containsSingleton("profileManager")) {
+            	jeevesAppContext.getBeanFactory().registerSingleton("profileManager", profileManager);
+            }
+            
+            if (!jeevesAppContext.getBeanFactory().containsSingleton("resourceManager")) {
+            	// Add ResourceManager as a bean to the spring application context so that GeonetworkAuthentication can access it
+            	jeevesAppContext.getBeanFactory().registerSingleton("resourceManager", new ResourceManager(this.monitorManager, this.providerMan));
+            }
+            
+            if (!jeevesAppContext.getBeanFactory().containsSingleton("serialFactory")) {
+            	jeevesAppContext.getBeanFactory().registerSingleton("serialFactory", serialFact);
+            }
 
+            profileManager.setApplicationContext(jeevesAppContext);
+            
+            	
 			//--- handlers must be started here because they may need the context
 			//--- with the ProfileManager already loaded
 
 			for(int i=0; i<appHandList.size(); i++)
-				initAppHandler((Element) appHandList.get(i), servlet, jeevesAppContext);
+				initAppHandler((Element) appHandList.get(i), servlet, jeevesAppContext, site);
 
 			info("Starting schedule manager...");
 			scheduleMan.start();
@@ -291,7 +304,7 @@ public class JeevesEngine
 	//---------------------------------------------------------------------------
 
 	@SuppressWarnings("unchecked")
-	private void loadConfigFile(ServletContext servletContext, String path, String file, ServiceManager serviceMan) throws Exception
+	private void loadConfigFile(ServletContext servletContext, String path, String file, ServiceManager serviceMan, String site) throws Exception
 	{
 		file = path + file;
 
@@ -299,7 +312,7 @@ public class JeevesEngine
 
 		Element configRoot = Xml.loadFile(file);
 
-        ConfigurationOverrides.updateWithOverrides(file, servletContext, appPath, configRoot);
+        ConfigurationOverrides.updateWithOverrides(file, servletContext, appPath, configRoot, site);
 
 		Element elGeneral = configRoot.getChild(ConfigFile.Child.GENERAL);
 		Element elDefault = configRoot.getChild(ConfigFile.Child.DEFAULT);
@@ -378,7 +391,7 @@ public class JeevesEngine
 		{
 			Element include = includes.get(i);
 
-			loadConfigFile(servletContext, path, include.getText(), serviceMan);
+			loadConfigFile(servletContext, path, include.getText(), serviceMan, site);
 		}
 	}
 
@@ -408,8 +421,11 @@ public class JeevesEngine
             error("   Stack     : " +Util.getStackTrace(e));
 	    }
 
+		
+		String webinf = (null == serviceMan.getSite() ? "WEB-INF\\" : "WEB-INF-" + serviceMan.getSite() + "\\" );
+		
 		if (!new File(uploadDir).isAbsolute())
-			uploadDir = appPath + uploadDir;
+			uploadDir = appPath + webinf + uploadDir;
 
 		if (!uploadDir.endsWith("/"))
 			uploadDir += "/";
@@ -562,7 +578,7 @@ public class JeevesEngine
 	//---------------------------------------------------------------------------
 
 	@SuppressWarnings("unchecked")
-	private void initAppHandler(Element handler, JeevesServlet servlet, JeevesApplicationContext jeevesApplicationContext) throws Exception
+	private void initAppHandler(Element handler, JeevesServlet servlet, JeevesApplicationContext jeevesApplicationContext, String site) throws Exception
 	{
 		if (handler == null)
 			info("Handler not found");

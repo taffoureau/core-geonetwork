@@ -184,6 +184,8 @@ public class Resources {
 		if (property == null) {
 			property = System.getProperty("geonetwork.resources.dir");
 		}
+		
+		// MULTISITE FIXME Needed WEB-INF-site ? 
 		if (property == null) {
 			property = context.getRealPath("/WEB-INF/data/resources");
 		}

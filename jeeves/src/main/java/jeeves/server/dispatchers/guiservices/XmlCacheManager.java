@@ -27,7 +27,7 @@ public class XmlCacheManager {
         
         return cacheMap;
     }
-    public synchronized Element get(ServiceContext context, boolean localized, String base, String file, String preferedLanguage, String defaultLang) throws JDOMException, IOException {
+    public synchronized Element get(ServiceContext context, boolean localized, String base, String file, String preferedLanguage, String defaultLang, String site) throws JDOMException, IOException {
 
         Map<String, XmlFileCacher> cacheMap = getCacheMap(localized, base, file);
         
@@ -54,7 +54,7 @@ public class XmlCacheManager {
         XmlFileCacher xmlCache = cacheMap.get(preferedLanguage);
         File xmlFile = new File(xmlFilePath);
         if (xmlCache == null){
-            xmlCache = new XmlFileCacher(xmlFile,servletContext,appPath);
+            xmlCache = new XmlFileCacher(xmlFile,servletContext,appPath, site);
             cacheMap.put(preferedLanguage, xmlCache);
         }
 
@@ -65,7 +65,7 @@ public class XmlCacheManager {
             Log.error(Log.RESOURCES, "Error cloning the cached data.  Attempted to get: "+xmlFilePath+"but failed so falling back to default language");
             Log.debug(Log.RESOURCES, "Error cloning the cached data.  Attempted to get: "+xmlFilePath+"but failed so falling back to default language", e);
             String xmlDefaultLangFilePath = rootPath + File.separator + defaultLang + File.separator + file;
-            xmlCache = new XmlFileCacher(new File(xmlDefaultLangFilePath),servletContext, appPath);
+            xmlCache = new XmlFileCacher(new File(xmlDefaultLangFilePath),servletContext, appPath, site);
             cacheMap.put(preferedLanguage, xmlCache);
             result = (Element)xmlCache.get().clone();
         }

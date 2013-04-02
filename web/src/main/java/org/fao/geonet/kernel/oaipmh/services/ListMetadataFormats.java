@@ -121,7 +121,8 @@ public class ListMetadataFormats implements OaiPmhService
 	
 		Element elem = Xml.loadFile(context.getAppPath() + DEFAULT_PREFIXES_FILE);
 		if (context.getServlet() != null && context.getServlet().getServletContext() != null) {
-			ConfigurationOverrides.updateWithOverrides(DEFAULT_PREFIXES_FILE, context.getServlet().getServletContext(), context.getAppPath(), elem);
+			// MULTISITE WEB-INF SHARED
+			ConfigurationOverrides.updateWithOverrides(DEFAULT_PREFIXES_FILE, context.getServlet().getServletContext(), context.getAppPath(), elem, null);
 		}
 
 		List<Element> defaultSchemas = elem.getChildren();
@@ -139,6 +140,7 @@ public class ListMetadataFormats implements OaiPmhService
 	//---
 	//---------------------------------------------------------------------------
 
+	// MULTISITE WEB-INF SHARED
 	private static final String DEFAULT_PREFIXES_FILE = "WEB-INF" + File.separator + "config-oai-prefixes.xml";
 }
 

@@ -83,7 +83,8 @@ public class SerialFactory
 		}
 
 		int newSerial = intSerial.intValue() +1;
-		htSerials.put(table, new Integer(newSerial));
+// MULTISITE TODO IMPROVE - Cannot use a htSerials cache built on a single dbms
+//		htSerials.put(table, new Integer(newSerial));
 
 		return newSerial;
 	}

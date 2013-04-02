@@ -81,12 +81,13 @@ public class XmlFile implements GuiService
 	{
 
         String lang = context.getLanguage();
-
+        String site = context.getSite();
+        
         String preferedLanguage = language;
         if(localized || preferedLanguage  == null) preferedLanguage = lang;
         if(preferedLanguage == null) preferedLanguage = defaultLang;
 
-        Element element = context.getXmlCacheManager().get(context, localized, base, file, preferedLanguage, defaultLang);
+        Element element = context.getXmlCacheManager().get(context, localized, base, file, preferedLanguage, defaultLang, site);
         element.setName(name);
         return element;
 	}

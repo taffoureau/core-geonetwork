@@ -14,6 +14,7 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 public class JeevesApplicationContext extends XmlWebApplicationContext {
 	
     private String appPath;
+    private String site;
     
     public JeevesApplicationContext() {
         addApplicationListener(new ApplicationListener<ApplicationEvent>() {
@@ -21,7 +22,7 @@ public class JeevesApplicationContext extends XmlWebApplicationContext {
             @Override
             public void onApplicationEvent(ApplicationEvent event) {
                 try {
-                    ConfigurationOverrides.applyNonImportSpringOverides(JeevesApplicationContext.this, getServletContext(), appPath);
+                    ConfigurationOverrides.applyNonImportSpringOverides(JeevesApplicationContext.this, getServletContext(), appPath, site);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -33,6 +34,10 @@ public class JeevesApplicationContext extends XmlWebApplicationContext {
         this.appPath = appPath;
     }
     
+    public void setSite(String site) {
+    	this.site = site;
+    }
+    
 	@Override
 	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader)
  throws IOException {
@@ -40,7 +45,7 @@ public class JeevesApplicationContext extends XmlWebApplicationContext {
         super.loadBeanDefinitions(reader);
         try {
             ConfigurationOverrides.importSpringConfigurations(reader, (ConfigurableBeanFactory) reader.getBeanFactory(),
-                    getServletContext(), appPath);
+                    getServletContext(), appPath, site);
         } catch (JDOMException e) {
             throw new IOException(e);
         }

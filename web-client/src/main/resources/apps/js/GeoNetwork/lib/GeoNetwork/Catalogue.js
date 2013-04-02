@@ -113,6 +113,11 @@ GeoNetwork.Catalogue = Ext.extend(Ext.util.Observable, {
      */
     DEFAULT_LANG: "en",
     
+    /**
+     * MULTISITE
+     */
+    siteUrl : null,
+    
     
     EDITOR_MODE : {
         IN_OTHER_WINDOW : 1,
@@ -263,6 +268,11 @@ GeoNetwork.Catalogue = Ext.extend(Ext.util.Observable, {
         } else {
             this.URL = this.SERVERURL + 'geonetwork';
         }
+        
+        if (this.siteUrl) {
+        	this.URL = this.URL + "/" + siteUrl;
+        }
+        
         
         this.LANG = (this.lang ? this.lang : this.DEFAULT_LANG);
         

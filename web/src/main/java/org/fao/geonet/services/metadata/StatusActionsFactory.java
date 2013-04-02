@@ -23,13 +23,12 @@
 
 package org.fao.geonet.services.metadata;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.util.Set;
+
 import jeeves.resources.dbms.Dbms;
 import jeeves.server.context.ServiceContext;
-import org.fao.geonet.GeonetContext;
-import org.fao.geonet.constants.Geonet;
-
-import java.lang.reflect.*;
-import java.util.Set;
 
 public class StatusActionsFactory {
 
@@ -38,7 +37,7 @@ public class StatusActionsFactory {
 	/**
 	  * Constructor.
 		*
-		* @param statusRules Class defined in WEB-INF/config.xml that defines status actions
+		* @param statusRules Class defined in config.xml that defines status actions
 		*/
 	public StatusActionsFactory(Class statusRules) {
 		this.statusRules = statusRules;

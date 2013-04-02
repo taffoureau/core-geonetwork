@@ -49,19 +49,32 @@ public class ServerLib
 
 	public ServerLib(ServletContext servletContext, String appPath) throws IOException
 	{
+		init(servletContext, appPath, null);
+	}
+	
+	public ServerLib(ServletContext servletContext, String appPath, String site) throws IOException
+	{
+		init(servletContext, appPath, site);
+	}
+	
+	private void init(ServletContext servletContext, String appPath, String site)  throws IOException
+	{
 		this.appPath = appPath;
 
 		serverProps = new Properties();
 		
-		InputStream stream = servletContext.getResourceAsStream(SERVER_PROPS);
+		// MULTISITE WEB-INF-site
+		String webinf= ((null == site)? "WEB-INF":"WEB-INF-" + site);
+		
+		InputStream stream = servletContext.getResourceAsStream(File.separator + webinf + SERVER_PROPS);
 		if (stream == null) {
-			stream = new FileInputStream(appPath + SERVER_PROPS);
+			stream = new FileInputStream(appPath + File.separator + webinf + SERVER_PROPS);
 		}
 		BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
 		
 		try {
 			List<String> lines = ConfigurationOverrides.loadTextFileAndUpdate(
-                    SERVER_PROPS, servletContext, appPath, reader);
+                    SERVER_PROPS, servletContext, appPath, reader, site);
 			StringBuilder b = new StringBuilder();
 			for (String string : lines) {
 				b.append(string);
@@ -93,7 +106,7 @@ public class ServerLib
 	private String     appPath;
 	private Properties serverProps;
 
-	private static final String SERVER_PROPS = File.separator + "WEB-INF" + File.separator + "server.prop";
+	private static final String SERVER_PROPS = File.separator + "server.prop";
 }
 
 //=============================================================================

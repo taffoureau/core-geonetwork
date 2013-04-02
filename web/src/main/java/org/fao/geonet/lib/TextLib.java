@@ -23,11 +23,6 @@
 
 package org.fao.geonet.lib;
 
-import jeeves.server.overrides.ConfigurationOverrides;
-import jeeves.server.sources.http.JeevesServlet;
-import jeeves.utils.Util;
-
-import javax.servlet.ServletContext;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -39,6 +34,11 @@ import java.io.OutputStreamWriter;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+
+import jeeves.server.overrides.ConfigurationOverrides;
+import jeeves.utils.Util;
+
 //=============================================================================
 
 public class TextLib
@@ -49,17 +49,17 @@ public class TextLib
 	//---
 	//---------------------------------------------------------------------------
 
-	public List<String> load(ServletContext servletContext, String appPath, String file) throws FileNotFoundException, IOException
+	public List<String> load(ServletContext servletContext, String appPath, String file, String site) throws FileNotFoundException, IOException
 	{
 		return load(servletContext, appPath, file, "ISO-8859-1");
 	}
 
-	public List<String> load(ServletContext servletContext, String appPath, String file, String encoding) throws FileNotFoundException, IOException
+	public List<String> load(ServletContext servletContext, String appPath, String file, String encoding, String site) throws FileNotFoundException, IOException
 	{
 		FileInputStream is = new FileInputStream(file);
 		BufferedReader  ir = new BufferedReader(new InputStreamReader(is, encoding));
 
-		return ConfigurationOverrides.loadTextFileAndUpdate(file, servletContext, appPath, ir);
+		return ConfigurationOverrides.loadTextFileAndUpdate(file, servletContext, appPath, ir, site);
 	}
 	
 	//---------------------------------------------------------------------------

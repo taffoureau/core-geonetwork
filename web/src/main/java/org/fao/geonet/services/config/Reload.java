@@ -57,7 +57,7 @@ public class Reload implements Service {
             servletContext = context.getServlet().getServletContext();
         }
 
-		LuceneConfig lc = new LuceneConfig(path, servletContext, luceneConfigXmlFile);
+		LuceneConfig lc = new LuceneConfig(path, servletContext, luceneConfigXmlFile, context.getSite());
 
 		// Update related services to Lucene config
 		// SearchManager
