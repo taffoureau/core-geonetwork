@@ -24,12 +24,15 @@ public class GeonetworkDataDirectory {
 	/**
 	 * The default GeoNetwork data directory location.
 	 */
-	private static final String GEONETWORK_DEFAULT_DATA_DIR = "WEB-INF" + File.separator + "data"  + File.separator;
+	private static final String GEONETWORK_DEFAULT_DATA_DIR = File.separator + "data"  + File.separator;
 	public static final String KEY_SUFFIX = ".dir";
-	public static final String GEONETWORK_DIR_KEY = "geonetwork.dir";
+	public static final String KEY_GEONETWORK = "geonetwork";
 
 	private String systemDataDir;
 	private JeevesServlet jeevesServlet;
+	
+	
+	private String site;
 
 	/**
 	 * Check and create if needed GeoNetwork data directory.
@@ -51,12 +54,31 @@ public class GeonetworkDataDirectory {
 	 * </ul>
 	 * 
 	 */
-	public GeonetworkDataDirectory(String webappName, String path,
+	public GeonetworkDataDirectory(String webappName, String path, 
 			ServiceConfig handlerConfig, JeevesServlet jeevesServlet) {
+		init(webappName, path, handlerConfig, jeevesServlet, null);
+	}
+	
+	/**
+	 *  Constructor for MULTISITE
+	 * @param webappName
+	 * @param path
+	 * @param handlerConfig
+	 * @param jeevesServlet
+	 * @param site (can be null if single site)
+	 */
+	public GeonetworkDataDirectory(String webappName, String path, 
+			ServiceConfig handlerConfig, JeevesServlet jeevesServlet, String site) {
+		init(webappName, path, handlerConfig, jeevesServlet, site);
+	}
+	
+	private void init(String webappName, String path, 
+			ServiceConfig handlerConfig, JeevesServlet jeevesServlet, String site) {
         if (Log.isDebugEnabled(Geonet.DATA_DIRECTORY))
             Log.debug(Geonet.DATA_DIRECTORY,
 				"Check and create if needed GeoNetwork data directory");
 		this.jeevesServlet = jeevesServlet;
+		this.site = site;
 		setDataDirectory(webappName, path, handlerConfig);
 	}
 
@@ -130,15 +152,20 @@ public class GeonetworkDataDirectory {
 	 */
 	private String setDataDirectory(String webappName, String path,
 			ServiceConfig handlerConfig) {
-
+		
+		String SITE_SUFFIX = "";
+		if (null != site) {
+			SITE_SUFFIX = site;
+		}
+		
 		// System property defined according to webapp name
 		systemDataDir = GeonetworkDataDirectory.lookupProperty(jeevesServlet,
-				handlerConfig, webappName + KEY_SUFFIX);
+				handlerConfig, webappName + SITE_SUFFIX + KEY_SUFFIX);
 
 		// GEONETWORK.dir is default
 		if (systemDataDir == null) {
 			systemDataDir = GeonetworkDataDirectory.lookupProperty(
-					jeevesServlet, handlerConfig, GEONETWORK_DIR_KEY);
+					jeevesServlet, handlerConfig, KEY_GEONETWORK + SITE_SUFFIX + KEY_SUFFIX);
 		}
 		boolean useDefaultDataDir = false;
 		Log.warning(Geonet.DATA_DIRECTORY,
@@ -149,7 +176,7 @@ public class GeonetworkDataDirectory {
 		if (systemDataDir == null) {
 			Log.warning(Geonet.DATA_DIRECTORY,
 					"    - Data directory properties is not set. Use "
-							+ webappName + KEY_SUFFIX + " or " + GEONETWORK_DIR_KEY
+							+ webappName + KEY_SUFFIX + " or " + KEY_GEONETWORK + KEY_SUFFIX
 							+ " properties.");
 			useDefaultDataDir = true;
 		} else {
@@ -179,8 +206,11 @@ public class GeonetworkDataDirectory {
 			}
 		}
 		
+		// MULTISITE
+		String webinf = (null == site)? "WEB-INF":"WEB-INF-" + site;
+		
 		if (useDefaultDataDir) {
-			systemDataDir = path + GEONETWORK_DEFAULT_DATA_DIR;
+			systemDataDir = path + webinf + GEONETWORK_DEFAULT_DATA_DIR;
 			systemDataFolder = new File(systemDataDir);
 			Log.warning(Geonet.DATA_DIRECTORY,
 					"    - Data directory provided could not be used. Using default location: "
@@ -244,8 +274,11 @@ public class GeonetworkDataDirectory {
 			Log.info(Geonet.DATA_DIRECTORY,
 					"     - Copying codelists directory ...");
 			try {
+				// MULTISITE
+				String webinf = (null == site)? "WEB-INF":"WEB-INF-" + site;
+				
 				BinaryFile.copyDirectory(new File(path
-						+ GEONETWORK_DEFAULT_DATA_DIR + "codelist"),
+						+ webinf + GEONETWORK_DEFAULT_DATA_DIR + "codelist"),
 						codelistDir);
 			} catch (IOException e) {
 				Log.info(Geonet.DATA_DIRECTORY,
@@ -261,7 +294,10 @@ public class GeonetworkDataDirectory {
 			Log.info(Geonet.DATA_DIRECTORY,
 					"     - Copying schema plugin catalogue ...");
 			try {
-				FileInputStream in = new FileInputStream(path + "WEB-INF"
+				// MULTISITE
+				String webinf = (null == site)? "WEB-INF":"WEB-INF-" + site;
+				
+				FileInputStream in = new FileInputStream(path + webinf
 						+ File.separator + Geonet.File.SCHEMA_PLUGINS_CATALOG);
 				FileOutputStream out = new FileOutputStream(schemaCatFile);
 

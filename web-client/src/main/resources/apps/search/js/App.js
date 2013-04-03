@@ -731,8 +731,14 @@ GeoNetwork.app = function () {
     return {
         init: function () {
             geonetworkUrl = GeoNetwork.URL || window.location.href.match(/(http.*\/.*)\/apps\/search.*/, '')[1];
-
+           
             urlParameters = GeoNetwork.Util.getParameters(location.href);
+            
+            // MULTISITE
+            siteUrl = ""; 
+            if (urlParameters.site) {
+            	siteUrl = urlParameters.site;
+            }
             var lang = urlParameters.hl || GeoNetwork.Util.defaultLocale;
             if (urlParameters.extent) {
                 urlParameters.bounds = new OpenLayers.Bounds(urlParameters.extent[0], urlParameters.extent[1], urlParameters.extent[2], urlParameters.extent[3]);
@@ -760,8 +766,9 @@ GeoNetwork.app = function () {
                 statusBarId: 'info',
                 lang: lang,
                 hostUrl: geonetworkUrl,
+                siteUrl: siteUrl,
                 mdOverlayedCmpId: 'resultsPanel',
-                adminAppUrl: geonetworkUrl + '/srv/' + lang + '/admin',
+                adminAppUrl: geonetworkUrl + siteUrl + '/srv/' + lang + '/admin',
                 // Declare default store to be used for records and summary
                 metadataStore: GeoNetwork.Settings.mdStore ? GeoNetwork.Settings.mdStore() : GeoNetwork.data.MetadataResultsStore(),
                 metadataCSWStore : GeoNetwork.data.MetadataCSWResultsStore(),

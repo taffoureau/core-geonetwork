@@ -147,7 +147,7 @@ public class Update implements Service
 		
 		// init service
 		
-		context.getServlet().getEngine().initServices(eltServices);
+		context.getServlet().getEngine(context.getSite()).initServices(eltServices);
 	
 		
 	}

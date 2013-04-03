@@ -3,17 +3,20 @@ package jeeves.config.springutil;
 import java.io.IOException;
 
 import jeeves.server.overrides.ConfigurationOverrides;
+import jeeves.server.sources.http.JeevesServlet;
 
 import org.jdom.JDOMException;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
+import org.springframework.security.web.FilterInvocation;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
 public class JeevesApplicationContext extends XmlWebApplicationContext {
 	
     private String appPath;
+    private String site;
     
     public JeevesApplicationContext() {
         addApplicationListener(new ApplicationListener<ApplicationEvent>() {
@@ -21,7 +24,13 @@ public class JeevesApplicationContext extends XmlWebApplicationContext {
             @Override
             public void onApplicationEvent(ApplicationEvent event) {
                 try {
-                    ConfigurationOverrides.applyNonImportSpringOverides(JeevesApplicationContext.this, getServletContext(), appPath);
+                	
+                	if (event.getSource() instanceof FilterInvocation){
+                		FilterInvocation filter = (FilterInvocation)event.getSource();
+                		site = JeevesServlet.getSite(filter.getRequest().getServletPath());
+                	}
+                	
+                    ConfigurationOverrides.applyNonImportSpringOverides(JeevesApplicationContext.this, getServletContext(), appPath, site);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -33,6 +42,10 @@ public class JeevesApplicationContext extends XmlWebApplicationContext {
         this.appPath = appPath;
     }
     
+    public void setSite(String site) {
+    	this.site = site;
+    }
+    
 	@Override
 	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader)
  throws IOException {
@@ -40,7 +53,7 @@ public class JeevesApplicationContext extends XmlWebApplicationContext {
         super.loadBeanDefinitions(reader);
         try {
             ConfigurationOverrides.importSpringConfigurations(reader, (ConfigurableBeanFactory) reader.getBeanFactory(),
-                    getServletContext(), appPath);
+                    getServletContext(), appPath, site);
         } catch (JDOMException e) {
             throw new IOException(e);
         }

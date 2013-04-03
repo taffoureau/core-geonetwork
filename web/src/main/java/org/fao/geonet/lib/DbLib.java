@@ -99,11 +99,11 @@ public class DbLib {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public void removeObjects(ServletContext servletContext, Dbms dbms, String appPath, String filePath, String filePrefix)
+	public void removeObjects(ServletContext servletContext, Dbms dbms, String appPath, String filePath, String filePrefix, String site)
 			throws FileNotFoundException, IOException {
         if(Log.isDebugEnabled(Geonet.DB))
             Log.debug(Geonet.DB, "Removing database objects");
-		List<String> schema = loadSchemaFile(servletContext, dbms, appPath, filePath, filePrefix);
+		List<String> schema = loadSchemaFile(servletContext, dbms, appPath, filePath, filePrefix, site);
 
 		// --- step 1 : collect objects to remove
 		ArrayList<ObjectInfo> objects = new ArrayList<ObjectInfo>();
@@ -154,11 +154,11 @@ public class DbLib {
      *
      * @param dbms
      */
-	public void createSchema(ServletContext servletContext, Dbms dbms, String appPath, String filePath, String filePrefix) throws Exception {
+	public void createSchema(ServletContext servletContext, Dbms dbms, String appPath, String filePath, String filePrefix, String site) throws Exception {
         if(Log.isDebugEnabled(Geonet.DB))
             Log.debug(Geonet.DB, "Creating database schema");
 
-		List<String> schema = loadSchemaFile(servletContext, dbms, appPath, filePath, filePrefix);
+		List<String> schema = loadSchemaFile(servletContext, dbms, appPath, filePath, filePrefix, site);
 		runSQL(dbms, schema);
 	}
 
@@ -177,12 +177,12 @@ public class DbLib {
 	 * @param sqlFile
 	 * @throws Exception
 	 */
-	public void runSQL(ServletContext servletContext, Dbms dbms, File sqlFile) throws Exception {
-		runSQL(servletContext, dbms, sqlFile, true);
+	public void runSQL(ServletContext servletContext, Dbms dbms, File sqlFile, String site) throws Exception {
+		runSQL(servletContext, dbms, sqlFile, true, site);
 	}
 
-	public void runSQL(ServletContext servletContext, Dbms dbms, File sqlFile, boolean failOnError) throws Exception {
-		List<String> data = Lib.text.load(servletContext, sqlFile.getCanonicalPath(), "UTF-8");
+	public void runSQL(ServletContext servletContext, Dbms dbms, File sqlFile, boolean failOnError, String site) throws Exception {
+		List<String> data = Lib.text.load(servletContext, sqlFile.getCanonicalPath(), "UTF-8", site);
 		runSQL(dbms, data, failOnError);
 	}
 	
@@ -255,7 +255,7 @@ public class DbLib {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	private List<String> loadSchemaFile(ServletContext servletContext, Dbms dbms, String appPath, String filePath, String filePrefix) // FIXME :
+	private List<String> loadSchemaFile(ServletContext servletContext, Dbms dbms, String appPath, String filePath, String filePrefix, String site) // FIXME :
 																	// use
 																	// resource
 																	// dir
@@ -270,7 +270,7 @@ public class DbLib {
             Log.debug(Geonet.DB, "  Loading script:" + file);
 
 		// --- load the dbms schema
-		return Lib.text.load(servletContext, appPath, file);
+		return Lib.text.load(servletContext, appPath, file, site);
 	}
 
 	/**

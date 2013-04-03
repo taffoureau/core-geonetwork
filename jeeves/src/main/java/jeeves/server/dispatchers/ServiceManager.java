@@ -100,6 +100,9 @@ public class ServiceManager
     private boolean startupError = false;
     private Map<String,String> startupErrors;
     private JeevesApplicationContext jeevesApplicationContext;
+    
+    // MULTISITE
+    private String site;
 
     //---------------------------------------------------------------------------
 	//---
@@ -124,6 +127,13 @@ public class ServiceManager
     public void setStartupErrors(Map<String,String> errors)   { startupErrors = errors; startupError = true; }
 	public boolean isStartupError() { return startupError; }
 
+	// MULTISITE
+	public void setSite        (String  site)  { this.site        = site;  }
+	
+	public String getSite() {
+		return site;
+	}
+	
 	//---------------------------------------------------------------------------
 
 	public void setBaseUrl(String name)
@@ -138,7 +148,8 @@ public class ServiceManager
 
 	public ProfileManager loadProfiles(ServletContext servletContext, String file) throws Exception
 	{
-		profilMan = new ProfileManager(servletContext, appPath, appPath + Jeeves.Path.WEBINF + file);
+		// FIXME MULTISITE profiles in WEB-INF shared for all sites => site = null
+		profilMan = new ProfileManager(servletContext, appPath, appPath + Jeeves.Path.WEBINF + file, site);
 		return profilMan;
 	}
 
@@ -347,12 +358,16 @@ public class ServiceManager
 		context.setUploadDir(uploadDir);
         context.setMaxUploadSize(maxUploadSize);
 		context.setServlet(servlet);
+		// MULTISITE
+		context.setSite(site);
 
 		return context;
 	}
 
 	public void dispatch(ServiceRequest req, UserSession session) {
 		ServiceContext context = new ServiceContext(req.getService(), jeevesApplicationContext, xmlCacheManager, monitorManager, providMan, serialFact, profilMan, htContexts);
+		// MULTISITE
+		context.setSite(site);
 		dispatch(req, session, context);
 	}
 
@@ -932,4 +947,3 @@ public class ServiceManager
 }
 
 //=============================================================================
-

@@ -25,6 +25,9 @@ package jeeves.server.sources.http;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -51,6 +54,7 @@ public class JeevesServlet extends HttpServlet
 {
 	public static final String USER_SESSION_ATTRIBUTE_KEY = Jeeves.Elem.SESSION;
 	private JeevesEngine jeeves = new JeevesEngine();
+	private static final HashMap<String, JeevesEngine> jeevesMap = new HashMap<String, JeevesEngine>();
 	private boolean initialized = false;
 
 	//---------------------------------------------------------------------------
@@ -80,15 +84,45 @@ public class JeevesServlet extends HttpServlet
         if (!appPath.endsWith(File.separator))
             appPath += File.separator;
 
-        String configPath = getServletConfig().getServletContext().getRealPath("/WEB-INF/config.xml");
+        // MULTISITE PURPOSE
+        
+        /*String configPath = getServletConfig().getServletContext().getRealPath("/WEB-INF/config.xml");
         if (configPath == null) {
             configPath = appPath + "WEB-INF" + File.separator;
         } else {
             configPath = new File(configPath).getParent() + File.separator;
+        }*/
+        
+        String configPath = getServletConfig().getServletContext().getRealPath("/WEB-INF/config.xml");
+        if (configPath == null) {
+            configPath = appPath + "WEB-INF";
+        } else {
+            configPath = new File(configPath).getParent();
         }
-
-        jeeves.init(appPath, configPath, baseUrl, this);
-        initialized = true;
+        
+        // INIT a jeeves engine for baseUrl and initialize singletons properly
+	   	jeeves.init(appPath, configPath + File.separator, baseUrl, this, null);
+	   
+        String nodes = getInitParameter("nodes");
+        
+ 	    if (nodes!=null) {
+ 	    
+ 	    	List<String> items = Arrays.asList(nodes.split("\\s*,\\s*"));
+ 	        
+ 	        for (String item : items ){
+ 	        	JeevesEngine jeevesItem = new JeevesEngine();
+ 	        	System.out.println("MULTISITE = " + item);
+ 	        	String dynConfigPath = configPath + "-" + item;
+ 	        	dynConfigPath = dynConfigPath + File.separator;
+ 	            System.out.println("MULTISITE CONFIG PATH : " + dynConfigPath);
+ 	            //baseUrl = baseUrl + File.separator + item;
+ 	            jeevesItem.init(appPath, dynConfigPath, baseUrl, this, item);
+ 	            jeevesMap.put(item, jeevesItem);
+ 	        }
+         
+ 	    }
+ 	    	
+ 	    initialized = true;
     }
 
 	//---------------------------------------------------------------------------
@@ -100,6 +134,12 @@ public class JeevesServlet extends HttpServlet
 	public void destroy()
 	{
 		jeeves.destroy();
+		
+		if (!jeevesMap.isEmpty()){
+			for (JeevesEngine engine : jeevesMap.values()) {
+				engine.destroy();
+			}
+		}
 		super .destroy();
 	}
 
@@ -175,6 +215,17 @@ public class JeevesServlet extends HttpServlet
             if(Log.isDebugEnabled(Log.REQUEST)) Log.debug(Log.REQUEST, "Session created for client : " + ip);
 		}
 
+		// MULTISITE PURPOSE - Find JeevesEngine for the request
+		JeevesEngine engine = jeeves;
+		if (!jeevesMap.isEmpty()) {
+			
+			for (String key : jeevesMap.keySet()) {
+				if (req.getServletPath().startsWith("/" + key + "/")) {
+					engine = jeevesMap.get(key);
+				}
+			}
+		}
+		
 		//------------------------------------------------------------------------
 		//--- build service request
 
@@ -183,10 +234,10 @@ public class JeevesServlet extends HttpServlet
 		//--- create request
 
 		try {
-			srvReq = ServiceRequestFactory.create(req, res, jeeves.getUploadDir(), jeeves.getMaxUploadSize());
+			srvReq = ServiceRequestFactory.create(req, res, engine.getUploadDir(), engine.getMaxUploadSize());
 		} catch (FileUploadTooBigEx e) {
 			StringBuffer sb = new StringBuffer();
-			sb.append("File upload too big - exceeds "+jeeves.getMaxUploadSize()+" Mb\n");
+			sb.append("File upload too big - exceeds "+ engine.getMaxUploadSize()+" Mb\n");
 			sb.append("Error : " +e.getClass().getName() +"\n");
 			res.sendError(400, sb.toString());
 
@@ -210,19 +261,34 @@ public class JeevesServlet extends HttpServlet
 			return;
 		}
 
-		//--- execute request
-
-		jeeves.dispatch(srvReq, session);
+		engine.dispatch(srvReq, session);
+		
 	}
 
 	public boolean isInitialized() { return initialized; }
 
-	public JeevesEngine getEngine() {
-		return jeeves;
+	public JeevesEngine getEngine(String site) {
+		return (null == site)? jeeves : jeevesMap.get(site);
 		
 	}
+	
+	public static String getSite(String url){
+		
+		System.out.println("JeevesServlet.getSite() - input url : " + url);
+		
+		if (!jeevesMap.isEmpty()) {
+			
+			for (String key : jeevesMap.keySet()) {
+				if (url.startsWith("/" + key))
+					return key;
+			}
+		}
+		
+		return null;
+		
+	}
+	
 }
 
 //=============================================================================
-
 
