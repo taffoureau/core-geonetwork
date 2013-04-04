@@ -274,8 +274,6 @@ public class JeevesServlet extends HttpServlet
 	
 	public static String getSite(String url){
 		
-		System.out.println("JeevesServlet.getSite() - input url : " + url);
-		
 		if (!jeevesMap.isEmpty()) {
 			
 			for (String key : jeevesMap.keySet()) {

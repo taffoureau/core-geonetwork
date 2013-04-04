@@ -920,7 +920,14 @@ public class ServiceManager
 		root.addContent(new Element(Jeeves.Elem.BASE_URL)    .setText(baseUrl));
 		root.addContent(new Element(Jeeves.Elem.LOC_URL)     .setText(baseUrl +"/loc/"+ lang));
 		root.addContent(new Element(Jeeves.Elem.BASE_SERVICE).setText(baseUrl +"/"+ Jeeves.Prefix.SERVICE));
-		root.addContent(new Element(Jeeves.Elem.LOC_SERVICE) .setText(baseUrl +"/"+ Jeeves.Prefix.SERVICE +"/"+ lang));
+		
+		if (null == site)
+			root.addContent(new Element(Jeeves.Elem.LOC_SERVICE) .setText(baseUrl +"/"+ Jeeves.Prefix.SERVICE +"/"+ lang));
+		else {
+			root.addContent(new Element(Jeeves.Elem.LOC_SERVICE) .setText(baseUrl +"/"+ site + "/" + Jeeves.Prefix.SERVICE +"/"+ lang));
+			root.addContent(new Element(Jeeves.Elem.SITE) .setText(site));
+		}
+		
 	}
 
 	//---------------------------------------------------------------------------

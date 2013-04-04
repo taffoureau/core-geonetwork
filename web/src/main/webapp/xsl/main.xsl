@@ -13,6 +13,16 @@
 	<xsl:include href="header.xsl"/>
 	<xsl:include href="banner.xsl"/>
 	<xsl:include href="utils.xsl"/>
+	
+	
+	<xsl:variable name="relativePath">
+		<xsl:choose>
+			<xsl:when test="/root/gui/site">
+				<xsl:text>../../..</xsl:text>
+			</xsl:when>
+			<xsl:otherwise><xsl:text>../..</xsl:text></xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
 
 	<!--
 	main page

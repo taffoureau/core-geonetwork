@@ -94,6 +94,8 @@ public final class Jeeves
 		public static final String LOC_SERVICE  = "locService";
 		public static final String LANGUAGE     = "language";
 		public static final String REQ_SERVICE  = "reqService";
+		// MULTISITE
+		public static final String SITE  = "site";
 	}
 
 	//--------------------------------------------------------------------------

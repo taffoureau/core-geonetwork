@@ -59,6 +59,7 @@ public class XmlFileCacher
 	{
 		//--- 10 seconds as default interval
 		this(file, 10, servletContext, appPath);
+		this.site = site;
 	}
 
 	//--------------------------------------------------------------------------
