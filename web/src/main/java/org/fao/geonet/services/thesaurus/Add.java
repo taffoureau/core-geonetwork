@@ -78,7 +78,7 @@ public class Add implements Service {
 		
 		File rdfFile = new File(filePath);		
 		Thesaurus thesaurus = new Thesaurus(tname,fname,type,dname,rdfFile,dm.getSiteURL(),false);		
-		tm.addThesaurus(thesaurus);
+		tm.addThesaurus(thesaurus, true);
 
 		// Save activated status in the database
 		String query = "INSERT INTO Thesaurus (id, activated) VALUES (?,?)";
