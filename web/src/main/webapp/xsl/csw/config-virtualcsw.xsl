@@ -51,7 +51,6 @@
 			
 			
 			<xsl:for-each select="/root/gui/services/record">
-			
 				<xsl:sort select="name"/>
 				
 				<!-- 
@@ -61,18 +60,11 @@
 				-->
 				
 				<tr>
-					<td class="padded"><xsl:value-of select="name"/></td>
+					<td class="padded"><a href="{concat(/root/gui/locService, '/', name, '?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetCapabilities')}" 
+						target="_blank" title="GetCapabilities"><xsl:value-of select="name"/></a></td>
 					
 					<td class="padded"><xsl:value-of select="description"/></td>
-										
-					<!-- 
 					
-					<td class="padded"><xsl:value-of select="class"/></td>
-					
-					<td class="padded"></td>
-					<td class="padded"></td>
-					
-					 <td class="padded"><xsl:value-of select="/root/gui/strings/profileChoice[@value=$profileId]"/></td>-->
 					
 					<td class="padded">
 						<button class="content" onclick="load('{/root/gui/locService}/virtualcsw.config.edit?id={id}')">
