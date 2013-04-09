@@ -102,6 +102,16 @@ public class JeevesEngine
 	private ProviderManager providerMan = new ProviderManager();
 	private ScheduleManager scheduleMan = new ScheduleManager();
 	private SerialFactory   serialFact  = new SerialFactory();
+	
+	private ResourceManager resourceMan;
+
+	public ResourceManager getResourceMan() {
+		return resourceMan;
+	}
+
+	public void setResourceMan(ResourceManager resourceMan) {
+		this.resourceMan = resourceMan;
+	}
 
 	private Logger appHandLogger = Log.createLogger(Log.APPHAND);
 	private List<Element> appHandList = new ArrayList<Element>();
@@ -200,9 +210,10 @@ public class JeevesEngine
             	jeevesAppContext.getBeanFactory().registerSingleton("profileManager", profileManager);
             }
             
+            this.resourceMan = new ResourceManager(this.monitorManager, this.providerMan);
             if (!jeevesAppContext.getBeanFactory().containsSingleton("resourceManager")) {
             	// Add ResourceManager as a bean to the spring application context so that GeonetworkAuthentication can access it
-            	jeevesAppContext.getBeanFactory().registerSingleton("resourceManager", new ResourceManager(this.monitorManager, this.providerMan));
+            	jeevesAppContext.getBeanFactory().registerSingleton("resourceManager", resourceMan);
             }
             
             if (!jeevesAppContext.getBeanFactory().containsSingleton("serialFactory")) {

@@ -53,7 +53,7 @@ import jeeves.utils.Util;
 public class JeevesServlet extends HttpServlet
 {
 	public static final String USER_SESSION_ATTRIBUTE_KEY = Jeeves.Elem.SESSION;
-	private JeevesEngine jeeves = new JeevesEngine();
+	private static JeevesEngine jeeves = new JeevesEngine();
 	private static final HashMap<String, JeevesEngine> jeevesMap = new HashMap<String, JeevesEngine>();
 	private boolean initialized = false;
 
@@ -267,7 +267,7 @@ public class JeevesServlet extends HttpServlet
 
 	public boolean isInitialized() { return initialized; }
 
-	public JeevesEngine getEngine(String site) {
+	public static JeevesEngine getEngine(String site) {
 		return (null == site)? jeeves : jeevesMap.get(site);
 		
 	}

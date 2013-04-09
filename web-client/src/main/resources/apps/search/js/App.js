@@ -736,8 +736,12 @@ GeoNetwork.app = function () {
             
             // MULTISITE
             siteUrl = ""; 
+            adminSiteUrl = "";
             if (urlParameters.site) {
             	siteUrl = urlParameters.site;
+            }
+            if (siteUrl.length>0){
+            	adminSiteUrl = "/" + siteUrl;
             }
             var lang = urlParameters.hl || GeoNetwork.Util.defaultLocale;
             if (urlParameters.extent) {
@@ -768,7 +772,7 @@ GeoNetwork.app = function () {
                 hostUrl: geonetworkUrl,
                 siteUrl: siteUrl,
                 mdOverlayedCmpId: 'resultsPanel',
-                adminAppUrl: geonetworkUrl + siteUrl + '/srv/' + lang + '/admin',
+                adminAppUrl: geonetworkUrl + adminSiteUrl + '/srv/' + lang + '/admin',
                 // Declare default store to be used for records and summary
                 metadataStore: GeoNetwork.Settings.mdStore ? GeoNetwork.Settings.mdStore() : GeoNetwork.data.MetadataResultsStore(),
                 metadataCSWStore : GeoNetwork.data.MetadataCSWResultsStore(),

@@ -23,8 +23,10 @@
 package org.fao.geonet.kernel.security;
 
 import jeeves.resources.dbms.Dbms;
+import jeeves.server.JeevesEngine;
 import jeeves.server.ProfileManager;
 import jeeves.server.resources.ResourceManager;
+import jeeves.server.sources.http.JeevesServlet;
 import jeeves.utils.Log;
 import jeeves.utils.PasswordUtil;
 
@@ -39,6 +41,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsChecker;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -48,11 +51,20 @@ public class GeonetworkAuthenticationProvider extends AbstractUserDetailsAuthent
 
 	private ApplicationContext applicationContext;
 	private PasswordEncoder encoder;
+	private String site;
+
+
+	@Override
+	protected UserDetailsChecker getPreAuthenticationChecks() {
+		// TODO Auto-generated method stub
+		return super.getPreAuthenticationChecks();
+	}
 
 	@Override
 	protected void additionalAuthenticationChecks(UserDetails userDetails,
 			UsernamePasswordAuthenticationToken authentication)
 			throws AuthenticationException {
+		
 		GeonetworkUser gnDetails = (GeonetworkUser) userDetails;
 		if (authentication.getCredentials() == null) {
 			Log.warning(Log.JEEVES, "Authentication failed: no credentials provided");
@@ -72,7 +84,7 @@ public class GeonetworkAuthenticationProvider extends AbstractUserDetailsAuthent
 		Dbms dbms = null;
 		ResourceManager resourceManager = null;
 		try {
-			resourceManager = applicationContext.getBean(ResourceManager.class);
+			resourceManager = JeevesServlet.getEngine(site).getResourceMan();
 			dbms = (Dbms) resourceManager.openDirect(Geonet.Res.MAIN_DB);
 			// Only check user with local db user (ie. authtype is '')
 			Element selectRequest = dbms.select("SELECT * FROM Users WHERE username=? AND authtype IS NULL", username);
@@ -124,6 +136,14 @@ public class GeonetworkAuthenticationProvider extends AbstractUserDetailsAuthent
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
 		return retrieveUser(username, null);
+	}
+
+	public String getSite() {
+		return site;
+	}
+
+	public void setSite(String site) {
+		this.site = site;
 	}
 
 }
