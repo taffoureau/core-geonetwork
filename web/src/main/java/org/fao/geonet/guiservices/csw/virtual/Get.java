@@ -1,5 +1,5 @@
 //=============================================================================
-//===	Copyright (C) 2001-2010 Food and Agriculture Organization of the
+//===	Copyright (C) 2001-2013 Food and Agriculture Organization of the
 //===	United Nations (FAO-UN), United Nations World Food Programme (WFP)
 //===	and United Nations Environment Programme (UNEP)
 //===
@@ -22,59 +22,49 @@
 //==============================================================================
 package org.fao.geonet.guiservices.csw.virtual;
 
-import jeeves.constants.Jeeves;
 import jeeves.interfaces.Service;
 import jeeves.resources.dbms.Dbms;
 import jeeves.server.ServiceConfig;
-import jeeves.server.UserSession;
 import jeeves.server.context.ServiceContext;
-import org.fao.geonet.GeonetContext;
+
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Params;
-import org.fao.geonet.kernel.setting.SettingManager;
 import org.jdom.Element;
 
-
-/** Retrieves a particular service
+/**
+ * Retrieves a particular service
  */
 public class Get implements Service {
 
-	public void init(String appPath, ServiceConfig params) throws Exception {}
+    public void init(String appPath, ServiceConfig params) throws Exception {
+    }
 
-	public Element exec(Element params, ServiceContext context) throws Exception {
-		
-		
-		String id = params.getChildText(Params.ID);
+    public Element exec(Element params, ServiceContext context)
+            throws Exception {
 
-		Dbms dbms = (Dbms) context.getResourceManager().open (Geonet.Res.MAIN_DB);
+        String id = params.getChildText(Params.ID);
 
-		Element elService = 
-			dbms.select ("SELECT * FROM Services WHERE id=?", Integer.valueOf(id));
+        Dbms dbms = (Dbms) context.getResourceManager()
+                .open(Geonet.Res.MAIN_DB);
 
-		//--- retrieve filter parameters
-		//elParameters.addContent(dbms.select("SELECT name, value FROM ServiceParameters WHERE service =?", Integer.valueOf(id)).getChildren());
-		
-		Element elParameters = new Element(Geonet.Elem.FILTER);
-		
-		  java.util.List list = 
-				dbms.select("SELECT name, value FROM ServiceParameters WHERE service =?", Integer.valueOf(id)).getChildren();
-			
-		  for(int i=0; i<list.size(); i++){			
-			  
-			Element filter = (Element)list.get(i);
-			String filterId = filter.getChildText("id");
-			//elParameters.addContent(new Element(Geonet.Elem.ID).setText(id).setAttribute("value", filter.getChildText("value")));
-			//elParameters.addContent(new Element(Geonet.Elem.FILTER).setText(filter.getChildText(Geonet.Elem.VALUE)).setAttribute(attribute));
-			
-			elParameters.addContent(new Element(filter.getChildText("name")).setText(filter.getChildText("value")));
-			
-		}
+        Element elService = dbms.select("SELECT * FROM Services WHERE id=?",
+                Integer.valueOf(id));
 
-		elService.addContent(elParameters);
-		
-		
-		return elService;
-        
-	}
+        Element elParameters = new Element(Geonet.Elem.FILTER);
 
+        java.util.List list = dbms.select(
+                "SELECT name, value FROM ServiceParameters WHERE service =?",
+                Integer.valueOf(id)).getChildren();
+
+        for (int i = 0; i < list.size(); i++) {
+
+            Element filter = (Element) list.get(i);
+            String filterId = filter.getChildText("id");
+            elParameters.addContent(new Element(filter.getChildText("name"))
+                    .setText(filter.getChildText("value")));
+        }
+        elService.addContent(elParameters);
+
+        return elService;
+    }
 }

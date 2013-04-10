@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
 	
-
+	
 	<xsl:include href="../main.xsl"/>
-
+	
 	
 	<xsl:template name="content">
 		<xsl:call-template name="formLayout">
@@ -24,15 +24,15 @@
 	
 	
 	<xsl:template name="form">
-	
+		
 		<script type="text/javascript">
 			function deleteUser(service, message, id){
-				var cswContactId = '<xsl:value-of select="/root/gui/env/csw/contactId"/>';
-				if (id == cswContactId) {
-					if (!confirm("<xsl:value-of select="/root/gui/strings/delUserCsw"/>"))
-						return null;
-				}
-				doConfirm(service, message);
+			var cswContactId = '<xsl:value-of select="/root/gui/env/csw/contactId"/>';
+			if (id == cswContactId) {
+			if (!confirm("<xsl:value-of select="/root/gui/strings/delUserCsw"/>"))
+			return null;
+			}
+			doConfirm(service, message);
 			}
 		</script>
 		
@@ -40,11 +40,6 @@
 			<tr>
 				<th class="padded" style="width:200px;"><b><xsl:value-of select="/root/gui/strings/virtualcswServiceName"/></b></th>
 				<th class="padded" style="width:200px;"><b><xsl:value-of select="/root/gui/strings/virtualcswServiceDescription"/></b></th>
-				
-			<!-- <th class="padded" style="width:100px;"><b><xsl:value-of select="/root/gui/strings/virtualcswClassName"/></b></th>
-				<th class="padded" style="width:100px;"><b><xsl:value-of select="/root/gui/strings/virtualcswParamName"/></b></th>
-				<th class="padded" style="width:100px;"><b><xsl:value-of select="/root/gui/strings/virtualcswParamValue"/></b></th>-->
-				
 				<th class="padded"><b><xsl:value-of select="/root/gui/strings/operation"/></b></th>
 			</tr>
 			
@@ -52,12 +47,6 @@
 			
 			<xsl:for-each select="/root/gui/services/record">
 				<xsl:sort select="name"/>
-				
-				<!-- 
-				<xsl:variable name="profileId">
-					<xsl:value-of select="profile"/>
-				</xsl:variable>
-				-->
 				
 				<tr>
 					<td class="padded"><a href="{concat(/root/gui/locService, '/', name, '?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetCapabilities')}" 
@@ -72,7 +61,7 @@
 						</button>
 						&#160;
 						<!-- <button class="content" onclick="deleteUser('{/root/gui/locService}/user.remove?id={id}','{/root/gui/strings/delUserConf}', {id})">-->
-						<button class="content" onclick="load('{/root/gui/locService}/virtualcsw.config.delete?id={id}')">	
+						<button class="content" onclick="load('{/root/gui/locService}/virtualcsw.config.delete?id={id}')">  
 							<xsl:value-of select="/root/gui/strings/delete"/>
 						</button>
 						

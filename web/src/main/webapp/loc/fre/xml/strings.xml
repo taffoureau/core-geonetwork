@@ -1370,8 +1370,7 @@
     <virtualcswTitle>Titre</virtualcswTitle>
 	<virtualcswAbstract>Résumé</virtualcswAbstract>
 	<virtualcswKeywords>Mot-clé</virtualcswKeywords>
-	<virtualcswDenominatorFrom>Echelle minimum</virtualcswDenominatorFrom>
-	<virtualcswDenominatorTo>Echelle maximum</virtualcswDenominatorTo>
+	<virtualcswDenominator>Echelle</virtualcswDenominator>
 	<virtualcswCatalog>Catalogue</virtualcswCatalog>
 	<virtualcswGroup>Groupe</virtualcswGroup>
 	<virtualcswCategory>Catégorie</virtualcswCategory>

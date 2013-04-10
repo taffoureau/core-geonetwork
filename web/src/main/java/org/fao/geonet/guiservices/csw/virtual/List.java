@@ -1,5 +1,5 @@
 //=============================================================================
-//===	Copyright (C) 2001-2010 Food and Agriculture Organization of the
+//===	Copyright (C) 2001-2013 Food and Agriculture Organization of the
 //===	United Nations (FAO-UN), United Nations World Food Programme (WFP)
 //===	and United Nations Environment Programme (UNEP)
 //===
@@ -26,27 +26,24 @@ import jeeves.interfaces.Service;
 import jeeves.resources.dbms.Dbms;
 import jeeves.server.ServiceConfig;
 import jeeves.server.context.ServiceContext;
-import org.fao.geonet.GeonetContext;
+
 import org.fao.geonet.constants.Geonet;
-import org.fao.geonet.kernel.setting.SettingManager;
 import org.jdom.Element;
 
+/**
+ * Get the list of service define in DB configuration
+ */
 public class List implements Service {
+    public void init(String appPath, ServiceConfig params) throws Exception {
+    }
 
-	public void init(String appPath, ServiceConfig params) throws Exception {}
-
-	
-	public Element exec(Element params, ServiceContext context) throws Exception {
-		
-		GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
-        SettingManager sm = gc.getSettingManager();
-
-        Dbms dbms = (Dbms) context.getResourceManager().open (Geonet.Res.MAIN_DB);
+    public Element exec(Element params, ServiceContext context)
+            throws Exception {
+        Dbms dbms = (Dbms) context.getResourceManager()
+                .open(Geonet.Res.MAIN_DB);
 
         String query = "SELECT * FROM Services";
-        
-        return dbms.select(query);
-        
-	}
 
+        return dbms.select(query);
+    }
 }
