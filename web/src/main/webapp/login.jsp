@@ -6,6 +6,11 @@
 		<script language="Javascript1.5" type="text/javascript">
 		function init() {
 			<% 
+			
+			String siteUrl = "";
+			if (request.getParameter("site")!=null)
+				siteUrl = siteUrl + request.getParameter("site") + "/";
+			
 			String found = null;
 			Enumeration names = request.getHeaderNames();
 			while (names.hasMoreElements()) {
@@ -19,7 +24,9 @@
 			if(found != null) {
 				language = request.getHeader(found);
 			}
+
 			%>
+			var siteUrl = "<%= siteUrl %>"
 			var userLang = "<%= language %>"
 			if(!userLang) {
 				userLang = (navigator.language) ? navigator.language : navigator.userLanguage;
@@ -43,7 +50,10 @@
 				userLang = "ita";
 			}
 	
-		  	window.location="srv/"+userLang+"/login.form"+window.location.search;
+		  	if (siteUrl.length>0)
+				window.location=siteUrl+"srv/"+userLang+"/login.form";
+		  	else
+		  		window.location="srv/"+userLang+"/login.form" + window.search;
 		}
 		</script>
 	</head>

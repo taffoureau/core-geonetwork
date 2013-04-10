@@ -19,7 +19,19 @@
 				</script>
 			</xsl:when>
 			<xsl:otherwise>
-	<form name="login" action="{/root/gui/url}/j_spring_security_check"
+			
+	<xsl:variable name="siteUrl">
+	 <xsl:choose>
+	   <xsl:when test="/root/gui/site">
+	   		<xsl:value-of select="concat(/root/gui/url, '/', /root/gui/site)"/>
+	   	</xsl:when>
+	   <xsl:otherwise>
+	   		<xsl:value-of select="/root/gui/url"/>
+	   	</xsl:otherwise>
+	 </xsl:choose>
+	</xsl:variable>
+
+	<form name="login" action="{$siteUrl}/j_spring_security_check"
 		method="post">
 		<xsl:call-template name="formLayout">
 			<xsl:with-param name="title" select="/root/gui/info/heading" />
