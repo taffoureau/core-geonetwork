@@ -53,7 +53,7 @@
 		  	if (siteUrl.length>0)
 				window.location=siteUrl+"srv/"+userLang+"/login.form";
 		  	else
-		  		window.location="srv/"+userLang+"/login.form" + window.search;
+		  		window.location="srv/"+userLang+"/login.form"+window.location.search;;
 		}
 		</script>
 	</head>

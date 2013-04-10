@@ -14,7 +14,7 @@
 	<xsl:include href="banner.xsl"/>
 	<xsl:include href="utils.xsl"/>
 	
-	
+	<!--  MULTISITE -->
 	<xsl:variable name="relativePath">
 		<xsl:choose>
 			<xsl:when test="/root/gui/site">

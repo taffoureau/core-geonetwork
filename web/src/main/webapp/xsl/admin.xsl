@@ -85,7 +85,7 @@
 
 		<xsl:if test="normalize-space($content)">
 			<tr>
-				<td colspan="3" class="configTitle"><img src="../../images/{$icon}" class="configTitle"/>&#160;<b><xsl:value-of
+				<td colspan="3" class="configTitle"><img src="{$relativePath}/images/{$icon}" class="configTitle"/>&#160;<b><xsl:value-of
 							select="$title"/></b></td>
 			</tr>
 			<xsl:copy-of select="$content"/>

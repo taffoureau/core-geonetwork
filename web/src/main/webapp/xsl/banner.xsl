@@ -9,7 +9,7 @@
 	<xsl:template name="banner">
 		<div id="header" style="border-bottom: 2px solid #99BBE8; width:100%; height: 32px; clear: both">
 			<div>
-				<img src="../../images/logos/{/root/gui/env/site/siteId}.gif" style="max-height:31px"/>
+				<img src="{/root/gui/url}/images/logos/{/root/gui/env/site/siteId}.gif" style="max-height:31px"/>
 				
 				<div id="mn-top" style="float: right;">
 					<div class="pipe first"><a href="{/root/gui/locService}/home"><xsl:value-of select="/root/gui/strings/home"/></a></div>
