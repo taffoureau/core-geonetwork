@@ -9,18 +9,18 @@
 	</xsl:template>
 
 	<xsl:template mode="script" match="/">
-		<script type="text/javascript" src="../../scripts/ext/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="{$relativePath}/scripts/ext/adapter/ext/ext-base.js"></script>
 		<xsl:choose>
 			<xsl:when test="/root/request/debug">
-				<script type="text/javascript" src="../../scripts/ext/ext-all-debug.js"></script>
+				<script type="text/javascript" src="{$relativePath}/scripts/ext/ext-all-debug.js"></script>
 			</xsl:when>
 			<xsl:otherwise>
-				<script type="text/javascript" src="../../scripts/ext/ext-all.js"></script>
+				<script type="text/javascript" src="{$relativePath}/scripts/ext/ext-all.js"></script>
 			</xsl:otherwise>
 		</xsl:choose>
-		<script type="text/javascript" src="../../scripts/ext/form/FileUploadField.js"></script>
-		<script type="text/javascript" src="../../scripts/ext-ux/XmlTreeLoader.js"></script>
-		<script type="text/javascript" src="../../scripts/UserXsl.js"></script>
+		<script type="text/javascript" src="{$relativePath}/scripts/ext/form/FileUploadField.js"></script>
+		<script type="text/javascript" src="{$relativePath}/scripts/ext-ux/XmlTreeLoader.js"></script>
+		<script type="text/javascript" src="{$relativePath}/scripts/UserXsl.js"></script>
 		<script type="text/javascript" language="JavaScript">
 			 Ext.onReady(function(){
 				new GeoNetwork.UserXsl('xslManager');
