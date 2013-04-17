@@ -2,6 +2,16 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 	<xsl:variable name="title">CSW Demo Request</xsl:variable>
+	
+	<!--  MULTISITE -->
+	<xsl:variable name="relativePath">
+		<xsl:choose>
+			<xsl:when test="/root/gui/site">
+				<xsl:text>../../..</xsl:text>
+			</xsl:when>
+			<xsl:otherwise><xsl:text>../..</xsl:text></xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
 
 	<xsl:template match="/">
 		<html>
@@ -10,12 +20,12 @@
 					<xsl:value-of select="concat(/root/gui/strings/title, '-', $title)"/>
 				</title>
 			  
-			  <link href="../../images/logos/favicon.gif" rel="shortcut icon" type="image/x-icon" />
-			  <link href="../../images/logos/favicon.gif" rel="icon" type="image/x-icon" />
+			  <link href="{/root/gui/url}/images/logos/favicon.gif" rel="shortcut icon" type="image/x-icon" />
+			  <link href="{/root/gui/url}/images/logos/favicon.gif" rel="icon" type="image/x-icon" />
 			  
 				<link rel="stylesheet" type="text/css" href="{/root/gui/url}/geonetwork.css"/>
-				<script type="text/javascript" src="../../scripts/openlayers/OpenLayers.js"/>
-				<script type="text/javascript" src="../../scripts/test-csw.js"/>
+				<script type="text/javascript" src="{/root/gui/url}/scripts/openlayers/OpenLayers.js"/>
+				<script type="text/javascript" src="{/root/gui/url}/scripts/test-csw.js"/>
 				<style type="text/css">
 					div.test {
 					    padding:7px 7px 7px 7px;
@@ -54,10 +64,10 @@
 					    clear: left;
 					}</style>
 			</head>
-			<body onload="init();">
+			<body onload="init('{$relativePath}');">
 				<div class="test-head">
 					<div class="test-head-logo">
-						<img src="../../images/header-right.gif"/>
+						<img src="{/root/gui/url}/images/header-right.gif"/>
 					</div>
 					<div class="test-head-text">
 						<h1>
@@ -72,7 +82,7 @@
 				</div>
 				<div class="test">
 					<label for="request">Request:</label>
-					<select id="request" onchange="updateOperation(this);"> </select>
+					<select id="request" onchange="updateOperation(this, '{$relativePath}');"> </select>
 					<br/>
 					<label for="url">URL:</label>
 					<input id="url" type="text" size="50"

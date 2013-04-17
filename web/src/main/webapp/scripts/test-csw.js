@@ -110,6 +110,34 @@ function updateOperation(option) {
 	}
 }
 
+//MULTISITE //
+function init(relPath) {
+	var operationsList = document.getElementById('request');
+	for (i = 0; i < operations.length; i++) {
+		var op = new Option(operations[i][1], operations[i][0]);
+		operationsList.options[i] = op;
+	}
+	updateOperation(operationsList.options[operationsList.selectedIndex], relPath);
+}
+function updateOperation(option, relPath) {
+	for (i = 0; i < operations.length; i++) {
+		if (operations[i][0] == option.value) {
+			var request = OpenLayers.Request
+					.GET( {
+						url : relPath + '/xml/csw/test/' + operations[i][0] + '.xml',
+						success : function(response) {
+							document.getElementById('body').value = response.responseText;
+						}
+					});
+
+			if (operations[i][2] != undefined)
+				document.getElementById('info').innerHTML = operations[i][2];
+			else
+				document.getElementById('info').innerHTML = '';
+		}
+	}
+}
+
 function submit() {
 
 	var opts = {
