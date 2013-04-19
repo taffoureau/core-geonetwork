@@ -30,6 +30,8 @@
 				<sec:filter-chain pattern="/xml/schemas/**" filters="" />
 				<sec:filter-chain pattern="/xsl/harvesting/**" filters="" />
 				<sec:filter-chain pattern="/xsl/ownership/**" filters="" />
+				<ref bean="catalogue1FilterChain"/>
+				<ref bean="site2FilterChain"/>
 				<ref bean="coreFilterChain"/>
  				<!-- <sec:filter-chain pattern="/**" filters="securityContextPersistenceFilter,
  				logoutFilter,
@@ -43,6 +45,201 @@
 			</list>
 		</constructor-arg>
 	</bean>
+	
+	
+	<bean id="catalogue1FilterChain" class="org.springframework.security.web.DefaultSecurityFilterChain">
+		<constructor-arg>
+			<bean class="org.springframework.security.web.util.AntPathRequestMatcher">
+				<constructor-arg value="/catalogue1/**"/>
+			</bean>
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="catalogue1filter"/>
+		</constructor-arg>
+	</bean>
+	<bean id="catalogue1filter" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<ref bean="securityContextPersistenceFilter" />
+				<ref bean="catalogue1logoutFilter" />
+				<ref bean="preAuthenticationFilter" />
+				<ref bean="basicAuthenticationFilter" />
+				<ref bean="catalogue1formLoginFilter" />
+				<ref bean="requestCacheFilter" />
+				<ref bean="anonymousFilter" />
+				<ref bean="sessionMgmtFilter" />
+				<ref bean="catalogue1exceptionTranslationFilter" />
+				<ref bean="overridefilterSecurityInterceptor" />
+				<ref bean="filterSecurityInterceptor" />
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="catalogue1formLoginFilter"
+		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+		<property name="postOnly" value="true" />
+		<property name="usernameParameter" value="username" />
+		<property name="passwordParameter" value="password" />
+		<property name="authenticationManager" ref="catalogue1authenticationManager" />
+		<property name="filterProcessesUrl" value="/catalogue1/j_spring_security_check" />
+		<property name="authenticationFailureHandler">
+			<bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+				<constructor-arg value="/login.jsp?failure=true&amp;site=catalogue1"></constructor-arg>
+			</bean>
+		</property>
+		<property name="authenticationSuccessHandler">
+			<bean class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+				<property name="defaultTargetUrl" value="/" />
+				<property name="targetUrlParameter" value="redirectUrl" />
+			</bean>
+		</property>
+		<property name="sessionAuthenticationStrategy">
+			<bean class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy" />
+		</property>	
+	</bean>
+	<bean id="catalogue1authenticationManager"
+		class="org.springframework.security.authentication.ProviderManager">
+		<property name="providers">
+			<list>
+				<!-- Check if the preAuthenticationFilter has already authenticated user -->
+				<ref bean="preFilterAuthenticationProvider" />
+				<ref bean="catalogue1geonetworkAuthenticationProvider" />
+			</list>
+		</property>
+	</bean>	
+	<bean class="org.fao.geonet.kernel.security.GeonetworkAuthenticationProvider" id="catalogue1geonetworkAuthenticationProvider">
+    	<property name="site" value="catalogue1"></property>
+    </bean>
+	
+	<bean id="catalogue1logoutFilter"
+		class="org.springframework.security.web.authentication.logout.LogoutFilter">
+		<constructor-arg ref="logoutSuccessHandler" />
+		<constructor-arg>
+			<list>
+				<bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler" />
+				<bean class="org.springframework.security.web.authentication.logout.CookieClearingLogoutHandler">
+				  <constructor-arg>
+				  	<array>
+				  		<value>JSESSIONID</value>
+				  	</array>
+				  </constructor-arg>
+				</bean>
+			</list>
+		</constructor-arg>
+		<property name="filterProcessesUrl" value="/catalogue1/j_spring_security_logout"/>
+	</bean>
+	
+	<bean id="catalogue1exceptionTranslationFilter"
+		class="org.springframework.security.web.access.ExceptionTranslationFilter">
+		<property name="authenticationEntryPoint" ref="catalogue1authenticationEntryPoint" />
+		<property name="accessDeniedHandler" ref="accessDeniedHandler" />
+	</bean>
+	<bean id="catalogue1authenticationEntryPoint"
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<property name="loginFormUrl" value="/login.jsp?site=catalogue1" />
+	</bean>
+	
+
+
+
+
+
+	<bean id="site2FilterChain" class="org.springframework.security.web.DefaultSecurityFilterChain">
+		<constructor-arg>
+			<bean class="org.springframework.security.web.util.AntPathRequestMatcher">
+				<constructor-arg value="/site2/**"/>
+			</bean>
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="site2filter"/>
+		</constructor-arg>
+	</bean>
+	<bean id="site2filter" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<ref bean="securityContextPersistenceFilter" />
+				<ref bean="site2logoutFilter" />
+				<ref bean="preAuthenticationFilter" />
+				<ref bean="basicAuthenticationFilter" />
+				<ref bean="site2formLoginFilter" />
+				<ref bean="requestCacheFilter" />
+				<ref bean="anonymousFilter" />
+				<ref bean="sessionMgmtFilter" />
+				<ref bean="site2exceptionTranslationFilter" />
+				<ref bean="overridefilterSecurityInterceptor" />
+				<ref bean="filterSecurityInterceptor" />
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="site2formLoginFilter"
+		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+		<property name="postOnly" value="true" />
+		<property name="usernameParameter" value="username" />
+		<property name="passwordParameter" value="password" />
+		<property name="authenticationManager" ref="site2authenticationManager" />
+		<property name="filterProcessesUrl" value="/site2/j_spring_security_check" />
+		<property name="authenticationFailureHandler">
+			<bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+				<constructor-arg value="/login.jsp?failure=true&amp;site=site2"></constructor-arg>
+			</bean>
+		</property>
+		<property name="authenticationSuccessHandler">
+			<bean class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+				<property name="defaultTargetUrl" value="/" />
+				<property name="targetUrlParameter" value="redirectUrl" />
+			</bean>
+		</property>
+		<property name="sessionAuthenticationStrategy">
+			<bean class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy" />
+		</property>	
+	</bean>
+	<bean id="site2authenticationManager"
+		class="org.springframework.security.authentication.ProviderManager">
+		<property name="providers">
+			<list>
+				<!-- Check if the preAuthenticationFilter has already authenticated user -->
+				<ref bean="preFilterAuthenticationProvider" />
+				<ref bean="site2geonetworkAuthenticationProvider" />
+			</list>
+		</property>
+	</bean>	
+	<bean class="org.fao.geonet.kernel.security.GeonetworkAuthenticationProvider" id="site2geonetworkAuthenticationProvider">
+    	<property name="site" value="site2"></property>
+    </bean>
+	
+	<bean id="site2logoutFilter"
+		class="org.springframework.security.web.authentication.logout.LogoutFilter">
+		<constructor-arg ref="logoutSuccessHandler" />
+		<constructor-arg>
+			<list>
+				<bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler" />
+				<bean class="org.springframework.security.web.authentication.logout.CookieClearingLogoutHandler">
+				  <constructor-arg>
+				  	<array>
+				  		<value>JSESSIONID</value>
+				  	</array>
+				  </constructor-arg>
+				</bean>
+			</list>
+		</constructor-arg>
+		<property name="filterProcessesUrl" value="/site2/j_spring_security_logout"/>
+	</bean>
+	
+	<bean id="site2exceptionTranslationFilter"
+		class="org.springframework.security.web.access.ExceptionTranslationFilter">
+		<property name="authenticationEntryPoint" ref="site2authenticationEntryPoint" />
+		<property name="accessDeniedHandler" ref="accessDeniedHandler" />
+	</bean>
+	<bean id="site2authenticationEntryPoint"
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<property name="loginFormUrl" value="/login.jsp?site=site2" />
+	</bean>
+
+
+
+
+	
+	
+	
 	
 	<bean id="coreFilterChain" class="org.springframework.security.web.DefaultSecurityFilterChain">
 		<constructor-arg>
@@ -192,7 +389,9 @@
         <constructor-arg value="${passwordSalt}"/>
     </bean>
 
-    <bean class="org.fao.geonet.kernel.security.GeonetworkAuthenticationProvider" id="geonetworkAuthenticationProvider"/>
+	<bean class="org.fao.geonet.kernel.security.GeonetworkAuthenticationProvider" id="geonetworkAuthenticationProvider"/>
+    
+    
     
     <!-- Check if the preAuthenticationFilter has already authenticated user -->
     <bean class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider" id="preFilterAuthenticationProvider">

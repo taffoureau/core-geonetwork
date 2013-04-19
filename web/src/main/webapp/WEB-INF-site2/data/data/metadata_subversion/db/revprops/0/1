@@ -1,0 +1,13 @@
+K 8
+svn:date
+V 27
+2013-03-20T09:04:46.449000Z
+K 7
+svn:log
+V 67
+Setting geonet:dburl to jdbc:postgresql://localhost:5432/geonetwork
+K 10
+svn:author
+V 10
+geonetwork
+END

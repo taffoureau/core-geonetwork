@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:foaf="http://xmlns.com/foaf/0.1/"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+<rdf:Description rdf:about="http://geonetwork-opensource.org/inspire-theme">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+	<dc:title>INSPIRE Service taxonomy</dc:title>
+	<dc:description>INSPIRE service taxonomy for GeoNetwork opensource.
+	Codelist is used for now and should be stored in gmd:keywords elements.
+	Another option could be to add "Translation (codelistValue)" in gmd:keywords.
+	INSPIRE schematron rules could then use contains instead of equal operator.
+	TODO : Add other EU Languages.</dc:description>
+	<dc:creator rdf:nodeID="node17mj3es5bx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node17mj3es5bx1">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name></foaf:name>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://geonetwork-opensource.org/inspire-theme">
+	<dcterms:modified>2010-04-22 07:57:15</dcterms:modified>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:humanInteractionService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">humanInteractionService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">humanInteractionService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:humanCatalogueViewer">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">humanCatalogueViewer</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">humanCatalogueViewer</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:humanGeographicViewer">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">humanGeographicViewer</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">humanGeographicViewer</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:humanGeographicSpreadsheetViewer">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">humanGeographicSpreadsheetViewer</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">humanGeographicSpreadsheetViewer</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:humanServiceEditor">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">humanServiceEditor</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">humanServiceEditor</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:humanChainDefinitionEditor">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">humanChainDefinitionEditor</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">humanChainDefinitionEditor</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:humanWorkflowEnactmentManager">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">humanWorkflowEnactmentManager</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">humanWorkflowEnactmentManager</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:humanGeographicFeatureEditor">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">humanGeographicFeatureEditor</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">humanGeographicFeatureEditor</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:humanGeographicSymbolEditor">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">humanGeographicSymbolEditor</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">humanGeographicSymbolEditor</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:humanFeatureGeneralizationEditor">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">humanFeatureGeneralizationEditor</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">humanFeatureGeneralizationEditor</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:humanGeographicDataStructureViewer">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">humanGeographicDataStructureViewer</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">humanGeographicDataStructureViewer</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:infoManagementService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">infoManagementService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">infoManagementService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:infoFeatureAccessService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">infoFeatureAccessService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">infoFeatureAccessService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:infoMapAccessService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">infoMapAccessService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">infoMapAccessService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:infoCoverageAccessService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">infoCoverageAccessService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">infoCoverageAccessService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:infoSensorDescriptionService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">infoSensorDescriptionService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">infoSensorDescriptionService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:infoProductAccessService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">infoProductAccessService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">infoProductAccessService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:infoFeatureTypeService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">infoFeatureTypeService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">infoFeatureTypeService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:infoCatalogueService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">infoCatalogueService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">infoCatalogueService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:infoRegistryService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">infoRegistryService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">infoRegistryService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:infoGazetteerService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">infoGazetteerService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">infoGazetteerService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:infoOrderHandlingService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">infoOrderHandlingService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">infoOrderHandlingService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:infoStandingOrderService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">infoStandingOrderService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">infoStandingOrderService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:taskManagementService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">taskManagementService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">taskManagementService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:chainDefinitionService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">chainDefinitionService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">chainDefinitionService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:workflowEnactmentService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">workflowEnactmentService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">workflowEnactmentService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:subscriptionService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">subscriptionService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">subscriptionService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialProcessingService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialProcessingService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialProcessingService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialCoordinateConversionService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialCoordinateConversionService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialCoordinateConversionService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialCoordinateTransformationService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialCoordinateTransformationService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialCoordinateTransformationService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialCoverageVectorConversionService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialCoverageVectorConversionService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialCoverageVectorConversionService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialImageCoordinateConversionService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialImageCoordinateConversionService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialImageCoordinateConversionService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialRectificationService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialRectificationService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialRectificationService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialOrthorectificationService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialOrthorectificationService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialOrthorectificationService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialSensorGeometryModelAdjustmentService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialSensorGeometryModelAdjustmentService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialSensorGeometryModelAdjustmentService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialImageGeometryModelConversionService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialImageGeometryModelConversionService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialImageGeometryModelConversionService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialSubsettingService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialSubsettingService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialSubsettingService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialSamplingService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialSamplingService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialSamplingService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialTilingChangeService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialTilingChangeService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialTilingChangeService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialDimensionMeasurementService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialDimensionMeasurementService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialDimensionMeasurementService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialFeatureManipulationService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialFeatureManipulationService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialFeatureManipulationService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialFeatureMatchingService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialFeatureMatchingService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialFeatureMatchingService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialFeatureGeneralizationService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialFeatureGeneralizationService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialFeatureGeneralizationService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialRouteDeterminationService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialRouteDeterminationService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialRouteDeterminationService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialPositioningService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialPositioningService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialPositioningService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:spatialProximityAnalysisService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">spatialProximityAnalysisService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">spatialProximityAnalysisService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:thematicProcessingService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">thematicProcessingService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">thematicProcessingService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:thematicGoparameterCalculationService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">thematicGoparameterCalculationService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">thematicGoparameterCalculationService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:thematicClassificationService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">thematicClassificationService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">thematicClassificationService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:thematicFeatureGeneralizationService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">thematicFeatureGeneralizationService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">thematicFeatureGeneralizationService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:thematicSubsettingService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">thematicSubsettingService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">thematicSubsettingService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:thematicSpatialCountingService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">thematicSpatialCountingService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">thematicSpatialCountingService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:thematicChangeDetectionService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">thematicChangeDetectionService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">thematicChangeDetectionService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:thematicGeographicInformationExtractionService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">thematicGeographicInformationExtractionService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">thematicGeographicInformationExtractionService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:thematicImageProcessingService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">thematicImageProcessingService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">thematicImageProcessingService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:thematicReducedResolutionGenerationService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">thematicReducedResolutionGenerationService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">thematicReducedResolutionGenerationService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:thematicImageManipulationService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">thematicImageManipulationService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">thematicImageManipulationService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:thematicImageUnderstandingService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">thematicImageUnderstandingService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">thematicImageUnderstandingService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:thematicImageSynthesisService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">thematicImageSynthesisService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">thematicImageSynthesisService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:thematicMultibandImageManipulationService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">thematicMultibandImageManipulationService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">thematicMultibandImageManipulationService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:thematicObjectDetectionService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">thematicObjectDetectionService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">thematicObjectDetectionService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:thematicGeoparsingService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">thematicGeoparsingService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">thematicGeoparsingService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:thematicGeocodingService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">thematicGeocodingService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">thematicGeocodingService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:temporalProcessingService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">temporalProcessingService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">temporalProcessingService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:temporalReferenceSystemTransformationService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">temporalReferenceSystemTransformationService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">temporalReferenceSystemTransformationService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:temporalSubsettingService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">temporalSubsettingService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">temporalSubsettingService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:temporalSamplingService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">temporalSamplingService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">temporalSamplingService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:temporalProximityAnalysisService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">temporalProximityAnalysisService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">temporalProximityAnalysisService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:metadataProcessingService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">metadataProcessingService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">metadataProcessingService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:metadataStatisticalCalculationService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">metadataStatisticalCalculationService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">metadataStatisticalCalculationService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:metadataGeographicAnnotationService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">metadataGeographicAnnotationService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">metadataGeographicAnnotationService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:comService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">comService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">comService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:comEncodingService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">comEncodingService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">comEncodingService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:comTransferService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">comTransferService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">comTransferService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:comGeographicCompressionService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">comGeographicCompressionService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">comGeographicCompressionService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:comGeographicFormatConversionService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">comGeographicFormatConversionService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">comGeographicFormatConversionService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:comMessagingService">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">comMessagingService</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">comMessagingService</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:inspire:service:taxonomy:comRemoteFileAndExecutableManagement">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<skos:prefLabel xml:lang="fr">comRemoteFileAndExecutableManagement</skos:prefLabel>
+	<skos:prefLabel xml:lang="en">comRemoteFileAndExecutableManagement</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://geonetwork-opensource.org/INSPIRE Service taxonomy">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+	<dc:title>INSPIRE Service taxonomy</dc:title>
+</rdf:Description>
+
+</rdf:RDF>
