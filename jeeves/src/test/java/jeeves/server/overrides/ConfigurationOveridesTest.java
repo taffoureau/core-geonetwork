@@ -87,7 +87,7 @@ public class ConfigurationOveridesTest {
     	try {
     	    // note first , is intentional to verify that it will be ignored
     	    System.setProperty("geonetwork."+ConfigurationOverrides.OVERRIDES_KEY, ",/WEB-INF/overrides-config.xml,/WEB-INF/overrides-config-overlay.xml");
-			List<String> lines = ConfigurationOverrides.loadTextFileAndUpdate("test-sql.sql", null, appPath, reader);
+			List<String> lines = ConfigurationOverrides.loadTextFileAndUpdate("test-sql.sql", null, appPath, reader, null);
 			
 			assertEquals("CREATE TABLE NewRelations", lines.get(0).trim());
 			assertEquals("(", lines.get(1).trim());
