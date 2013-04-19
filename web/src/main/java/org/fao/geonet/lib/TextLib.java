@@ -51,7 +51,7 @@ public class TextLib
 
 	public List<String> load(ServletContext servletContext, String appPath, String file, String site) throws FileNotFoundException, IOException
 	{
-		return load(servletContext, appPath, file, "ISO-8859-1");
+		return load(servletContext, appPath, file, "ISO-8859-1", site);
 	}
 
 	public List<String> load(ServletContext servletContext, String appPath, String file, String encoding, String site) throws FileNotFoundException, IOException
