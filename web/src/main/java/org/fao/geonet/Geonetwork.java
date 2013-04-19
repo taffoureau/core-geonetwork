@@ -546,7 +546,7 @@ public class Geonetwork implements ApplicationHandler {
 		
 		// MULTISITE WEB-INF-site
         String webinf = (null == site) ? "WEB-INF" : "WEB-INF-" + site;
-        JeevesJCS.setConfigFilename(path + "\\WEB-INF\\classes\\cache.ccf");
+        JeevesJCS.setConfigFilename(path + "WEB-INF" + FS + "classes" + FS + "cache.ccf");
 		//JeevesJCS.setConfigFilename(path + "\\" + webinf + "\\classes\\cache.ccf");
 
 		// force caches to be config'd so shutdown hook works correctly
@@ -556,7 +556,7 @@ public class Geonetwork implements ApplicationHandler {
 		// --- Check current database and create database if an emty one is found
 		
 		
-		String dbConfigurationFilePath = path + webinf + "\\config-db.xml";
+		String dbConfigurationFilePath = path + webinf + FS + "config-db.xml";
 		dbConfiguration = Xml.loadFile(dbConfigurationFilePath);
         ConfigurationOverrides.updateWithOverrides(dbConfigurationFilePath, servletContext, path, dbConfiguration, site);
 
