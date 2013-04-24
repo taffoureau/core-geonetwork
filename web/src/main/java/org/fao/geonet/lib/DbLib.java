@@ -162,11 +162,20 @@ public class DbLib {
 		runSQL(dbms, schema);
 	}
 
+	
 	public void insertData(ServletContext servletContext, Dbms dbms, String appPath, String filePath, String filePrefix) throws Exception {
         if(Log.isDebugEnabled(Geonet.DB))
             Log.debug(Geonet.DB, "Filling database tables");
 
 		List<String> data = loadSqlDataFile(servletContext, dbms, appPath, filePath, filePrefix);
+		runSQL(dbms, data);
+	}
+	
+	public void insertData(ServletContext servletContext, Dbms dbms, String appPath, String filePath, String filePrefix, String site) throws Exception {
+        if(Log.isDebugEnabled(Geonet.DB))
+            Log.debug(Geonet.DB, "Filling database tables");
+
+		List<String> data = loadSqlDataFile(servletContext, dbms, appPath, filePath, filePrefix, site);
 		runSQL(dbms, data);
 	}
 
@@ -298,6 +307,7 @@ public class DbLib {
 		return "";
 	}
 	
+	
 	private List<String> loadSqlDataFile(ServletContext servletContext, Dbms dbms, String appPath, String filePath, String filePrefix)
 			throws FileNotFoundException, IOException {
 		// --- find out which dbms data file to load
@@ -305,6 +315,15 @@ public class DbLib {
 		
 		// --- load the sql data
 		return Lib.text.load(servletContext, appPath, file, "UTF-8");
+	}
+	
+	private List<String> loadSqlDataFile(ServletContext servletContext, Dbms dbms, String appPath, String filePath, String filePrefix, String site)
+			throws FileNotFoundException, IOException {
+		// --- find out which dbms data file to load
+		String file = checkFilePath(filePath, filePrefix, DatabaseType.lookup(dbms).toString());
+		
+		// --- load the sql data
+		return Lib.text.load(servletContext, appPath, file, "UTF-8", site);
 	}
 
 	private String getObjectName(String createStatem) {

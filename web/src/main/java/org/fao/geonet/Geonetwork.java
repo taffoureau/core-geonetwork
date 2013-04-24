@@ -1068,7 +1068,7 @@ public class Geonetwork implements ApplicationHandler {
                 String filePath = path + file.getAttributeValue("path");
                 String filePrefix = file.getAttributeValue("filePrefix");
                 logger.info("         - SQL data file:" + filePath + " prefix:" + filePrefix + " ...");
-                Lib.db.insertData(servletContext, dbms, path, filePath, filePrefix);
+                Lib.db.insertData(servletContext, dbms, path, filePath, filePrefix, context.getSite());
 	        }
 	        dbms.commit();
             
