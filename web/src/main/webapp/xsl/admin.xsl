@@ -113,7 +113,23 @@
 								<!-- When client application is the widget redirect to that app 
 								FIXME : hl parameter is only available for GUI widget experimental client.
 								-->
-								<xsl:if test="/root/gui/config/client/@widget='true'"><xsl:value-of select="concat(/root/gui/config/client/@url, '?hl=', /root/gui/language, /root/gui/config/client/@createParameter)"/></xsl:if>
+		
+		<xsl:if test="/root/gui/config/client/@widget='true'">
+			<!-- MULTISITE -->
+			<xsl:choose>
+			<xsl:when test="/root/gui/site">
+					<xsl:value-of select="concat(/root/gui/config/client/@url, '?hl=', /root/gui/language, '&#38;site=', /root/gui/site ,/root/gui/config/client/@createParameter)"/>
+			</xsl:when>
+			<xsl:otherwise>
+					<xsl:value-of select="concat(/root/gui/config/client/@url, '?hl=', /root/gui/language, /root/gui/config/client/@createParameter)"/>
+			</xsl:otherwise>
+			<!--  -->
+		</xsl:choose>
+					
+		</xsl:if>
+			
+			
+			
 							</xsl:with-param>
 							<xsl:with-param name="title" select="/root/gui/strings/newMetadata"/>
 							<xsl:with-param name="desc" select="/root/gui/strings/newMdDes"/>
