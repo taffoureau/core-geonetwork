@@ -1,5 +1,5 @@
 //=============================================================================
-//===	Copyright (C) 2001-2010 Food and Agriculture Organization of the
+//===	Copyright (C) 2001-2013 Food and Agriculture Organization of the
 //===	United Nations (FAO-UN), United Nations World Food Programme (WFP)
 //===	and United Nations Environment Programme (UNEP)
 //===
@@ -28,51 +28,34 @@ import jeeves.resources.dbms.Dbms;
 import jeeves.server.ServiceConfig;
 import jeeves.server.context.ServiceContext;
 import jeeves.utils.Util;
-import org.fao.geonet.GeonetContext;
+
 import org.fao.geonet.constants.Geonet;
-import org.fao.geonet.kernel.csw.domain.CswCapabilitiesInfo;
-import org.fao.geonet.kernel.setting.SettingManager;
-import org.fao.geonet.lib.Lib;
 import org.jdom.Element;
 
-import java.util.Map;
-
-
+/**
+ * Add a virtual CSW service configuration
+ */
 public class Add implements Service {
 
-	
-	public void init(String appPath, ServiceConfig params) throws Exception {}
+    public void init(String appPath, ServiceConfig params) throws Exception {
+    }
 
-	
-	public Element exec(Element params, ServiceContext context) throws Exception {
-	    GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
-        Dbms dbms = (Dbms) context.getResourceManager().open (Geonet.Res.MAIN_DB);
+    public Element exec(Element params, ServiceContext context)
+            throws Exception {
+        Dbms dbms = (Dbms) context.getResourceManager()
+                .open(Geonet.Res.MAIN_DB);
 
-        // 
         String serviceName = Util.getParam(params, "service");
         String className = Util.getParam(params, "class");
         String serviceDescription = Util.getParam(params, "servicedescription");
-       
+
         int serviceId = context.getSerialFactory().getSerial(dbms, "Services");
-        
-        
+
         String query = "INSERT INTO Services(id, name, class, description) VALUES (?, ?, ?, ?)";
-        
-        dbms.execute(query, serviceId, serviceName, className, serviceDescription);
-        
-		
-        //String paramName = Util.getParam(params, "paramName");
-        //String paramValue = Util.getParam(params, "paramValue"); 
-        //int paramId = context.getSerialFactory().getSerial(dbms, "ServiceParameters");
-        
-        //String query = "INSERT INTO ServiceParameters(id, name, value) VALUES (?, ?, ?)";
-		//dbms.execute(query, 1, serviceName, className);
-        //dbms.execute(query, paramId, paramName, paramValue);
-        
-        		
-        // Build response
+
+        dbms.execute(query, serviceId, serviceName, className,
+                serviceDescription);
+
         return new Element(Jeeves.Elem.RESPONSE).setText("ok");
-	}
-
-
+    }
 }

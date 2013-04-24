@@ -145,8 +145,12 @@ public class Thesaurus {
 		// TODO: add parameter to set namespace
 		this.defaultNamespace = DEFAULT_THESAURUS_NAMESPACE;
 		
-        retrieveThesaurusTitle(thesaurusFile, dname + "." + fname, ignoreMissingError);
-	}
+        if (tname != null) {
+            this.title = tname;
+        } else {
+            retrieveThesaurusTitle(thesaurusFile, dname + "." + fname, ignoreMissingError);
+        }
+    }
 
     
     /**
@@ -705,21 +709,12 @@ public class Thesaurus {
             theNSs.add(Namespace.getNamespace("dcterms", "http://purl.org/dc/terms/"));
 
             this.defaultNamespace = null;
-            Element title = Xml.selectElement(thesaurusEl, "skos:ConceptScheme/dc:title", theNSs);
+            Element title = Xml.selectElement(thesaurusEl, "skos:ConceptScheme/dc:title|rdf:Description/dc:title", theNSs);
             if (title != null) {
                 this.title = title.getValue();
                 this.defaultNamespace = title.getParentElement().getAttributeValue("about", rdfNamespace);
-
             } else {
-            	title = Xml.selectElement(thesaurusEl, "rdf:Description/dc:title", theNSs);
-                if (title != null) {
-                    this.title = title.getValue();
-                    this.defaultNamespace = title.getParentElement().getAttributeValue("about", rdfNamespace);
-                    
-                } else {
-                	this.title = defaultTitle;
-                
-                }
+                this.title = defaultTitle;
             }
             
             try {
@@ -745,7 +740,10 @@ public class Thesaurus {
                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 this.date = df.format(thesaususDate);
             }
-
+            
+            if (Log.isDebugEnabled(Geonet.THESAURUS_MAN)) {
+                Log.debug(Geonet.THESAURUS_MAN, "Thesaurus information: " + this.title + " (" + this.date + ")");
+            }
         } catch (Exception ex) {
             if(!ignoreMissingError)
                 Log.error(Geonet.THESAURUS_MAN, "Error getting thesaurus info: " + ex.getMessage());

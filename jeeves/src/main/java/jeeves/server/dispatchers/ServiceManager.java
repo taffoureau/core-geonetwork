@@ -188,11 +188,16 @@ public class ServiceManager
 
 		ArrayList<ServiceInfo> al = htServices.get(name);
 
-		if (al == null) {
-			al = new ArrayList<ServiceInfo>();
-			htServices.put(name, al);
-		}
-
+        if (al == null) {
+            al = new ArrayList<ServiceInfo>();
+            htServices.put(name, al);
+        } else {
+            info("Service " + name + " already exist, re-register it.");
+            htServices.remove(name);
+            al = new ArrayList<ServiceInfo>();
+            htServices.put(name, al);
+        }
+        
 		al.add(si);
 
 		//--- parse classes elements

@@ -171,11 +171,15 @@ public class GetRecords extends AbstractOperation implements CatalogService {
         //
         // no ElementNames requested: use ElementSetName
         //
+        GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
+        if (gc.isIndexing()) {
+            throw new RuntimeException("Catalog is indexing content, retry later.");
+        }
+        
         if((elemNames == null)) {
             setName = getElementSetName(query , ElementSetName.SUMMARY);
             // elementsetname is FULL: use customized elementset if defined
             if(setName.equals(ElementSetName.FULL)) {
-                GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
                 List<Element> customElementSets;
                 Dbms dbms = null;
                 try {
@@ -205,7 +209,7 @@ public class GetRecords extends AbstractOperation implements CatalogService {
                 }
             }
         }
-
+        
         Element constr = query.getChild("Constraint", Csw.NAMESPACE_CSW);
         Element filterExpr = getFilterExpression(constr);
         String filterVersion = getFilterVersion(constr);

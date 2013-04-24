@@ -193,6 +193,7 @@
     -->
     <Field name="subject" analyzer="org.apache.lucene.analysis.core.KeywordAnalyzer"/>
     <Field name="_cat" analyzer="org.apache.lucene.analysis.core.KeywordAnalyzer"/>
+    <Field name="_source" analyzer="org.apache.lucene.analysis.core.KeywordAnalyzer"/>
     
 
     <Field name="keyword" analyzer="org.apache.lucene.analysis.core.KeywordAnalyzer"/>

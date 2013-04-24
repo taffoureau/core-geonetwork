@@ -25,63 +25,37 @@
 					<td class="padded"><input class="content" type="text" name="keyword" value="{/root/gui/services/filter/keyword}"/></td>
 				</tr>
 				<tr>
-					<th class="padded"><xsl:value-of select="/root/gui/strings/virtualcswDenominatorFrom"/></th>
-					<td class="padded"><input class="content" type="text" name="denominatorFrom" value="{/root/gui/services/filter/denominatorFrom}"/></td>
+					<th class="padded"><xsl:value-of select="/root/gui/strings/virtualcswDenominator"/></th>
+					<td class="padded"><input class="content" type="text" name="denominator" value="{/root/gui/services/filter/denominator}"/></td>
 				</tr>
-				<tr>
-					<th class="padded"><xsl:value-of select="/root/gui/strings/virtualcswDenominatorTo"/></th>
-					<td class="padded"><input class="content" type="text" name="denominatorTo" value="{/root/gui/services/filter/denominatorTo}"/></td>
-				</tr>
-
 				<tr>
 					<th class="padded"><xsl:value-of select="/root/gui/strings/virtualcswCatalog"/></th>
 					<td class="padded">
-					<select class="content" name="catalog">
+					<select class="content" name="_source">
 							<option value=""/>
 							<xsl:for-each select="/root/gui/sources/record">
-								<option value="{name}">
-									<xsl:variable name="aSource" select="name"/>
-									<xsl:if test="/root/gui/services/filter/catalog[.=$aSource]">
+								<option value="{siteid}">
+									<xsl:variable name="aSource" select="siteid"/>
+									<xsl:if test="/root/gui/services/filter/_source[.=$aSource]">
 										<xsl:attribute name="selected"/>
 									</xsl:if>
 									<xsl:value-of select="name"/>
 								</option>
 							</xsl:for-each>
 					</select>
-					</td>					
-				</tr>
-				
-				<!-- 
-				<tr>
-					<th class="padded"><xsl:value-of select="/root/gui/strings/virtualcswType"/></th>
-					<td class="padded">
-					<select class="content" name="type">
-							<option value=""/>
-							<xsl:for-each select="/root/gui/types/record">
-								<xsl:sort select="name"/>
-								<option value="{id}">
-									<xsl:variable name="aResourceType" select="id"/>
-									<xsl:if test="/root/gui/services/filter/type[.=$aResourceType]">
-										<xsl:attribute name="selected"/>
-									</xsl:if>
-									<xsl:value-of select="label/child::*[name() = $lang]"/>
-								</option>
-							</xsl:for-each>
-					</select>
 					</td>
 				</tr>
-				 -->
 				
 				<tr>
 					<th class="padded"><xsl:value-of select="/root/gui/strings/virtualcswGroup"/></th>
 					<td class="padded">
-					<select class="content" name="group">
+					<select class="content" name="_groupPublished">
 							<option value=""/>
 							<xsl:for-each select="/root/gui/groups/record">
 								<xsl:sort select="name"/>
 								<option value="{name}">
 									<xsl:variable name="aGroup" select="name"/>
-									<xsl:if test="/root/gui/services/filter/group[.=$aGroup]">
+									<xsl:if test="/root/gui/services/filter/_groupPublished[.=$aGroup]">
 										<xsl:attribute name="selected"/>
 									</xsl:if>
 									<xsl:value-of select="label/child::*[name() = $lang]"/>
@@ -91,40 +65,18 @@
 					</td>
 				</tr>
 				
-				<!-- 
 				<tr>
 					<th class="padded">
 						<xsl:value-of select="/root/gui/strings/virtualcswCategory"/>
 					</th>
 					<td class="padded">
-					<select class="content" name="category">
-							<option value=""/>
-							<xsl:for-each select="/root/gui/categories/record">
-								<xsl:sort select="name"/>
-								<option value="{id}">
-									<xsl:variable name="aCategory" select="id"/>
-									<xsl:if test="/root/gui/services/filter/category[.=$aCategory]">
-										<xsl:attribute name="selected"/>
-									</xsl:if>
-									<xsl:value-of select="label/child::*[name() = $lang]"/>
-								</option>
-							</xsl:for-each>
-					</select>
-					</td>
-				</tr>
-				-->
-				<tr>
-					<th class="padded">
-						<xsl:value-of select="/root/gui/strings/virtualcswCategory"/>
-					</th>
-					<td class="padded">
-					<select class="content" name="category">
+					<select class="content" name="_cat">
 							<option value=""/>
 							<xsl:for-each select="/root/gui/categories/record">
 								<xsl:sort select="name"/>
 								<option value="{name}">
 									<xsl:variable name="aCategory" select="name"/>
-									<xsl:if test="/root/gui/services/filter/category[.=$aCategory]">
+									<xsl:if test="/root/gui/services/filter/_cat[.=$aCategory]">
 										<xsl:attribute name="selected"/>
 									</xsl:if>
 									<xsl:value-of select="label/child::*[name() = $lang]"/>
@@ -133,8 +85,6 @@
 					</select>
 					</td>
 				</tr>
-
-
 
 	</xsl:template>
 	

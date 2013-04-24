@@ -93,7 +93,7 @@
 			<table class="text-aligned-left">
 				<tr>
 					<th class="padded"><xsl:value-of select="/root/gui/strings/virtualcswServiceName"/> (*)</th>
-					<td class="padded"><input class="content" type="text" name="servicename" value="{/root/response/record/servicename}"/></td>
+					<td class="padded"><input class="content" type="text" name="servicename" value="csw-"/></td>
 				</tr>
 				<tr>
 					<th class="padded"><xsl:value-of select="/root/gui/strings/virtualcswServiceDescription"/></th>
