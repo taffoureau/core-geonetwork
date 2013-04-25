@@ -35,7 +35,8 @@ Ext.ux.Lightbox = (function(){
         initMarkup: function() {
             els.shim = Ext.DomHelper.append(document.body, {
                 tag: 'iframe',
-                id: 'ux-lightbox-shim'
+                id: 'ux-lightbox-shim',
+                title: 'Lightbox'
             }, true);
             els.overlay = Ext.DomHelper.append(document.body, {
                 id: 'ux-lightbox-overlay'
@@ -69,7 +70,7 @@ Ext.ux.Lightbox = (function(){
                 '<div id="ux-lightbox">',
                     '<div id="ux-lightbox-outerImageContainer">',
                         '<div id="ux-lightbox-imageContainer">',
-                            '<img id="ux-lightbox-image">',
+                            '<img id="ux-lightbox-image" alt="Image overview" src="">',
                             '<div id="ux-lightbox-hoverNav">',
                                 '<a href="#" id="ux-lightbox-navPrev"></a>',
                                 '<a href="#" id="ux-lightbox-navNext"></a>',

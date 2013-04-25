@@ -74,6 +74,13 @@
         <from>^(.*)/it/(.*)$</from>
         <to type="permanent-redirect" last="true">%{context-path}$1/ita/$2</to>
     </rule>
+    <rule>
+        <note>
+            Retrieves robots.txt filemap pointing to sitemaps for better indexing.
+        </note>
+        <from>^/robots.txt$</from>
+        <to type="forward" last="true">/srv/eng/robots.txt</to>
+    </rule>
 
     <!-- Rules for RESTful urls for metadata retrieve -->
     <rule>
@@ -131,14 +138,6 @@
         </note>
         <from>^/metadata/(.*)/(.*)$</from>
         <to type="permanent-redirect">%{context-path}/srv/$1/home?uuid=$2</to>
-    </rule>
-    
-    <rule>
-        <note>
-            Retrieves robots.txt filemap pointing to sitemaps for better indexing.
-        </note>
-        <from>^/robots.txt$</from>
-        <to type="forward">/srv/eng/robots.txt</to>
     </rule>
         
     <rule>
