@@ -8,7 +8,7 @@
   <file name=".*/WEB-INF/config.xml">
     <!-- make iso19139 the preferred schema -->
     <replaceAtt xpath="appHandler/param[@name='preferredSchema']" attName="value"
-      value="iso19139.fra"/>
+      value="iso19139"/>
     <replaceAtt xpath="appHandler/param[@name='useSubversion']" attName="value" value="false"/>
     <replaceText xpath="general/maxUploadSize">100</replaceText>
     <replaceXML xpath="resources">
