@@ -448,7 +448,7 @@ public final class Xml
                 }
                 
                 Log.debug(Log.XML_RESOLVER, "  from uri");
-                URL url = new URL(path);
+                URL url = new URL(path.replaceAll(" ", "%20"));
                 File f = new File(url.toURI());
                 if (!(f.exists())) {
                     if(Log.isDebugEnabled(Log.XML_RESOLVER)) {
