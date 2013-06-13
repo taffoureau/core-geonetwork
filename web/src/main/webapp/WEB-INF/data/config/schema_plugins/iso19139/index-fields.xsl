@@ -9,7 +9,7 @@
                                         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
 
 	<xsl:include href="convert/functions.xsl"/>
-	<xsl:include href="../../../xsl/utils-fn.xsl"/>
+	<xsl:include href="../utils-fn.xsl"/>
 	
 	<!-- This file defines what parts of the metadata are indexed by Lucene
 	     Searches can be conducted on indexes defined here. 
