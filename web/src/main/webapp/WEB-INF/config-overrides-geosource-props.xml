@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<overrides>
+    <properties>
+        <cat.name>Catalogue GéoSource</cat.name>
+        <cat.org>Mon organisation</cat.org>
+        <cat.version>2.9.2</cat.version>
+        <!--
+        Connexion par défaut / base H2 :
+        -->
+        <db.user>admin</db.user>
+        <db.pass>gnos</db.pass>
+        <db.driver>org.h2.Driver</db.driver>
+        <db.url>jdbc:h2:geonetwork</db.url>
+
+        <!--
+        Exemple de configuration pour Postgresql :
+        
+        <db.user>www-data</db.user>
+        <db.pass>www-data</db.pass>
+        <db.driver>org.postgresql.Driver</db.driver>
+        <db.url>jdbc:postgresql://localhost:5432/geosource29</db.url>
+        -->
+
+        <widget.url>../../apps/search</widget.url>
+        <widget.parameters>hl=fre&amp;extent=-550000,5000000,1200000,7000000</widget.parameters>
+    </properties>
+</overrides>

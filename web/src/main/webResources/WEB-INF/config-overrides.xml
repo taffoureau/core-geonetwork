@@ -1,5 +1,3 @@
 <overrides>
-	<override>${system.specific.overrides}</override>
-	<override>${web.xml.main.config.overrides}</override>
-	<override>${web.xml.widget.config.overrides}</override>
+	<override>/WEB-INF/config-overrides-geosource.xml</override>
 </overrides>
