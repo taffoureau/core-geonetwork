@@ -232,36 +232,39 @@ public class Geonetwork implements ApplicationHandler {
 		// null means not initialized
 		ApplicationContext app_context = null;
 
+        logger.info("     - Z39.50 is enabled: " + z3950Enable);
 		// build Z3950 repositories file first from template
-		URL url = getClass().getClassLoader().getResource(Geonet.File.JZKITCONFIG_TEMPLATE);
-
-		if (Repositories.build(url, context)) {
-			logger.info("     Repositories file built from template.");
-
-			try {
-				app_context = new  ClassPathXmlApplicationContext( Geonet.File.JZKITAPPLICATIONCONTEXT );
-
-				// to have access to the GN context in spring-managed objects
-				ContextContainer cc = (ContextContainer)app_context.getBean("ContextGateway");
-				cc.setSrvctx(context);
-
-				if (!z3950Enable)
-					logger.info("     Server is Disabled.");
-				else
-				{
-					logger.info("     Server is Enabled.");
-		
-					Server.init(z3950port, app_context);
-				}	
-			} catch (Exception e) {
-				logger.error("     Repositories file init FAILED - Z3950 server disabled and Z3950 client services (remote search, harvesting) may not work. Error is:" + e.getMessage());
-				e.printStackTrace();
-			}
-			
-		} else {
-			logger.error("     Repositories file builder FAILED - Z3950 server disabled and Z3950 client services (remote search, harvesting) may not work.");
+		if (z3950Enable) {
+    		URL url = getClass().getClassLoader().getResource(Geonet.File.JZKITCONFIG_TEMPLATE);
+    
+    		if (Repositories.build(url, context)) {
+    			logger.info("     Repositories file built from template.");
+    
+    			try {
+    				app_context = new  ClassPathXmlApplicationContext( Geonet.File.JZKITAPPLICATIONCONTEXT );
+    
+    				// to have access to the GN context in spring-managed objects
+    				ContextContainer cc = (ContextContainer)app_context.getBean("ContextGateway");
+    				cc.setSrvctx(context);
+    
+    				if (!z3950Enable)
+    					logger.info("     Server is Disabled.");
+    				else
+    				{
+    					logger.info("     Server is Enabled.");
+    		
+    					Server.init(z3950port, app_context);
+    				}	
+    			} catch (Exception e) {
+    				logger.error("     Repositories file init FAILED - Z3950 server disabled and Z3950 client services (remote search, harvesting) may not work. Error is:" + e.getMessage());
+    				e.printStackTrace();
+    			}
+    			
+    		} else {
+    			logger.error("     Repositories file builder FAILED - Z3950 server disabled and Z3950 client services (remote search, harvesting) may not work.");
+    		}
 		}
-
+		
 		//------------------------------------------------------------------------
 		//--- initialize SchemaManager
 

@@ -94,7 +94,11 @@
       >$1true$2</update>
     <update linePattern="(INSERT INTO Settings VALUES \(722,720,'enableSearchPanel',').+?('.*)"
       >$1true$2</update>
-
+    
+    <!-- Z39.50 -->
+    <update linePattern="(INSERT INTO Settings VALUES \(41,40,'enable',').+?('.*)"
+      >$1false$2</update>
+    
     <!-- Xlink resolver -->
     <update linePattern="(INSERT INTO Settings VALUES \(231,230,'enable',').+?('.*)"
       >$1true$2</update>
