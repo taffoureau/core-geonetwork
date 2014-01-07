@@ -32,24 +32,35 @@ Proj4js.defs["EPSG:2154"] = "+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 
 GeoNetwork.map.printCapabilities = "../../pdf";
 
 // Config for WGS84 based maps
-GeoNetwork.map.PROJECTION = "EPSG:4326";
-GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-180, -90, 180, 90);
+//GeoNetwork.map.PROJECTION = "EPSG:4326";
+////GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-180,-90,180,90);
 //GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-5.1,41,9.7,51);
 
-GeoNetwork.map.BACKGROUND_LAYERS = [
-    new OpenLayers.Layer.WMS("Background layer", "/geoserver/wms", {layers: 'gn:world,gn:ne_50m_boundary_da,gn:ne_50m_boundary_lines_land,gn:ne_50m_coastline', format: 'image/jpeg'}, {isBaseLayer: true})
-    //new OpenLayers.Layer.WMS("Background layer", "http://www2.demis.nl/mapserver/wms.asp?", {layers: 'Countries', format: 'image/jpeg'}, {isBaseLayer: true})
-];
 
-//// Config for OSM based maps
-//GeoNetwork.map.PROJECTION = "EPSG:900913";
-////GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-550000, 5000000, 1200000, 7000000);
-//GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34);
+// France Extent in Lambert Zone II 
+// GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-22841,1712212,1087335,2703971);
+// Guadeloupe Extent 
+// GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-61.923110556507261,15.638450453434646,-60.89882855155793,16.733329887987498);
+// Guyane Extent 
+// GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-55.021871380568264,2.010650405791685,-51.290955696038872,6.000970747951597);
+// Martinique Extent 
+// GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-61.292310412948595,14.34656891402657,-60.749391841477684,14.926907507956782);
+// Reunion Extent 
+// GeoNetwork.map.EXTENT = new OpenLayers.Bounds(55.191558854627800,-21.483429620283132,55.873778462321622,-20.753776363928615);
+
+//
 //GeoNetwork.map.BACKGROUND_LAYERS = [
-//    new OpenLayers.Layer.OSM()
-//    //new OpenLayers.Layer.Google("Google Streets");
-//];
+//    new OpenLayers.Layer.WMS("Background layer", "/geoserver/wms", {layers: 'gn:world,gn:gboundaries', format: 'image/jpeg'}, {isBaseLayer: true})
+//    ];
 
+// Config for OSM based maps
+GeoNetwork.map.PROJECTION = "EPSG:900913";
+//GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-20037508, -32487565, 20037508, 25479824);
+GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-550000, 5000000, 1200000, 7000000);
+GeoNetwork.map.BACKGROUND_LAYERS = [
+    new OpenLayers.Layer.OSM()
+    //new OpenLayers.Layer.Google("Google Streets");
+    ];
 //GeoNetwork.map.RESOLUTIONS = [];
 
 // Define background map layer from an OGC Context. 
@@ -58,7 +69,7 @@ GeoNetwork.map.BACKGROUND_LAYERS = [
 //GeoNetwork.map.OWS = "../../maps/demis.xml";
 //* Default GeoServer layers
 //GeoNetwork.map.OWS = "../../maps/geoserver_localhost.xml";
-GeoNetwork.map.CONTEXT = "../../maps/geoserver_localhost.wmc";
+//GeoNetwork.map.CONTEXT = "../../maps/geoserver_localhost.wmc";
 
 GeoNetwork.map.CONTEXT_MAP_OPTIONS = {
  controls: [],

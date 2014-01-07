@@ -20,19 +20,18 @@ OpenLayers.ProxyHost = function(url){
 };
 
 
-GeoNetwork.Util.defaultLocale = 'eng';
+
+GeoNetwork.Util.defaultLocale = 'fre';
 // Restrict locales to a subset of languages
-//GeoNetwork.Util.locales = [
-//        ['en', 'English', 'eng'], 
-//        ['fr', 'Français', 'fre']
-//    ];
+GeoNetwork.Util.locales = [['fr', 'Français', 'fre']];
+
 GeoNetwork.searchDefault = {
     activeMapControlExtent: false
 };
 GeoNetwork.advancedFormButton = true;
 
 GeoNetwork.Settings.editor = {
-    defaultViewMode : 'simple',
+    defaultViewMode : 'inspire',
     // Define which edit mode to use by default
     // according to metadata schema
     editMode: {
@@ -46,7 +45,7 @@ GeoNetwork.Settings.editor = {
 GeoNetwork.printDefaultForTabs = false;
 
 // Define if label needs to be displayed for login form next to username/password fields
-GeoNetwork.hideLoginLabels = true;
+GeoNetwork.hideLoginLabels = false;
 
 // Define custom user menu for quick search links
 //GeoNetwork.Settings.userQuickLinks = {
@@ -100,7 +99,7 @@ GeoNetwork.Settings.results = {
         //loadRelationForAll: true
         loadRelationForAll: undefined
 };
-GeoNetwork.MapModule = true;
+GeoNetwork.MapModule = false;
 GeoNetwork.ProjectionList = [['EPSG:4326', 'WGS84 (lat/lon)']];
 GeoNetwork.WMSList = [['Geoserver', 'http://localhost/geoserver/wms?']];
 
