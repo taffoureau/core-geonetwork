@@ -1,10 +1,18 @@
 package org.fao.geonet.services.metadata;
 
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+
 import jeeves.resources.dbms.Dbms;
 import jeeves.server.UserSession;
 import jeeves.server.context.ServiceContext;
 import jeeves.utils.Log;
 import jeeves.utils.Xml;
+import jeeves.xlink.Processor;
+
 import org.fao.geonet.constants.Edit;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.kernel.DataManager;
@@ -18,12 +26,6 @@ import org.jdom.Namespace;
 import org.jdom.Text;
 import org.jdom.filter.ElementFilter;
 import org.jdom.filter.Filter;
-
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
 
 /**
  * // --------------------------------------------------------------------------
@@ -582,6 +584,11 @@ public class AjaxEditUtils extends EditUtils {
 		//--- get metadata from session and clone it for validation
 		Element realMd = getMetadataFromSession(session, id);
 		Element md = (Element)realMd.clone();
+		
+		boolean doXLinks = xmlSerializer.resolveXLinks();
+		if (doXLinks) {
+		    Processor.detachXLink(md);
+		}
 
 		//--- remove editing info
         EditLib editLib = dataManager.getEditLib();
