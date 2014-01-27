@@ -37,7 +37,7 @@
 					</div>
 				</xsl:if>
 			
-				<div id="content_container" style="display:none">
+				<div id="content_container" style="display:none;clear: both;">
 					<xsl:if test="/root/request/modal">
 						<xsl:attribute name="style">display: block"</xsl:attribute>
 					</xsl:if>
