@@ -7,8 +7,9 @@ svn_revision=8717
 git_url=https\://github.com/geonetwork/core-geonetwork
 buildDate=${maven.build.timestamp}
 #subVersion=SNAPSHOT
-#version=2.10.2-SNAPSHOT
-# GéoSource 2.9.2 based on GeoNetwork 2.10.x branch
+#version=2.10.3-SNAPSHOT
+# GéoSource 2.9.2 based on GeoNetwork 2.10.x branch and equal to 2.10.3 release
+# Commit f1b8069c847b42d1aad931f6cf519d6288d7489d
 subVersion=0
 version=2.9.2
 ant.build.javac.target=1.5
