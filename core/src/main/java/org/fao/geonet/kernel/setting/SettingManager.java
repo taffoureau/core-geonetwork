@@ -24,6 +24,7 @@
 package org.fao.geonet.kernel.setting;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,10 +36,10 @@ import javax.persistence.PersistenceContext;
 
 import jeeves.constants.Jeeves;
 import jeeves.server.context.ServiceContext;
+
 import org.fao.geonet.repository.LanguageRepository;
 import org.fao.geonet.repository.SortUtils;
 import org.fao.geonet.utils.Log;
-
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.HarvesterSetting;
 import org.fao.geonet.domain.Setting;
@@ -70,7 +71,8 @@ public class SettingManager {
     /**
      * Get all settings as xml.
      *
-     * @param asTree get the settings as a tree
+     * @param asTree get the settings as a tree. If true only settings
+     * from the system family will be returned.
      *
      * @return all settings as xml.
      */
@@ -82,7 +84,9 @@ public class SettingManager {
 
         for (Setting setting : settings) {
             if (asTree) {
-                buildXmlTree(env, pathElements, setting);
+                if (setting.getName().startsWith("system")) {
+                    buildXmlTree(env, pathElements, setting);
+                }
             } else {
                 Element settingEl = new Element("setting");
                 settingEl.setAttribute("name", setting.getName());

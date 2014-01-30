@@ -88,7 +88,7 @@
 	  </service>
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="metadata.edit">
+		<service name="metadata.edit" deprecated="true">
 			<class name=".services.metadata.GetEditableData"/>
 
 			<output sheet="metadata-edit.xsl">
@@ -108,7 +108,7 @@
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="metadata.elem.add">
+		<service name="metadata.elem.add" deprecated="true">
 			<class name=".services.metadata.AddElement"/>
 
 			<output sheet="metadata-edit-embedded.xsl">
@@ -128,7 +128,7 @@
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="metadata.elem.delete">
+		<service name="metadata.elem.delete" deprecated="true">
 			<class name=".services.metadata.DeleteElement"/>
 
 			<output sheet="metadata-edit-embedded.xsl">
@@ -149,7 +149,7 @@
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<!-- saves edits -->
 
-		<service name="metadata.update">
+		<service name="metadata.update" deprecated="true">
 			<class name=".services.metadata.Update"/>
 
 			<output forward="metadata.edit" />
@@ -160,7 +160,7 @@
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<!-- saves edits and returns to viewer -->
 
-		<service name="metadata.update.finish">
+		<service name="metadata.update.finish" deprecated="true">
 			<class name=".services.metadata.Update">
 				<param name="finished" value="yes" />
 			</class>
@@ -171,7 +171,7 @@
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<!-- reset - forget edits and return to last saved version -->
 
-		<service name="metadata.update.forget">
+		<service name="metadata.update.forget" deprecated="true">
 			<class name=".services.metadata.Update">
 				<param name="forget" value="yes" />
 			</class>
@@ -184,7 +184,7 @@
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<!-- cancel - forget edits and returns to viewer -->
 
-		<service name="metadata.update.forgetandfinish">
+		<service name="metadata.update.forgetandfinish" deprecated="true">
 			<class name=".services.metadata.Update">
 				<param name="forget" value="yes" />
 				<param name="finished" value="yes" />
@@ -196,7 +196,7 @@
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<!-- validates metadata in session -->
 
-		<service name="metadata.validate">
+		<service name="metadata.validate" deprecated="true">
 			<class name=".services.metadata.Validate"/>
 
 			<output sheet="metadata-validate.xsl">
@@ -209,7 +209,7 @@
 			</error>
 		</service>
 
-		<service name="xml.metadata.validate">
+		<service name="xml.metadata.validate" deprecated="true">
 			<class name=".services.metadata.Validate"/>
 		  <output sheet="metadata/validate.xsl" contentType="text/xml; charset=UTF-8">
 		    <xml name="validation" file="xml/metadata-validate.xml" />
@@ -220,7 +220,7 @@
 			<class name=".guiservices.metadata.GetRelated"/>
 		</service>
 		
-	  <service name="xml.relation">
+	  <service name="xml.relation" deprecated="true">
 	    <class name=".guiservices.metadata.GetRelated"/>
 	    <output sheet="metadata/relation.xsl" contentType="text/xml; charset=UTF-8"/>
 	  </service>
@@ -228,7 +228,7 @@
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="metadata.elem.down">
+		<service name="metadata.elem.down" deprecated="true">
 			<class name=".services.metadata.MoveElement">
 				<param name="dir" value="down" />
 			</class>
@@ -237,7 +237,7 @@
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="metadata.elem.up">
+		<service name="metadata.elem.up" deprecated="true">
 			<class name=".services.metadata.MoveElement">
 				<param name="dir" value="up" />
 			</class>
@@ -246,7 +246,7 @@
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="metadata.attr.delete">
+		<service name="metadata.attr.delete" deprecated="true">
 			<class name=".services.metadata.DeleteAttribute"/>
 		</service>
 

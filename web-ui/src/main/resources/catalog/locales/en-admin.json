@@ -12,6 +12,12 @@
     "classificationSystems": "Classification systems",
     "standards": "Standards",
     "tools": "Tools",
+    "moreExamples": "More examples",
+    "cron-0 0 12 * * ?": "Fire at 12pm (noon) every day",
+    "cron-0 15 10 * * ?": "Fire at 10:15am every day",
+    "cron-0 0/5 14 * * ?": "Fire every 5 minutes starting at 2pm and ending at 2:55pm, every day",
+    "cron-0 15 10 ? * MON-FRI": "Fire at 10:15am every Monday, Tuesday, Wednesday, Thursday and Friday",
+    "cron-0 15 10 15 * ?": "Fire at 10:15am on the 15th day of every month",
     
     "totalNumberOfRecords": "records in the catalog",
     "totalNumberOfRecordsHelp": "Total number of records visible to you.",
@@ -86,9 +92,6 @@
     
     "nostatus": "No status",
     
-    "METADATA": "Metadata",
-    "TEMPLATE": "Template",
-    "SUB_TEMPLATE": "Directory entry",
     
     "dublin-core": "Dublin Core",
     "dublin-core-acr": "DC",
@@ -102,13 +105,15 @@
     "iso19139": "Geographic information - Metadata (ISO/TS 19139:2007)",
     "iso19139-acr": "ISO19139",
     "iso19139-help": "",
-    "iso19115": "Geographic information - Metadata (ISO 19115:2003)",
+    "iso19115": "Geographic information - Metadata (ISO 19115-DIS:2003)",
     "iso19115-acr": "ISO19115",
-    "iso19115-help": "Use for backward compatibilty with old metadata catalog (before 2007).",
+    "iso19115-help": "Draft International Standard of ISO19115. Used for backward compatibilty with old metadata catalog (before 2007).",
     "iso19110": "Geographic information - Methodology for feature cataloguing (ISO 19110:2005)",
     "iso19110-acr": "ISO19110",
     "iso19110-help": "",
-    
+    "iso19135": "Geographic information - Procedures for item registration (ISO 19135:2005)",
+    "iso19135-acr": "ISO19135",
+    "iso19135-help": "",
     
     "data.codeListDir": "Thesaurus folder: ",
     "data.configDir": "Configuration folder: ",
@@ -581,9 +586,7 @@
     "thesaurusClass": "Thesaurus type",
     "thesaurusExternalHelp": "External thesaurus are in read only mode.",
     "thesaurusPlaceHelp": "Thesaurus of type place contains bounding box of each concept. They could be use to automatically compute record extent from keywords.",
-    "keywords": "Keywords",
     "maxNumberOfKeywords": "Number of keywords returned",
-    "keywordFilter": "Filter keyword",
     "keywordLabel": "Label",
     "keywordDefinition": "Definition",
     "keywordIdentifier": "Identifier",
@@ -675,6 +678,8 @@
     "processReportErrors": "Records with error",
     "processReportNoProcessFound": "Records with process not defined in its standard",
     "processReportNotOwner": "Not editable records",
+    "processRecommendedOnHostChange": "Update metadata records",
+    "processRecommendedOnHostChange-help": "After changing the catalog host name, it's recommended to update all links which may be defined in the catalog records (eg. thumbnails, uploaded documents, XLinks). Click here to replace {{old}} by {{by}}",
     
     "availableStandards": "Standards available",
     "addOrUpdateStandards": "Add or update standards",
