@@ -21,9 +21,8 @@ INSERT INTO CategoriesDes (iddes, langid, label) VALUES (12,'fre','Annuaires');
 INSERT INTO CategoriesDes (iddes, langid, label) VALUES (13,'fre','Echantillons physiques');
 
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (-1,'fre','Invité');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (0,'fre','Intranet');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (1,'fre','Tous');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (2,'fre','Groupe exemple');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (1,'fre','Public');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (2,'fre','Privé');
 
 INSERT INTO IsoLanguagesDes  (iddes, langid, label) VALUES (1,'fre','Afar');
 INSERT INTO IsoLanguagesDes  (iddes, langid, label) VALUES (2,'fre','Abkhaze');
