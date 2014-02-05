@@ -17,7 +17,7 @@
 			during the initialization of resources or
 			the appHandler org.fao.geonet.Geonetwork
 		-->
-		<startupErrorService>main.error</startupErrorService>
+		<startupErrorService>error</startupErrorService>
 		<language>eng</language>
 		<localized>true</localized>
 		<contentType>text/html; charset=UTF-8</contentType>
@@ -342,7 +342,7 @@
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
         <!-- classic GUI -->
-		<service name="feedback">
+		<service name="feedback" deprecated="true">
 			<output sheet="feedback.xsl" />
 		</service>
 
@@ -398,7 +398,7 @@
 		<!-- Feedback services                                             -->
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="feedback.insert">
+		<service name="feedback.insert" deprecated="true">
 			<class name=".services.feedback.Insert" />
 
 			<output sheet="info.xsl">
@@ -1062,21 +1062,15 @@
 		</service>
 
 
-		<service name="crs.search">
-			<class name=".services.crs.Search" />
-		</service>
-		<service name="crs.types">
+		<service name="crs.types" deprecated="true">
 			<class name=".services.crs.GetCRSTypes" />
 		</service>
-		<service name="crs.get">
+		<service name="crs.get" deprecated="true">
 			<class name=".services.crs.GetCRS" />
 			<output sheet="crs.xsl" contentType="text/xml; charset=UTF-8" />
 		</service>
-
-		<service name="system.properties.set">
-			<class name=".services.config.SetSystemProperties" />
-		</service>
-
+		
+		
 		<service name="isolanguages" deprecated="true">
 			<class name="org.fao.geonet.guiservices.isolanguages.Get" />
 		</service>
@@ -1166,21 +1160,12 @@
 	    <output forward="virtualcsw.config"/>
 	  </service>
 
-
-		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-		<!-- Versioning log                                                -->
-		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-		<service name="versioning.logdata">
-			<class name=".guiservices.versioning.Get"/>
-		</service>
 	</services>
 
 	<!-- ====================================================================== -->
 
 	<include>config-metadata.xml</include>
 	<include>config-metadata-experimental.xml</include>
-	<include>config-subtemplate.xml</include>
 	<include>config-thesaurus.xml</include>
 	<include>config-harvesting.xml</include>
 	<include>config-portal.xml</include>
@@ -1217,6 +1202,7 @@
   <include>config/config-service-admin-user-and-group.xml</include>
   <include>config/config-service-admin-geoserver-publication.xml</include>
   <include>config/config-service-admin-transfert-privileges.xml</include>
+  <include>config/config-service-admin-formatter.xml</include>
   
   <include>config/config-service-statistics.xml</include>
   
@@ -1225,7 +1211,11 @@
   <include>config/config-service-csw-virtual.xml</include>
   
   <include>config/config-service-sitemap.xml</include>
-  
+
+  <include>config/config-service-crs.xml</include>
+
+  <include>config/config-service-subtemplate.xml</include>
+
   <include>config/config-ui-search.xml</include>
   <include>config/config-ui-metadata.xml</include>
   <include>config/config-ui-admin.xml</include>

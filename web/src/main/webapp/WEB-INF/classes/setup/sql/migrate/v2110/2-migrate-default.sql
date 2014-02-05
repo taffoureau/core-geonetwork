@@ -18,6 +18,7 @@ ALTER TABLE Settings ALTER name TYPE varchar(512);
 -- 0 is char, 1 is number, 2 is boolean
 ALTER TABLE Settings ADD datatype int;
 ALTER TABLE Settings ADD position int;
+ALTER TABLE Settings ADD internal varchar(1);
 
 UPDATE Settings SET position = id * 10;
 
@@ -156,8 +157,6 @@ INSERT INTO Settings (name, value, datatype, position) VALUES ('system/harvestin
 INSERT INTO Settings (name, value, datatype, position) VALUES ('system/harvesting/mail/level3', 'false', 2, 9028);
 INSERT INTO Settings (name, value, datatype, position) VALUES ('system/requestedLanguage/ignorechars', '', 0, 9590);
 INSERT INTO Settings (name, value, datatype, position) VALUES ('system/csw/transactionUpdateCreateXPath', 'true', 2, 1320);
-INSERT INTO Settings (name, value, datatype, position) VALUES ('system/requestedLanguage/preferUiLanguage', 'true', 2, 9595);
-
 
 ALTER TABLE StatusValues ADD displayorder int;
 
