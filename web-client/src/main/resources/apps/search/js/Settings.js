@@ -20,12 +20,12 @@ OpenLayers.ProxyHost = function(url){
 };
 
 
-GeoNetwork.Util.defaultLocale = 'eng';
+GeoNetwork.Util.defaultLocale = 'fre';
 // Restrict locales to a subset of languages
-//GeoNetwork.Util.locales = [
-//        ['en', 'English', 'eng'], 
-//        ['fr', 'Français', 'fre']
-//    ];
+GeoNetwork.Util.locales = [
+        ['en', 'English', 'eng'], 
+        ['fr', 'Français', 'fre']
+    ];
 GeoNetwork.searchDefault = {
     activeMapControlExtent: false
 };
@@ -55,7 +55,7 @@ GeoNetwork.Settings.privileges = {
 GeoNetwork.printDefaultForTabs = false;
 
 // Define if label needs to be displayed for login form next to username/password fields
-GeoNetwork.hideLoginLabels = true;
+GeoNetwork.hideLoginLabels = false;
 
 // Define custom user menu for quick search links
 //GeoNetwork.Settings.userQuickLinks = {
