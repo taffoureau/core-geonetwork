@@ -51,7 +51,7 @@
 		description="This stops the GeoNetwork server"
 		programGroup="yes"
 		desktop="no"
-		target="$INSTALL_PATH/bin/stop-geonetwork.sh"
+		target="$INSTALL_PATH/bin/stop.sh"
 		initialState="noShow"
 		workingDirectory="$INSTALL_PATH/bin"
 		type="Application"

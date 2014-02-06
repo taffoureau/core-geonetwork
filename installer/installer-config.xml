@@ -5,16 +5,17 @@
 	<!-- =================================================================================== -->
 	
 	<info>
-		<appname>geonetwork</appname>
+		<appname>geosource</appname>
 		<appversion>@version@ @subVersion@</appversion>
 		<authors>
+			<author name="BRGM" email="geonetwork-users-fr@lists.sourceforge.net"/>
 			<author name="OSGeo"               email="geonetwork@osgeo.org"/>					
 			<author name="FAO GeoNetwork Team" email="GeoNetwork@fao.org"/>
 			<author name="VAM WFP"             email="vamsie@wfp.org"/>
 			<author name="UNEP.net"            email="info@unep.net"/>			 
 			<author name="OCHA"                email="ochageodata@un.org"/>				 
 		</authors>
-		<url>http://geonetwork-opensource.org/</url>
+		<url>http://www.geosource.fr/</url>
 		<javaversion>@javaVersion@</javaversion>
 	</info>
 	
@@ -88,7 +89,7 @@
 		<panel classname="HTMLLicencePanel" id="htmlLicensePanel"/>
 		<panel classname="TargetPanel" id="targetPanel"/>
 		<panel classname="PacksPanel" id="packsPanel"/>
-		<panel classname="UserInputPanel" id="userInputPanel"/>
+		<!--<panel classname="UserInputPanel" id="userInputPanel"/>-->
 		<panel classname="InstallPanel" id="installPanel"/>
 		<panel classname="ShortcutPanel" id="shortcutPanel"/>
 		<panel classname="HTMLInfoPanel" id="htmlInfoPanel"/>
@@ -115,18 +116,18 @@
 			<!--singlefile target="$INSTALL_PATH/web/geonetwork.war" 
 			src="../web/target/geonetwork.war" override="true"/-->
 			
-			<fileset dir="../web/target/geonetwork"  targetdir="$INSTALL_PATH/web/geonetwork" />
+			<fileset dir="../web/target/geonetwork"  targetdir="$INSTALL_PATH/web/geosource" />
 
-			<fileset dir="../release/data"   targetdir="$INSTALL_PATH/web/geonetwork/data" />
-			<fileset dir="../release/schemaPlugins"   targetdir="$INSTALL_PATH/web/geonetwork/WEB-INF/data/config/schema_plugins" />
+			<fileset dir="../release/data"   targetdir="$INSTALL_PATH/web/geosource/data" />
+			<fileset dir="../release/schemaPlugins"   targetdir="$INSTALL_PATH/web/geosource/WEB-INF/data/config/schema_plugins" />
 			
-            <fileset dir="../web-client/target/classes/apps" targetdir="$INSTALL_PATH/web/geonetwork/apps" />
+			<fileset dir="../web-client/target/classes/apps" targetdir="$INSTALL_PATH/web/geosource/apps" />
 			
 			<!-- Update the config-gui.xml to reflect the selected GUI -->
-			<parsable targetfile="$INSTALL_PATH/web/geonetwork/WEB-INF/config-gui.xml" />
+			<parsable targetfile="$INSTALL_PATH/web/geosource/WEB-INF/config-gui.xml" />
 				
-			<executable targetfile="$INSTALL_PATH/bin/start-geonetwork.sh" />
-			<executable targetfile="$INSTALL_PATH/bin/stop-geonetwork.sh" />
+			<executable targetfile="$INSTALL_PATH/bin/start.sh" />
+			<executable targetfile="$INSTALL_PATH/bin/stop.sh" />
 		</pack>
 
 
@@ -141,16 +142,16 @@
       -->
     </pack>
 
-
+<!--
     <pack id="inspire" name="European Union INSPIRE Directive configuration pack" required="no" preselected="no">
         <description/>
 
-        <!-- Enable schematron rules -->
+        <!-\- Enable schematron rules -\->
         <singlefile src="../web/target/geonetwork/WEB-INF/data/config/schema_plugins/iso19139/schematron/schematron-rules-inspire.sch.disabled"
                     target="$INSTALL_PATH/web/geonetwork/WEB-INF/data/config/schema_plugins/iso19139/schematron/schematron-rules-inspire.sch"
                     override="true"/>
 
-        <!-- Inspire thesaurus files -->
+        <!-\- Inspire thesaurus files -\->
         <singlefile src="../web/target/thesauri/gemet.rdf"
                     target="$INSTALL_PATH/web/geonetwork/WEB-INF/data/config/codelist/external/thesauri/theme/gemet.rdf"
                     override="true"/>
@@ -163,11 +164,11 @@
                     target="$INSTALL_PATH/web/geonetwork/WEB-INF/data/config/codelist/external/thesauri/theme/inspire-theme.rdf"
                     override="true"/>
 
-        <!-- SQL script with Inspire Settings enabled -->
+        <!-\- SQL script with Inspire Settings enabled -\->
         <singlefile src="../web/target/inspire/data-db-default.sql"
                     target="$INSTALL_PATH//web/geonetwork/WEB-INF/classes/setup/sql/data/data-db-default.sql"
                     override="true"/>
-    </pack>
+    </pack>-->
 
 	</packs>
 

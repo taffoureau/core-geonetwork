@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
 <shortcuts>
-
+	
 	<!-- =================================================================================== -->
-  <skipIfNotSupported/>
-  <programGroup defaultName="GeoNetwork opensource" location="applications"/>
-
-  <!-- =================================================================================== -->
+	<skipIfNotSupported/>
+	<programGroup defaultName="GeoSource" location="applications"/>
+	
+	<!-- =================================================================================== -->
 	<!-- GN open homepage -->
-  
-  <shortcut 
+	
+	<shortcut 
 		os="windows"
-		name="Open GeoNetwork opensource" 
-		description="This opens the GeoNetwork homepage in a web browser"
+		name="Ouvrir le catalogue" 
+		description="Ouverture du catalogue dans votre navigateur"
 		target="$INSTALL_PATH\bin\win\start-stdln.html"
 		commandLine="" 
 		workingDirectory="$INSTALL_PATH" 
@@ -22,19 +22,19 @@
 		programGroup="yes"
 		startup="no">
 		<createForPack name="Core"/>
-  </shortcut>
-
-  <!-- =================================================================================== -->
+	</shortcut>
+	
+	<!-- =================================================================================== -->
 	<!-- GN start -->
-   
+	
 	<shortcut
 		os="windows"
-		name="Start server"
-		description="This starts the GeoNetwork server"
+		name="Lancer le serveur"
+		description="Lancement du catalogue (et du serveur Jetty)"
 		programGroup="yes"
 		desktop="no"
 		startup="no"
-		target="$INSTALL_PATH/bin/start-geonetwork.bat"
+		target="$INSTALL_PATH/bin/start.bat"
 		initialState="noShow"
 		workingDirectory="$INSTALL_PATH/bin"
 		type="Application"
@@ -42,15 +42,15 @@
 		iconIndex="0" 
 		encoding="UTF-8">
 		<createForPack name="Core"/>
-   </shortcut>
-   
+	</shortcut>
+	
 	<!-- =================================================================================== -->
 	<!-- GN stop -->
-   
+	
 	<shortcut
 		os="windows"
-		name="Stop server"
-		description="This stops the GeoNetwork server"
+		name="Arrêter le catalogue"
+		description="Arrêt du catalogue (et du serveur Jetty)"
 		programGroup="yes"
 		desktop="no"
 		target="$INSTALL_PATH/bin/stop-geonetwork.bat"
@@ -61,8 +61,7 @@
 		iconIndex="0"
 		encoding="UTF-8">
 		<createForPack name="Core"/>
-   </shortcut>
-	
+	</shortcut>
 	
 	<!-- =================================================================================== -->
 	<!-- Documentation -->
@@ -70,8 +69,8 @@
 	<shortcut
 		os="windows"
 		name="Documentation" 
-		description="GeoNetwork opensource documentation"
-		target="$INSTALL_PATH\web\geonetwork\docs\eng\users"
+		description="GeoSource documentation"
+		target="http://www.geosource.fr/docs/"
 		commandLine="" 
 		workingDirectory="$INSTALL_PATH" 
 		iconFile="$INSTALL_PATH/bin/ico/docs.ico" 
@@ -79,30 +78,12 @@
 		initialState="normal" 
 		programGroup="yes"
 		startup="no">
-   </shortcut>
-
-  <!-- =================================================================================== -->
-  <!-- GN readme -->
-  
-  <shortcut 
-		os="windows"
-		name="Release notes " 
-		description="GeoNetwork desktop release notes "
-		target="$INSTALL_PATH\web\geonetwork\docs\readme.html"
-		commandLine="" 
-		workingDirectory="$INSTALL_PATH" 
-		iconFile="$INSTALL_PATH/bin/ico/text.ico" 
-		iconIndex="0" 
-		initialState="normal" 
-		programGroup="yes"
-		startup="no">
-		<createForPack name="Core"/>
-  </shortcut>
-  
+	</shortcut>
+	
 	<!-- =================================================================================== -->
 	<!-- License -->
 	
-  <shortcut 
+	<shortcut 
 		os="windows"
 		name="GPL License" 
 		description="GeoNetwork opensource GNU-GPL license "
@@ -114,12 +95,12 @@
 		initialState="normal" 
 		programGroup="yes"
 		startup="no">
-  </shortcut>
-
+	</shortcut>
+	
 	<!-- =================================================================================== -->
 	<!-- Uninstall -->
-      
-   <shortcut
+	
+	<shortcut
 		os="windows"
 		name="Uninstaller"
 		programGroup="yes"
@@ -131,8 +112,7 @@
 		iconIndex="0" 
 		type="Application"
 		encoding="UTF-8">
-   </shortcut>
-   
-	<!-- =================================================================================== -->
-   
+	</shortcut>
+	
+	
 </shortcuts>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <langpack>
-    <str id="core" txt="GeoNetwork opensource"/>
-    <str id="core.description" txt="L'application GeoNetwork. Ce module correspond au catalogue de données géospatiales."/>
+    <str id="core" txt="GéoSource"/>
+    <str id="core.description" txt="Ce module correspond au catalogue de données géospatiales."/>
     <str id="idSampleM" txt="Métadonnées exemples"/>
     <str id="idSampleM.description" txt="Import de métadonnées pour les tests."/>
     <str id="geoserver" txt="Serveur cartographique GeoServer"/>
