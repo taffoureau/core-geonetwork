@@ -335,10 +335,11 @@ public class GeonetworkDataDirectory {
 			try {
                 final File srcFile = new File(path,  "WEB-INF" + File.separator + Geonet.File.SCHEMA_PLUGINS_CATALOG);
                 BinaryFile.copy(srcFile, schemaCatFile);
-
-                BinaryFile.copyDirectory(new File(path, GEONETWORK_DEFAULT_DATA_DIR + "config" + File.separator + "schema_plugins"),
+                if (!schemaPluginsDir.exists()) {
+                    BinaryFile.copyDirectory(new File(path, GEONETWORK_DEFAULT_DATA_DIR + "config" + File.separator + "schema_plugins"),
                         schemaPluginsDir);
-			} catch (IOException e) {
+                }
+            } catch (IOException e) {
 				Log.info(
                         Geonet.DATA_DIRECTORY,
                         "      - Error copying schema plugin catalogue: "
