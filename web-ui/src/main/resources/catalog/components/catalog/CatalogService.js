@@ -21,13 +21,16 @@
                 );
             return $http.get(url);
           },
+          /**
+           * isTemplate: boolean or string. 's' for subtemplate.
+           */
           copyMetadata: function(id, groupId, withFullPrivileges, 
               isTemplate, tab, isChild) {
             var url = gnUrlUtils.append('md.create@json',
                 gnUrlUtils.toKeyValue({
                   group: groupId,
                   id: id,
-                  template: isTemplate ? 'y' : 'n',
+                  template: isTemplate ? (isTemplate === 's' ? 's' : 'y') : 'n',
                   child: isChild ? 'y' : 'n',
                   fullPrivileges: withFullPrivileges ? 'true' : 'false'
                 })
