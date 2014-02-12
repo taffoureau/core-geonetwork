@@ -5,11 +5,26 @@
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" >
 
-	<bean id="RegionsDAO" class="org.fao.geonet.services.region.ThesaurusBasedRegionsDAO">
+<!--	<bean id="CountryDAO" class="org.fao.geonet.services.region.ThesaurusBasedRegionsDAO">
 		<constructor-arg ref="languages" />
 		<property name="cacheAllRegionsInMemory" value="true"/>
 		<property name="thesaurusName" value="external.place.regions"/>
-	</bean>
+	</bean>-->
+  <bean id="DepartementsFRDAO" class="org.fao.geonet.services.region.ThesaurusBasedRegionsDAO">
+    <constructor-arg ref="languages" />
+    <property name="cacheAllRegionsInMemory" value="true"/>
+    <property name="thesaurusName" value="external.place.DepartementFR"/>
+  </bean>
+ <!-- <bean id="RegionsDAO" class="org.fao.geonet.services.region.ThesaurusBasedRegionsDAO">
+    <constructor-arg ref="languages" />
+    <property name="cacheAllRegionsInMemory" value="true"/>
+    <property name="thesaurusName" value="external.place.RegionFR"/>
+  </bean>-->
+  <!--<bean id="CommunesDAO" class="org.fao.geonet.services.region.ThesaurusBasedRegionsDAO">
+    <constructor-arg ref="languages" />
+    <prope  rty name="cacheAllRegionsInMemory" value="false"/>
+    <property name="thesaurusName" value="external.place.CommunesFR"/>
+  </bean>-->
 	<bean id="MetadataRegionsDAO" class="org.fao.geonet.services.region.MetadataRegionDAO">
 		<property name="cacheAllRegionsInMemory" value="false"/>
 	</bean>
