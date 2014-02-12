@@ -29,7 +29,7 @@
       $scope.proxyUrl = '../../proxy?url=';
       $scope.logoPath = '../../images/harvesting/';
       $scope.pages = {
-        home: 'home',
+        home: 'find',
         admin: 'admin.console',
         signin: 'catalog.signin'
       };
