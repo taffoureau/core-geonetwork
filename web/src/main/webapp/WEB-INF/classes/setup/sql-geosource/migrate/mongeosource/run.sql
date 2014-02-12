@@ -6,3 +6,6 @@
 \i ../v2110/3-create-tmp-tables-postgres.sql
 \i ../v2110/4-copy-to-tmp-default.sql
 \i ../v2110/5-recreate-old-tables-postgres.sql
+
+\i drop-languages.sql
+\i migrate-harvester.sql

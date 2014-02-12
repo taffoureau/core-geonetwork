@@ -151,3 +151,5 @@ INSERT INTO UserAddress (SELECT id, id FROM Users);
 INSERT INTO Email (SELECT id, email FROM Users);
 
 
+INSERT INTO CategoriesDes (iddes, langid, label) VALUES (11,'fre','Serveurs Z3950');
+INSERT INTO CategoriesDes (iddes, langid, label) VALUES (12,'fre','Annuaires');
