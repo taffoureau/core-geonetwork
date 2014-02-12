@@ -12,7 +12,7 @@
     <xsl:template match="/j2e:web-app" priority="2">
         <xsl:copy>
             <xsl:copy-of select="@*"/>
-            <xsl:message>Add servlet mappinf for <xsl:value-of select="$nodeId"/></xsl:message>
+            <xsl:message>Add servlet mapping for <xsl:value-of select="$nodeId"/></xsl:message>
             <xsl:apply-templates select="*"/>
 
             <j2e:servlet-mapping>

@@ -24,9 +24,14 @@ then
   gnpoolsize=$gnpoolsize_default
 fi
 
-GNLIB=../../../../../target/geonetwork/WEB-INF/lib/
-WEB_FILE=../../../webResources/WEB-INF/web.xml
-WEB_FILE_OUT=../../../webapp/WEB-INF/web.xml
+# When running from the source code
+#GNLIB=../../../../../target/geonetwork/WEB-INF/lib/
+#WEB_FILE=../../../webResources/WEB-INF/web.xml
+#WEB_FILE_OUT=../../../webapp/WEB-INF/web.xml
+# When running from the app
+GNLIB=../lib/
+WEB_FILE=../web.xml
+WEB_FILE_OUT=../web.xml
 
 function showUsage 
 {
@@ -49,16 +54,14 @@ function showUsage
   echo
 }
 
-echo $#
-
-if [ "$1" = "-h" ] 
+if [ "$1" = "-h" ]
 then
         showUsage
         exit
 fi
 
 
-if [ $# -lt 5 ]
+if [ $# -lt 4 ]
 then
   showUsage
   exit
