@@ -21,5 +21,6 @@ SELECT * FROM gn_migrate_harvester(2);
 INSERT INTO HarvesterSettings VALUES  (1, NULL, 'harvesting', NULL);
 UPDATE HarvesterSettings SET parentId = 1 WHERE parentId = 2;
 DELETE FROM HarvesterSettings WHERE id = 2;
+--
 -- SELECT * FROM harvestersettings;
 

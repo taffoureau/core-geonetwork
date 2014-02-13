@@ -8,4 +8,4 @@
 \i ../v2110/5-recreate-old-tables-postgres.sql
 
 \i drop-languages.sql
-\i migrate-harvester.sql
+\i migrate-harvesters.sql
