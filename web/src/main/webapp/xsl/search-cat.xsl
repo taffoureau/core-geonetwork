@@ -31,7 +31,12 @@
 					href="../../apps/js/ext/resources/css/xtheme-gray.css"/>
 				<link rel="stylesheet" type="text/css"
 					href="../../apps/js/OpenLayers/theme/default/style.css"/>
-			    <xsl:choose>
+
+        <!-- GéoSource disable map by default / uncomment to enable it again -->
+        <link rel="stylesheet" type="text/css"
+              href="../../apps/css/hidemap.css"/>
+
+			      <xsl:choose>
 			        <xsl:when test="/root/request/debug">
 			            <link rel="stylesheet" type="text/css" href="../../static/geonetwork-client-ext-ux_css.css?minimize=false"/>
 			            <link rel="stylesheet" type="text/css" href="../../static/geonetwork-client_css.css?minimize=false"/>

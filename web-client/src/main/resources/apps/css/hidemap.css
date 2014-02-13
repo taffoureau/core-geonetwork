@@ -1,7 +1,20 @@
+/* KML links in menu */
 .md-mn-kml {
   display: none;
 }
 
-.addLayer {
+/* Add WMS links in menu */
+.addLayer, .addLayerIcon {
   display: none;
+}
+
+/* Search/visualization switcher */
+#mode-form {
+  display: none;
+}
+
+
+/* Add to map results toolbar action */
+#x-menu-el-addLayerAction {
+    display: none;
 }
