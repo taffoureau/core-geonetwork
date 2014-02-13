@@ -98,6 +98,6 @@ java -classpath $GNLIB/xalan-2.7.1.jar:$GNLIB/serializer-2.7.1.jar org.apache.xa
         -IN ../config-node/srv.xml -XSL generate-spring-config.xsl \
         -OUT ../config-node/$gnnodeid.xml
 
-
+sed -i s/j2ee://g $WEB_FILE
 
 
