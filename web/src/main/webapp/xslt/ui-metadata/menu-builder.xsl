@@ -15,7 +15,8 @@
     
     <div class="gn-scroll-spy" 
       data-gn-scroll-spy="gn-editor-{$metadataId}" 
-      data-all-depth="{if ($isFlatMode) then 'true' else 'false'}"/>
+      data-all-depth="{if ($isFlatMode) then 'true' else 'false'}"
+      data-collapse="true"/>
     
     <ul class="nav nav-pills">
       <!-- Make a drop down choice to swith to one view to another -->
