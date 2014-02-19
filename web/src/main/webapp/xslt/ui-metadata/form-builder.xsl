@@ -118,7 +118,7 @@
             <xsl:value-of select="$label"/>
           </label>
 
-          <div class="col-sm-8 gn-value">
+          <div class="col-sm-9 gn-value">
             <xsl:if test="$isMultilingual">
               <xsl:attribute name="data-gn-multilingual-field" select="$metadataOtherLanguagesAsJson"/>
               <xsl:attribute name="data-main-language" select="$metadataLanguage"/>
@@ -182,7 +182,7 @@
               </xsl:for-each>
             </xsl:if>
           </div>
-          <div class="col-sm-2 gn-control">
+          <div class="col-sm-1 gn-control">
             <xsl:if test="not($isDisabled)">
               <xsl:call-template name="render-form-field-control-remove">
                 <xsl:with-param name="editInfo" select="$editInfo"/>
@@ -315,7 +315,7 @@
         <!-- TODO: set tooltip -->
         <xsl:value-of select="$name"/>
       </label>
-      <div class="col-sm-8">
+      <div class="col-sm-9">
         <xsl:if test="$hasAddAction">
           <xsl:choose>
             <xsl:when test="$addDirective != ''">
@@ -393,10 +393,13 @@
               </xsl:choose>
               
               <xsl:if test="$helper">
+                <xsl:variable name="elementName" select="concat($id, '_', @label)"/>
                 <xsl:call-template name="render-form-field-helper">
-                  <xsl:with-param name="elementRef" select="concat($id, '_', @label)"/>
-                  <!--<xsl:with-param name="relatedElement" select="concat('_', $editInfo/@ref)"/>
-                  <xsl:with-param name="relatedElementRef" select="concat('_', $editInfo/@ref, '_', $listOfValues/@relAtt)"/>-->
+                  <xsl:with-param name="elementRef" select="$elementName"/>
+                  <xsl:with-param name="relatedElement" select="if ($helper/@rel)
+                    then concat($elementName, '_', substring-after($helper/@rel, ':'))
+                    else ''"/>
+                  <!-- TODO related attribute ? -->
                   <xsl:with-param name="dataType" select="'text'"/>
                   <xsl:with-param name="listOfValues" select="$helper"/>
                 </xsl:call-template>
@@ -416,7 +419,7 @@
         </xsl:if>
       </div>
       <xsl:if test="$refToDelete">
-        <div class="col-sm-2 gn-control">
+        <div class="col-sm-1 gn-control">
           <xsl:call-template name="render-form-field-control-remove">
             <xsl:with-param name="editInfo" select="$refToDelete"/>
           </xsl:call-template>
@@ -473,7 +476,7 @@
                   <xsl:value-of select="$label"/>
           </xsl:if>
         </label>
-        <div class="col-sm-8">
+        <div class="col-sm-9">
           
           <xsl:choose>
             <!-- When element have different types, provide
@@ -708,11 +711,18 @@
         Current input could be an element or an attribute (eg. uom). 
         -->
     <xsl:if test="$hasHelper">
-     
       <xsl:call-template name="render-form-field-helper">
         <xsl:with-param name="elementRef" select="concat('_', $editInfo/@ref)"/>
-        <xsl:with-param name="relatedElement" select="concat('_', $editInfo/@ref)"/>
-        <xsl:with-param name="relatedElementRef" select="concat('_', $editInfo/@ref, '_', $listOfValues/@relAtt)"/>
+        <!-- The @rel attribute in the helper may define a related field
+        to update. Check the related element of the current element
+        which should be in the sibbling axis. -->
+        <xsl:with-param name="relatedElement"
+                        select="concat('_',
+                        following-sibling::*[name() = $listOfValues/@rel]/*/gn:element/@ref)"/>
+        <!-- Related attribute name is based on element name
+        _<element_ref>_<attribute_name>. -->
+        <xsl:with-param name="relatedElementRef"
+                        select="concat('_', $editInfo/@ref, '_', $listOfValues/@relAtt)"/>
         <xsl:with-param name="dataType" select="$type"/>
         <xsl:with-param name="listOfValues" select="$listOfValues"/>
       </xsl:call-template>
@@ -738,7 +748,7 @@
       data-gn-editor-helper="{$listOfValues/@editorMode}"
       data-ref="{$elementRef}"
       data-type="{$dataType}"
-      data-related-element="{if ($listOfValues/@relElementRef != '') 
+      data-related-element="{if ($listOfValues/@rel != '')
       then $relatedElement else ''}"
       data-related-attr="{if ($listOfValues/@relAtt) 
       then $relatedElementRef else ''}">
@@ -916,7 +926,7 @@
     <!-- TODO: Could be relevant to only apply process to the current thesaurus -->
     
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-xs-10 col-xs-offset-2">
         <span data-gn-batch-process-button="{$process-name}"
           data-params="{$process-params}"
           data-name="{$strings/*[name() = $process-name]}"
