@@ -12,10 +12,11 @@
     <xsl:param name="config" as="node()"/>
 
     <xsl:variable name="currentView" select="$config/editor/views/view[tab/@id = $tab]"/>
-    
-    <div class="gn-scroll-spy" 
+
+    <div class="gn-scroll-spy"
       data-gn-scroll-spy="gn-editor-{$metadataId}" 
       data-all-depth="{if ($isFlatMode) then 'true' else 'false'}"
+      data-watch=""
       data-collapse="true"/>
     
     <ul class="nav nav-pills">
