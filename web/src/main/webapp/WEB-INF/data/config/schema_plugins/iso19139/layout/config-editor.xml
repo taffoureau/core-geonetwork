@@ -717,10 +717,6 @@
                   xpath="gmd:DQ_ConformanceResult/
                         gmd:specification/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:date/gco:Date"
                   use="date"/>
-                <key label="explanation"
-                  xpath="gmd:DQ_ConformanceResult/
-                        gmd:explanation/gco:CharacterString"
-                  use="textarea"/>
                 <key label="pass"
                   xpath="gmd:DQ_ConformanceResult/
                         gmd:pass/gco:Boolean"/>
@@ -759,7 +755,7 @@
                       </gmd:CI_Citation>
                     </gmd:specification>
                     <gmd:explanation>
-                      <gco:CharacterString>{{explanation}}</gco:CharacterString>
+                      <gco:CharacterString>cf. la spécification citée</gco:CharacterString>
                     </gmd:explanation>
                     <gmd:pass>
                       <gco:Boolean>{{pass}}</gco:Boolean>
