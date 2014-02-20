@@ -5,6 +5,7 @@
 										xmlns:dc ="http://purl.org/dc/elements/1.1/"
 										xmlns:dct="http://purl.org/dc/terms/"
 										xmlns:gmd="http://www.isotc211.org/2005/gmd"
+                    xmlns:fra="http://www.cnig.gouv.fr/2005/fra"
 										xmlns:gco="http://www.isotc211.org/2005/gco"
 										xmlns:ows="http://www.opengis.net/ows"
 										xmlns:geonet="http://www.fao.org/geonetwork">
@@ -35,7 +36,9 @@
 			<xsl:apply-templates select="*"/>
 		</xsl:element>
 	</xsl:template>
-	
+
+  <xsl:template match="fra:*[not(@gco:isoType)]" priority="50"/>
+
 	<xsl:template match="@*|node()[name(.)!='geonet:info']">
 		<xsl:variable name="info" select="geonet:info"/>
 		<xsl:copy>
