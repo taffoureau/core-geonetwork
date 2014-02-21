@@ -194,7 +194,7 @@
           
           <xsl:for-each select="$nodes/*">
             <!-- Retrieve matching key values 
-              Only text values are supported. Separator is #.
+              Only text values are supported. Separator is $$$.
               -->
               
             <!--
