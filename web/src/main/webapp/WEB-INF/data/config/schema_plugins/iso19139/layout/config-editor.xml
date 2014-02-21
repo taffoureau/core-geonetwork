@@ -704,6 +704,7 @@
 
 
           <field name="conformity" templateModeOnly="true"
+                 isMissingLabel="notEvaluated"
             xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result"
             del="../..">
             <template>
@@ -718,6 +719,7 @@
                         gmd:specification/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:date/gco:Date"
                   use="date"/>
                 <key label="pass"
+                  use="checkbox"
                   xpath="gmd:DQ_ConformanceResult/
                         gmd:pass/gco:Boolean"/>
               </values>
