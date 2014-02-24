@@ -15,9 +15,9 @@ LANGUAGE 'plpgsql';
 
 
 TRUNCATE TABLE harvestersettings;
-INSERT INTO HarvesterSettings VALUES  (2, NULL, 'harvesting', NULL);
+INSERT INTO HarvesterSettings (id, parentid, name, value) VALUES  (2, NULL, 'harvesting', NULL);
 SELECT * FROM gn_migrate_harvester(2);
-INSERT INTO HarvesterSettings VALUES  (1, NULL, 'harvesting', NULL);
+INSERT INTO HarvesterSettings (id, parentid, name, value) VALUES  (1, NULL, 'harvesting', NULL);
 UPDATE HarvesterSettings SET parentId = 1 WHERE parentId = 2;
 DELETE FROM HarvesterSettings WHERE id = 2;
 --

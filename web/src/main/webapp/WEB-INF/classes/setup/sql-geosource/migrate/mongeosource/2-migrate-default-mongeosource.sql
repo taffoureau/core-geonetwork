@@ -5,7 +5,8 @@ ALTER TABLE operations DROP COLUMN reserved;
 
 CREATE TABLE SettingsBackup AS SELECT * FROM SETTINGS;
 
-INSERT INTO HarvesterSettings VALUES  (1,NULL,'harvesting',NULL);
+INSERT INTO HarvesterSettings (id, parentid, name, value) VALUES  (1,NULL,'harvesting',NULL);
+
 -- Copy all harvester's root nodes config
 INSERT INTO HarvesterSettings SELECT id, 1, name, value FROM Settings WHERE parentId = 2;
 -- Copy all harvester's properties (Greater than last 2.10.1 settings ie. keepMarkedElement)
