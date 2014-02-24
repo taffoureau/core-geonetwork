@@ -1,4 +1,3 @@
-
 CREATE OR REPLACE FUNCTION gn_migrate_harvester(parentIdentifier INT) RETURNS integer AS
 $BODY$
 DECLARE
@@ -6,7 +5,7 @@ DECLARE
 BEGIN
   FOR r IN SELECT id FROM SettingsBackup WHERE parentId = $1
   LOOP
-    EXECUTE 'INSERT INTO harvestersettings (SELECT * FROM SettingsBackup WHERE id = ' || r || ')';
+    EXECUTE 'INSERT INTO harvestersettings (SELECT id, parentid, name, value FROM SettingsBackup WHERE id = ' || r || ')';
     PERFORM gn_migrate_harvester(r);
   END LOOP;
   RETURN 1;
