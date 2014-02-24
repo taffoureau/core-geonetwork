@@ -18,3 +18,11 @@
 #x-menu-el-addLayerAction {
     display: none;
 }
+
+body > #east {
+    display: none;
+}
+
+body > #east-xcollapsed {
+    display: none !important;
+}
