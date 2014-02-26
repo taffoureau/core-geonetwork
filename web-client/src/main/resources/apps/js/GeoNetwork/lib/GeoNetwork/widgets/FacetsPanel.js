@@ -268,7 +268,7 @@ GeoNetwork.FacetsPanel = Ext.extend(Ext.Panel, {
         var data = {
             facet : node.nodeName,
             node : node.getAttribute('name'),
-            label : node.getAttribute('label'),
+            label : node.getAttribute('name'),  // FIXME: Translation are not properly returned in facet
             count : node.getAttribute('count')
         };
         // Only display a facet if it's not part of current filter
@@ -284,8 +284,9 @@ GeoNetwork.FacetsPanel = Ext.extend(Ext.Panel, {
                  r = new this.facetsStore.recordType(data, recId);
 
             this.facetsStore.add(r);
+            // FIXME: Enable client side translation only
             return "<li class='" + (visible ? '' : 'facet-more') + "' style='" + (visible ? '' : 'display:none;') + "'><a href='javascript:void(0);' class='facet-link' id='" + recId + "'>" + 
-                    (data.label != null ? data.label : data.node) + "<span class='facet-count'>(" + data.count + ")</span></a></li>";
+                    OpenLayers.i18n(data.label != null ? data.label : data.node) + "<span class='facet-count'>(" + data.count + ")</span></a></li>";
         }
         return '';
     },
