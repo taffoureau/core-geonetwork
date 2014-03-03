@@ -49,7 +49,7 @@
               </li>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:for-each select="$config/editor/views/view">
+              <xsl:for-each select="$config/editor/views/view[not(@disabled)]">
                 <li>
                   <xsl:if test="@name = $currentView/@name">
                     <xsl:attribute name="class">disabled</xsl:attribute>
