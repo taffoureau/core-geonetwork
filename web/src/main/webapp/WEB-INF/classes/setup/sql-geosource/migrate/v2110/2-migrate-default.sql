@@ -3,6 +3,9 @@
 ALTER TABLE operations DROP COLUMN reserved;
 ALTER TABLE services DROP COLUMN id;
 
+
+
+
 INSERT INTO HarvesterSettings VALUES  (1,NULL,'harvesting',NULL);
 -- Copy all harvester's root nodes config
 INSERT INTO HarvesterSettings SELECT id, 1, name, value FROM Settings WHERE parentId = 2;
