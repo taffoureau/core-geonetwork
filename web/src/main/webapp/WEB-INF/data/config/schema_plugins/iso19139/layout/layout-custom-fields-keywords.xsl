@@ -94,7 +94,8 @@
                       select="if (starts-with($thesaurusInternalKey, 'geonetwork.thesaurus.'))
                       then substring-after($thesaurusInternalKey, 'geonetwork.thesaurus.')
                       else $thesaurusInternalKey"/>
-        <!-- Single quote are escaped inside keyword. 
+
+        <!-- Single quote are escaped inside keyword.
           TODO: support multilingual editing of keywords
           -->
         <xsl:variable name="keywords" select="string-join(gmd:keyword/*[1], ',')"/>
