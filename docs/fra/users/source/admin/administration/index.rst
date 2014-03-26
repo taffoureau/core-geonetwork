@@ -1,4 +1,4 @@
-.. include:: ../../substitutions.txt
+﻿.. include:: ../../substitutions.txt
 
 .. _user_admin:
 
@@ -6,7 +6,7 @@
 Utilisateurs et groupes
 =======================
 
-|project_name| utilise les concepts suivants: "utilisateurs", "groupes" et "profils d'utilisateurs". Un utilisateur peut appartenir à plusieurs groupes. 
+|project_name| utilise les concepts suivants : "utilisateurs", "groupes" et "profils d'utilisateurs". Un utilisateur peut appartenir à plusieurs groupes. 
 Chaque utilisateur possède un ou plusieurs profils. Les combinaisons de profils et des groupes, auxquels l’utilisateur appartient, définit le périmètre
 des tâches qu’il peut réaliser au sein du catalogue.
 
